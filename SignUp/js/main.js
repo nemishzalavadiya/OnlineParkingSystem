@@ -28,6 +28,79 @@
             }
         })    
     })
+	$('.validate-input1 .input100').each(function(){
+        $(this).on('blur', function(){
+            if(validate1(this) == false){
+                showValidate(this);
+            }
+            else {
+                $(this).parent().addClass('true-validate');
+            }
+        })    
+    })
+	function validate1 (input) {
+        if($(input).attr('type') == 'number') {
+            if($(input).val().trim().match(/^[6-9]{1}[0-9]{9}$/) == null) {
+                return false;
+            }
+        }
+        else {
+            if($(input).val().trim() == ''){
+                return false;
+            }
+        }
+    }
+$('.validate-input-password .input100').each(function(){
+        $(this).on('blur', function(){
+			
+            if(validate_password(this) == false){
+                showValidate(this);
+				
+            }
+            else {
+                $(this).parent().addClass('true-validate');
+            }
+        })    
+    })
+	function validate_password (input) {
+        if($(input).attr('type') == 'password' ) {
+			
+            if($(input).val().trim() != $("#pass").val().trim() ) {
+                return false;
+            }
+        }
+        else {
+            if($(input).val().trim() == ''){
+                return false;
+            }
+        }
+    }
+
+
+
+	$('.validate-input-age .input100').each(function(){
+        $(this).on('blur', function(){
+            if(validate_age(this) == false){
+                showValidate(this);
+            }
+            else {
+                $(this).parent().addClass('true-validate');
+            }
+        })    
+    })
+	function validate_age (input) {
+        if($(input).attr('type') == 'number') {
+            if($(input).val().trim() < 18) {
+                return false;
+            }
+        }
+        else {
+            if($(input).val().trim() == ''){
+                return false;
+            }
+        }
+    }
+
 
     /*==================================================================
     [ Validate ]*/
