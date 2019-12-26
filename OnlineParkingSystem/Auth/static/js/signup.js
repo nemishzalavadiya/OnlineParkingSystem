@@ -65,7 +65,9 @@ $('.validate-input-password .input100').each(function(){
 	function validate_password (input) {
         if($(input).attr('type') == 'password' ) {
 			
+
             if( $(input).val().trim() == "" || $(input).val().trim() != $("#pass").val().trim() ) {
+
                 return false;
             }
         }
