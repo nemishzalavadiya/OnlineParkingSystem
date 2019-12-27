@@ -32,7 +32,9 @@
 
 </head>
 <body>
-
+	{% if message != None %}
+		<div class="card text-center">{{message}}</div>
+		{% endif %}
 	<div class="limiter">
 		<div class="container-login100">
 		
