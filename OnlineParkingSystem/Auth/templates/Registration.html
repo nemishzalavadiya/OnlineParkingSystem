@@ -77,33 +77,39 @@
 
 						Sign Up
 					</span>
-
+					{{ form.non_field_errors }}
 					<div class="wrap-input100 validate-input" data-validate="Name is required">
-						<span class="label-input100">Full Name</span>
-						<input class="input100" type="text" name="name" placeholder="Name...">
+						{{ form.name.errors }}
+   						 <label  class="label-input100" for="{{ form.name.id_for_label }}">Full Name :</label>
+    					{{ form.name }}
 						<span class="focus-input100"></span>
 					</div>
 					
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<span class="label-input100">Email</span>
-						<input class="input100" type="text" name="email" placeholder="Email addess...">
+						{{ form.email.errors }}
+   						 <label  class="label-input100" for="{{ form.email.id_for_label }}">Email :</label>
+    					{{ form.email }}
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input1" data-validate="Mobile number is required">
-						<span class="label-input100">Mobile No.</span>
-						<input class="input100" type="number" name="mobile" placeholder="Mobile No...">
+						{{ form.mobile_no.errors }}
+   						 <label  class="label-input100" for="{{ form.mobile_no.id_for_label }}">mobile_no :</label>
+    					{{ form.mobile_no }}
 						<span class="focus-input100"></span>
 					</div>
+					
 					<div class="wrap-input100 validate-input-age" data-validate="Age is required">
-						<span class="label-input100">Age</span>
-						<input class="input100" type="number" min="18" name="age" placeholder="Age...">
+						{{ form.age.errors }}
+   						 <label  class="label-input100" for="{{ form.age.id_for_label }}">age :</label>
+    					{{ form.age }}
 						<span class="focus-input100"></span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<span class="label-input100">Password</span>
-						<input class="input100" id="pass" type="password" name="pass" placeholder="*************">
+						{{ form.password.errors }}
+   						 <label  class="label-input100" for="{{ form.password.id_for_label }}">Password :</label>
+    					{{ form.password }}
 						<span class="focus-input100"></span>
 					</div>
 
@@ -161,8 +167,6 @@
 	<script src="/static/vendor/daterangepicker/daterangepicker.js"></script>
 
 	<script src="/static/vendor/countdowntime/countdowntime.js"></script>
-
 	<script src="/static/js/signup.js"></script>
-
 </body>
 </html>
