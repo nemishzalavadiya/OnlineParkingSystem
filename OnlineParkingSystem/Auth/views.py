@@ -24,7 +24,7 @@ class LoginView(TemplateView):
             return render(request,'login.html',{'message':'Login Successful'})
         else:
             print("no")
-            return render(request, 'Login.html',{'message':'Login Failed'})
+            return render(request, 'Login.html',{'message':'Invalid email or password!!!'})
 
 class RegistrationView(TemplateView):
     def get(self, request, **kwargs):
