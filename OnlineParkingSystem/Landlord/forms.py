@@ -1,6 +1,7 @@
 from django.forms import ModelForm , Textarea
 from django import forms
-from UserAuth.models import User_detail
+from User.models import User_detail
+from .models import Land_detail
 
 
 class RegistrationForm(ModelForm):
@@ -56,4 +57,47 @@ class LoginForm(ModelForm):
                 "id":"email",
                 "placeholder":"Email Address"
             })
+        }
+
+
+
+class AddLandForm(ModelForm):
+    class Meta:
+        model=Land_detail
+        fields=('lattitude','langitude','address','images','no_of_spot','description','availability','price_per_hour','start_date','end_date','verified','userid')
+        widgets = {
+            'address': forms.TextInput(attrs={
+                "class":"form-control",
+                "id":"address",
+                "placeholder":"Enter Your Address"
+            }),
+            'images': forms.FileInput(attrs={
+                "class":"form-control",
+                "id":"address",
+                "placeholder":"Enter Your Address"
+            }),
+            'no_of_spot': forms.NumberInput(attrs={
+                "class":"form-control",
+                "id":"no_of_spot",
+                "placeholder":"Enter Number of Spot"
+            }),
+            'description': forms.TextInput(attrs={
+                "class":"form-control",
+                "id":"description",
+                "placeholder":"Enter Description"
+            }),
+            'price_per_hour': forms.NumberInput(attrs={
+                "class":"form-control",
+                "id":"price_per_hour",
+                "placeholder":"Enter Price per Hour"
+            }),
+            'start_date': forms.DateInput(attrs={
+                "class":"form-control",
+                "id":"start_date",
+            }),
+            'end_date': forms.DateInput(attrs={
+                "class":"form-control",
+                "id":"end_date",
+            }),
+            
         }
