@@ -17,7 +17,7 @@ def Login(request):
         password = form.data['password']
         role = 'User'
         if(User_detail.objects.filter(email=email,password=password,role=role)):
-            return render(request,'login.html',{'message':'Login Successful','form' : form})
+            return render(request,'Login.html',{'message':'Login Successful','form' : form})
         else:
             return render(request, 'Login.html',{'message':'Invalid email or password!!!','form' : form})
     else:
