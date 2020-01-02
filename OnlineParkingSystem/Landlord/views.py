@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.template.context_processors import csrf
-from UserAuth.models import User_detail
+from User.models import User_detail
 from django.core.mail import send_mail
 from django.conf import settings
-from .forms import RegistrationForm,LoginForm
+from .forms import RegistrationForm,LoginForm,AddLandForm
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db import models
@@ -26,10 +26,6 @@ def Login(request):
         form = LoginForm()
         return render(request, 'LandlordLogin.html',{'form' : form})
 
-    def post(self, request, **kwargs):
-        email = request.POST.get('email') 
-        password = request.POST.get('pass')
-        
 
 def Registration(request):
     if request.method == 'POST':
@@ -45,4 +41,15 @@ def Registration(request):
         c.update(csrf(request))
         form = RegistrationForm()
         return render(request, 'LandlordRegistration.html',{'form' : form})
+
+        
+def AddLandDetail(request):
+    if request.method == 'POST':
+            return render(request, 'AddLandDetail.html',{'message':'Invalid email or password!!!','form' : ''})
+    else:
+        c = {}
+        c.update(csrf(request))
+        form = AddLandForm()
+        return render(request, 'AddLandDetail.html',{'form' : form})
+
     

@@ -19,6 +19,6 @@ from django.conf.urls import url, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url('User/', include("UserAuth.urls")),   
-    url('Landlord/', include("LandlordAuth.urls")),   
+    url('User/', include("User.urls")),   
+    url('Landlord/', include("Landlord.urls")),   
 ]
