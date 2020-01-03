@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="align-items:center;"><h3 class="card-panel fray" style="text-align: center;width: 80%;"> Approval Needed</h3></div>
+<div style="margin:60px;margin-top: 20px;">
+<table class="table table-bordered table-hover centered">
+  <thead>
+    <tr>
+      <th class="card-panel teal" onclick="approve('lattitude')" style="cursor: grab;">Latitude</th>
+      <th class="card-panel teal" onclick="approve('langitude')" style="cursor: grab;">Longitude</th>
+      <th class="card-panel teal" onclick="approve('address')" style="cursor: grab;">Address</th>
+      <th class="card-panel teal" onclick="approve('no_of_spot')" style="cursor: grab;">No Of Spots</th>
+      <th class="card-panel teal" onclick="approve('description')" style="cursor: grab;">Description</th>
+      <th class="card-panel teal" onclick="approve('price_per_hour')" style="cursor: grab;">Price_Per_Hour</th>
+      <th class="card-panel teal" onclick="approve('start_date')" style="cursor: grab;">Start_Date</th>
+      <th class="card-panel teal" onclick="approve('end_date')" style="cursor: grab;">End_Date</th>
+      <th class="card-panel teal" onclick="approve('lattitude')" style="cursor: grab;">Approve</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if app == "approve" %}
+
+    {% endif %}
+    {% for user in users %}
+ 
+      <tr>
+
+        <td>{{ user.lattitude }}</td>
+        <td>{{ user.langitude }}</td>
+        <td>{{ user.address }}</td>
+        <td>{{ user.no_of_spot }}</td>
+        <td>{{ user.description }}</td>
+        <td>{{ user.price_per_hour }}</td>
+        <td>{{ user.start_date }}</td>
+        <td>{{ user.end_date }}</td>
+        <td><button class="btn btn-success " onclick="run()">Approve</button></td>
+      </tr>
+     
+    {% endfor %}
+  </tbody>
+</table>
+<script>
+  function run(){
+    var toastHTML = '<span>Approval Granted</span><button id="butClick" class="btn-flat toast-action">Undo</button>';
+  M.toast({html: toastHTML,classes:"rounded"});
+  }
+
+  function approve($this){
+    console.log("button clicked");
+    var request_data = $this;
+    console.log("data: " + request_data);
+    var url = "{% url 'UserShortedView' %}";
+
+    var id = $this;
+    console.log(url + "/" + id);
+    document.location.href = '/admin_role/approveLand?id='+ id;
+  }
+</script>
+<div class="center">
+  {% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+      {% if page_obj.number == i %}
+        <li class="active btn btn-success"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+</div>
+</div>
+{% endblock %}

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'User.apps.UserConfig',
     'Landlord.apps.LandlordConfig',
+    'admin_role.apps.AdminRoleConfig',
 ]
 
 MIDDLEWARE = [

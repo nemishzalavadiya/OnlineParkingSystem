@@ -10,7 +10,7 @@ class Land_detail(models.Model):
     lattitude =  models.FloatField(max_length=25)
     langitude = models.FloatField(max_length=25)
     address = models.CharField(max_length=255)
-    images = models.TextField()
+    images = models.TextField(null=True)
     no_of_spot = models.IntegerField()
     description = models.TextField(null=True)
     availability = models.IntegerField()
