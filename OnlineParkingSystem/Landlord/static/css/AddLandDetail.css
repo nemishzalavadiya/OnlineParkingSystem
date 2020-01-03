@@ -1,6 +1,6 @@
 .section {
 	position: relative;
-	height: 100vh;
+	height: 120vh;
 }
 
 .section .section-center {
@@ -174,7 +174,7 @@
 	color: #ffc600;
 	background-color: #1a1b1d;
 	font-weight: 700;
-	height: 55px;
+	height: 75px;
 	padding: 10px 35px;
 	font-size: 18px;
 	border-radius: 0px;
