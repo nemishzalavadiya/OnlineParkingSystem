@@ -67,8 +67,21 @@
 									</div>
 								</div>
 							</div>
-							<div class="form-btn">
-								<button class="submit-btn">Book Now</button>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-btn">
+									<button onclick="getLocation()" class="submit-btn">Enable Location</button>
+									<p id="demo"style="color:yellow"></p>
+									</div>
+
+								</div>
+
+
+								<div class="col-md-6">
+										<div class="form-btn">
+											<button class="submit-btn">Book Now</button>
+										</div>
+								</div>
 							</div>
 						</form>
 					</div>
@@ -79,6 +92,22 @@
 
 	<script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
 	
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+}
+</script>
 <script>
 		$('.form-control').each(function () {
 			floatedLabel($(this));
