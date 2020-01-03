@@ -92,10 +92,12 @@ class AddLandForm(ModelForm):
                 "placeholder":"Enter Price per Hour"
             }),
             'start_date': forms.DateInput(attrs={
+                "type":"Date",
                 "class":"form-control",
                 "id":"start_date",
             }),
             'end_date': forms.DateInput(attrs={
+                "type":"Date",
                 "class":"form-control",
                 "id":"end_date",
             }),
