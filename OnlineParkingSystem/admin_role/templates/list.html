@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div><h3 class="card-panel fray" style="text-align: center;"> Approval Needed</h3></div>
+<div style="align-items:center;"><h3 class="card-panel fray" style="text-align: center;width: 80%;"> Approval Needed</h3></div>
 <div style="margin:60px;margin-top: 20px;">
 <table class="table table-bordered table-hover centered">
   <thead>
@@ -41,7 +41,7 @@
 </table>
 <script>
   function run(){
-    var toastHTML = '<span>Approval Granted</span><button class="btn-flat toast-action">Undo</button>';
+    var toastHTML = '<span>Approval Granted</span><button id="butClick" class="btn-flat toast-action">Undo</button>';
   M.toast({html: toastHTML,classes:"rounded"});
   }
 
