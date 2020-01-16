@@ -41,7 +41,7 @@ def Registration(request):
         form = RegistrationForm()
         return render(request, 'Registration.html',{'form' : form})
     
-def Editprofile(request):
+def EditProfile(request):
     if request.method == 'POST':
         userid = request.POST.get('userid')
         mydetail = User_detail.objects.get(userid=userid)
