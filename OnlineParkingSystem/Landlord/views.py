@@ -52,6 +52,7 @@ def AddLandDetail(request):
             return render(request, 'AddLandDetail.html',{'message':'Registration2 Failed','form' : form})
     else:
         c = {}
+        print("get")
         c.update(csrf(request))
         form = AddLandForm()
         return render(request, 'AddLandDetail.html',{'form' : form})

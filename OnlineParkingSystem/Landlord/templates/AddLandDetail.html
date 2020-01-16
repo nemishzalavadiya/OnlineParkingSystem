@@ -16,7 +16,7 @@
 				<div class="row" style="display:block;">
 					<div class="booking-form">
 						<div class="booking-bg"></div>
-						<form>
+						<form action="/Landlord/addlanddetail/" method="POST">
 						{% csrf_token%}
 							<div class="form-header">
 								<h2>ADD PARKING DETAILS</h2>
@@ -43,10 +43,28 @@
 								{{ form.price_per_hour }}
 								<span class="form-label" for="{{ form.price_per_hour.id_for_label }}">price_per_hour</span>
 							</div>
-							<div class="form-group">
-								{{ form.images.errors }}
-								{{ form.images }}
-								<span class="form-label" for="{{ form.images.id_for_label }}">images</span>
+							<div class="row">
+								<div class="col">
+									<div class="form-group">
+										{{ form.city.errors }}
+										{{ form.city }}
+										<span class="form-label" for="{{ form.city.id_for_label }}">city</span>
+									</div>
+								</div>
+								<div class="col">
+									<div class="form-group">
+									{{ form.area.errors }}
+									{{ form.area }}
+									<span class="form-label" for="{{ form.area.id_for_label }}">area</span>
+									</div>
+								</div>
+								<div class="col">
+									<div class="form-group">
+										{{ form.state.errors }}
+										{{ form.state }}
+										<span class="form-label" for="{{ form.state.id_for_label }}">state</span>
+									</div>
+								</div>
 							</div>
 							<div class="row" style="display:flex;">
 								<div class="col-md-6">
@@ -64,19 +82,14 @@
 									</div>
 								</div>
 							</div>
+							<input type="checkbox" id="ckb1" onclick="getLocation()" required> <span style="color:white">Enable Location</span>
 							<div class="row">
-								<div class="col-md-6">
-									<div class="form-btn">
-									<button onclick="getLocation()" class="submit-btn">Enable Location</button>
-								
-									</div>
-								</div>
 									{{ form.langitude }}
 									{{ form.lattitude }}
 									{{ form.verified  }}
 									{{ form.availability }}
 									{{ form.userid }}
-								<div class="col-md-6">
+								<div class="col">
 										<div class="form-btn">
 											<button class="submit-btn">Book Now</button>
 										</div>
@@ -93,7 +106,7 @@
 
 	<script>
 		$(document).ready(function(){
-  		$("submit-btn").click(function(){
+  		$("#no_of_spot").change(function(){
     	$("#availability").val()=$("#no_of_spot").val());
   });
 });
