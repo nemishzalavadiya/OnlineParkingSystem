@@ -56,3 +56,33 @@ class LoginForm(ModelForm):
                 "placeholder":"Email Address"
             })
         }
+
+class EditProfileForm(ModelForm):
+    class Meta:
+        model=User_detail
+        fields=('userid','name','mobile_no','email','age')
+        widgets = {
+            'age': forms.NumberInput(attrs={
+                "class":"input100",
+                "id":"age",
+                "placeholder":"Age"
+            }),
+            'name': forms.TextInput(attrs={
+                "class":"input100",
+                "id":"name",
+                "placeholder":"Name"
+            }),
+            'mobile_no': forms.NumberInput(attrs={
+                "class":"input100",
+                "id":"mobile_no",
+                "placeholder":"Mobile Number"
+            }),
+            'email': forms.EmailInput(attrs={
+                "class":"input100",
+                "id":"email",
+                "placeholder":"Email Address..."
+            }),
+            'userid': forms.TextInput(attrs={
+                "id":"userid"
+            }),
+        }
