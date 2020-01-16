@@ -73,8 +73,8 @@ class AddLandForm(ModelForm):
             }),
             'images': forms.FileInput(attrs={
                 "class":"form-control",
-                "id":"address",
-                "placeholder":"Enter Your Address"
+                "id":"image",
+                "placeholder":"image"
             }),
             'no_of_spot': forms.NumberInput(attrs={
                 "class":"form-control",
@@ -101,5 +101,21 @@ class AddLandForm(ModelForm):
                 "class":"form-control",
                 "id":"end_date",
             }),
-            
+            'langitude': forms.HiddenInput(attrs={
+                "id":"langitude",
+            }),
+            'lattitude': forms.HiddenInput(attrs={
+                "id":"lattitude",
+            }),
+            'availability': forms.HiddenInput(attrs={
+                "id":"availability",
+            }),
+            'verified': forms.HiddenInput(attrs={
+                "id":"verified",
+                "value":"0",
+            }),
+            'userid': forms.HiddenInput(attrs={
+                "id":"userid",
+                "value":"1",
+            })
         }
