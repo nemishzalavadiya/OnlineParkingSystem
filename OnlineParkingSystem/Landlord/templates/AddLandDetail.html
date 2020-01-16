@@ -8,10 +8,7 @@
 	<title>Add Land Details</title>	
 	<link rel="stylesheet" type="text/css" href="/static/vendor/bootstrap/css/bootstrap.min.css">
 	<link type="text/css" rel="stylesheet" href="/static/css/AddLandDetail.css" />
-
-
 </head>
-
 <body>
 	<div id="booking" class="section">
 		<div class="section-center">
@@ -71,12 +68,14 @@
 								<div class="col-md-6">
 									<div class="form-btn">
 									<button onclick="getLocation()" class="submit-btn">Enable Location</button>
-									<p id="demo"style="color:yellow"></p>
+								
 									</div>
-
 								</div>
-
-
+									{{ form.langitude }}
+									{{ form.lattitude }}
+									{{ form.verified  }}
+									{{ form.availability }}
+									{{ form.userid }}
 								<div class="col-md-6">
 										<div class="form-btn">
 											<button class="submit-btn">Book Now</button>
@@ -91,10 +90,18 @@
 	</div>
 
 	<script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
+
+	<script>
+		$(document).ready(function(){
+  		$("submit-btn").click(function(){
+    	$("#availability").val()=$("#no_of_spot").val());
+  });
+});
+	</script>
 	
 <script>
-var x = document.getElementById("demo");
-
+var langitude = document.getElementById("langitude");
+var lattitude = document.getElementById("lattitude");
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
@@ -102,10 +109,11 @@ function getLocation() {
     x.innerHTML = "Geolocation is not supported by this browser.";
   }
 }
-
 function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude;
+	var x=document.getElementById("no_of_spot").value;
+	document.getElementById("availability").value = x;
+		lattitude.value = position.coords.latitude;
+	langitude.value = position.coords.longitude;
 }
 </script>
 <script>
@@ -126,7 +134,5 @@ function showPosition(position) {
 			}
 		}
 	</script>
-
 </body>
-
 </html>

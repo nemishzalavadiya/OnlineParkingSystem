@@ -30,12 +30,11 @@ def Login(request):
 def Registration(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
-        print(form.data['role'])
         if form.is_valid():
             form.save()
             return render(request, 'LandlordRegistration.html',{'form' : form})
         else:
-            return render(request, 'LandlordRegistration.html',{'message':'Registration Failed','form' : form})
+            return render(request, 'LandlordRegistration.html',{'message':'Registration1 Failed','form' : form})
     else:
         c = {}
         c.update(csrf(request))
@@ -45,7 +44,12 @@ def Registration(request):
         
 def AddLandDetail(request):
     if request.method == 'POST':
-            return render(request, 'AddLandDetail.html',{'message':'Invalid email or password!!!','form' : ''})
+        form = AddLandForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'LandlordRegistration.html',{'form' : form})
+        else:
+            return render(request, 'AddLandDetail.html',{'message':'Registration2 Failed','form' : form})
     else:
         c = {}
         c.update(csrf(request))
