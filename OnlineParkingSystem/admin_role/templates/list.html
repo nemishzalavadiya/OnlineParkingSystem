@@ -22,9 +22,10 @@
 
     {% endif %}
     {% for user in users %}
- 
+      <form action="/admin_role/approveLand/" method="POST">
+      {% csrf_token %}
       <tr>
-
+        <input type="hidden" name="landid" value="{{ user.landid }}">
         <td>{{ user.lattitude }}</td>
         <td>{{ user.langitude }}</td>
         <td>{{ user.address }}</td>
@@ -35,7 +36,7 @@
         <td>{{ user.end_date }}</td>
         <td><button class="btn btn-success " onclick="run()">Approve</button></td>
       </tr>
-     
+     </form>
     {% endfor %}
   </tbody>
 </table>
@@ -53,7 +54,7 @@
 
     var id = $this;
     console.log(url + "/" + id);
-    document.location.href = '/admin_role/approveLand?id='+ id;
+    document.location.href = '/admin_role/sortLand?id='+ id;
   }
 </script>
 <div class="center">
