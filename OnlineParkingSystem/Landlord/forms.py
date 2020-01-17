@@ -74,7 +74,8 @@ class AddLandForm(ModelForm):
             'no_of_spot': forms.NumberInput(attrs={
                 "class":"form-control",
                 "id":"no_of_spot",
-                "placeholder":"Enter Number of Spot"
+                "placeholder":"Enter Number of Spot",
+                "onChange":"getAvailablity()"
             }),
             'description': forms.TextInput(attrs={
                 "class":"form-control",

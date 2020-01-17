@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Add Land Details</title>	
+	<title>Edit Land Details</title>	
 	<link rel="stylesheet" type="text/css" href="/static/vendor/bootstrap/css/bootstrap.min.css">
 	<link type="text/css" rel="stylesheet" href="/static/css/AddLandDetail.css" />
 </head>
@@ -16,10 +16,10 @@
 				<div class="row" style="display:block;">
 					<div class="booking-form">
 						<div class="booking-bg"></div>
-						<form action="/Landlord/addlanddetail/" method="POST">
+						<form action="/Landlord/editlanddetail/" method="POST">
 						{% csrf_token%}
 							<div class="form-header">
-								<h2>ADD PARKING DETAILS</h2>
+								<h2>EDIT PARKING DETAILS</h2>
 							</div>
 							{{ form.non_field_errors }}
 
@@ -89,9 +89,10 @@
 									{{ form.verified  }}
 									{{ form.availability }}
 									{{ form.userid }}
+                                    <input type="hidden" name="landid" value="{{ landid }}" />
 								<div class="col">
 										<div class="form-btn">
-											<button class="submit-btn">Add Now</button>
+											<button class="submit-btn">Edit Now</button>
 										</div>
 								</div>
 							</div>

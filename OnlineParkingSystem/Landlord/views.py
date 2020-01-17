@@ -4,6 +4,7 @@ from User.models import User_detail
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import RegistrationForm,LoginForm,AddLandForm
+from .models import Land_detail
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db import models
@@ -57,4 +58,21 @@ def AddLandDetail(request):
         form = AddLandForm()
         return render(request, 'AddLandDetail.html',{'form' : form})
 
+def EditLandDetail(request):
+    if request.method == 'POST':
+        landid = request.POST.get('landid')
+        mydetail = Land_detail.objects.get(landid=landid)
+        form = AddLandForm(request.POST,instance=mydetail)
+        if form.is_valid():
+            form.save()
+            return render(request, 'EditLandDetail.html',{'form' : form})
+        else:
+            return render(request, 'EditLandDetail.html',{'message':'Edit fail','form' : form})
+    else:
+        c = {}
+        c.update(csrf(request))
+        landid = 1
+        mydetail = Land_detail.objects.get(landid=landid)
+        form = AddLandForm(instance=mydetail)
+        return render(request, 'EditLandDetail.html',{'form' : form, 'landid' : landid})
     
