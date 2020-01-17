@@ -34,7 +34,7 @@
         <td>{{ user.price_per_hour }}</td>
         <td>{{ user.start_date }}</td>
         <td>{{ user.end_date }}</td>
-        <td><button class="btn btn-success " onclick="run()">Approve</button></td>
+        <td>{% if user.verified %}<button class="btn btn-success " onclick="run()">Approve</button>{% endif %}</td>
       </tr>
      </form>
     {% endfor %}

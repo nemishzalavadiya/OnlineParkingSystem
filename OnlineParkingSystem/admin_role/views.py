@@ -6,10 +6,10 @@ from django.http import HttpResponseRedirect
 
 class UserListView(ListView):
     model = Land_detail
-    template_name = 'list.html'  # Default: <app_label>/<model_name>_list.html
-    context_object_name = 'users'  # Default: object_list
+    template_name = 'list.html' 
+    context_object_name = 'users' 
     paginate_by = 10
-    queryset = Land_detail.objects.all().order_by('no_of_spot')  # Default: Model.objects.all()
+    queryset = Land_detail.objects.all().order_by('no_of_spot')
 
 class UserShortedView(ListView):
     id='lattitude'
@@ -17,7 +17,6 @@ class UserShortedView(ListView):
     template_name = 'list.html'  
     context_object_name = 'users' 
     paginate_by = 10
-    queryset = Land_detail.objects.filter(verified=0)
     def get_queryset(self):
         order_by = self.request.GET.get('id') or 'lattitude'
         qs = super(UserShortedView, self).get_queryset()
@@ -27,7 +26,7 @@ def UserApproved(request):
     if request.method == 'POST':
         landid = request.POST.get('landid')
         landdetail = Land_detail.objects.get(landid=landid)
-        landdetail.verified = 1
+        landdetail.verified = 0
         landdetail.save()
         return HttpResponseRedirect('/admin_role/newLandList')
 

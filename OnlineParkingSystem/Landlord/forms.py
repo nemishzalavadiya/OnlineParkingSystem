@@ -108,7 +108,7 @@ class AddLandForm(ModelForm):
             }),
             'verified': forms.HiddenInput(attrs={
                 "id":"verified",
-                "value":"0",
+                "value":"1",
             }),
             'userid': forms.HiddenInput(attrs={
                 "id":"userid",
