@@ -48,7 +48,7 @@ def AddLandDetail(request):
         form = AddLandForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'LandlordRegistration.html',{'form' : form})
+            return render(request, 'AddLandDetail.html',{'form' : form})
         else:
             return render(request, 'AddLandDetail.html',{'message':'Registration2 Failed','form' : form})
     else:
