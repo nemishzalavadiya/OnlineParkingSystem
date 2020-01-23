@@ -10,7 +10,7 @@ class Land_detail(models.Model):
     lattitude =  models.FloatField(max_length=25)
     langitude = models.FloatField(max_length=25)
     address = models.CharField(max_length=255)
-    images = models.TextField(null=True)
+    image = models.ImageField(null=True,upload_to='images/%Y/%m/%d')
     city = models.CharField(max_length=255)
     area = models.CharField(max_length=255)
     state = models.CharField(max_length=255) 

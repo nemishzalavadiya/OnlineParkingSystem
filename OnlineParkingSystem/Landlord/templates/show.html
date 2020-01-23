@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Add Land Details</title>	
+	
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
+</head>
+<body style="background-color:blueviolet;">
+    {% for i in list %}
+        <div class="card horizontal blue" style="margin: 7%;border-radius: 10px;">
+            <img class="card-image"  src="{{i.image.url}}" alt="Card image">
+            <div class="card-body" style="margin: 5%;">
+                <h5>City : {{i.city}} </h5><h5>State : {{i.state}} </h5><h5>Area : {{i.area}}</h5>
+                <h5>Price : {{i.price_per_hour}}</h5>
+                <h5>Spots : {{i.no_of_spot}}</h5>
+                <h5>Verified : {{i.verified}}</h5>
+                <h5>Date : {{i.start_date}} to {{i.end_date}}</h5>
+                <h6>Description : {{i.description}}</h6>
+            </div>
+        </div>
+    {% endfor %}
+</body>
+</html>
