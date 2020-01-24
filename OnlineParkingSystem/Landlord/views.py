@@ -18,6 +18,7 @@ def Login(request):
         password = form.data['password']
         role = 'Landlord'
         if(User_detail.objects.filter(email=email,password=password,role=role)):
+            request.session['userid']=User_detail.objects.get(email=email).userid
             return render(request,'LandlordLogin.html',{'message':'Login Successful','form' : form})
         else:
             return render(request, 'LandlordLogin.html',{'message':'Invalid email or password!!!','form' : form})
@@ -44,12 +45,34 @@ def Registration(request):
 
         
 def AddLandDetail(request):
-    if request.method == 'POST':
-        form = AddLandForm(request.POST)
+    print("$$$$$$$$$$$$$$$$ inside $$$$$$$$$$$$")
+    if request.method == 'POST' :
+        print("===starting============")
+        form = AddLandForm(request.POST,request.FILES)
+        print("======================")
+        print(form)
+        print("========================")
         if form.is_valid():
-            form.save()
+            land = Land_detail()
+            land.address= form.cleaned_data["address"]
+            land.no_of_spot= form.cleaned_data["no_of_spot"]
+            land.description= form.cleaned_data["description"]
+            land.city = form.cleaned_data["city"]
+            land.end_date = form.cleaned_data["end_date"]
+            land.start_date = form.cleaned_data["start_date"]
+            land.langitude= form.cleaned_data["langitude"]
+            land.lattitude = form.cleaned_data["lattitude"]
+            land.availability= form.cleaned_data["availability"]
+            land.verified=form.cleaned_data["verified"]
+            land.userid= form.cleaned_data["userid"]
+            land.area= form.cleaned_data["area"]
+            land.state=form.cleaned_data["state"]
+            land.image=form.cleaned_data["image"]
+            land.price_per_hour=form.cleaned_data["price_per_hour"]
+            land.save()
             return render(request, 'AddLandDetail.html',{'form' : form})
         else:
+            print("=========================Something went wrong=========================")
             return render(request, 'AddLandDetail.html',{'message':'Registration2 Failed','form' : form})
     else:
         c = {}
@@ -76,3 +99,6 @@ def EditLandDetail(request):
         form = AddLandForm(instance=mydetail)
         return render(request, 'EditLandDetail.html',{'form' : form, 'landid' : landid})
     
+def landlist(request):
+    landlist= Land_detail.objects.filter(userid=request.session['userid'])
+    return render(request, 'show.html',{ 'list' : landlist })

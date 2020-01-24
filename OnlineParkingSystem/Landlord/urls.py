@@ -5,5 +5,6 @@ urlpatterns = [
     url(r'editlanddetail/', views.EditLandDetail, name="editlanddetail"),
     url(r'registration/', views.Registration, name="registration"),
     url(r'login/', views.Login, name="login"),
+    url(r'showland/',views.landlist,name='landlist'),
     url(r'', views.Login, name="login"),
 ]

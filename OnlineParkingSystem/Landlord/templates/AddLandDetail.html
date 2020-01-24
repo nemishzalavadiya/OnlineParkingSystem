@@ -16,7 +16,7 @@
 				<div class="row" style="display:block;">
 					<div class="booking-form">
 						<div class="booking-bg"></div>
-						<form action="/Landlord/addlanddetail/" method="POST">
+						<form action="/Landlord/addlanddetail/" enctype="multipart/form-data" method="POST">
 						{% csrf_token%}
 							<div class="form-header">
 								<h2>ADD PARKING DETAILS</h2>
@@ -37,6 +37,12 @@
 								{{ form.description.errors }}
 								{{ form.description }}
 								<span class="form-label" for="{{ form.description.id_for_label }}">description</span>
+							</div>
+							<div class="form-group" style="color: white;">
+								
+								<span style="color: red;">{{ form.image.errors }}</span>
+								{{ form.image }}
+								<span class="form-label" for="{{ form.images.id_for_label }}">Image</span>
 							</div>
 							<div class="form-group">
 								{{ form.price_per_hour.errors }}
@@ -107,7 +113,7 @@
 	<script>
 		$(document).ready(function(){
   		$("#no_of_spot").change(function(){
-    	$("#availability").val()=$("#no_of_spot").val());
+    	$("#availability").val()=$("#no_of_spot").val();
   });
 });
 	</script>
