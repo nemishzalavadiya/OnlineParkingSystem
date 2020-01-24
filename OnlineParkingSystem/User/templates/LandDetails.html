@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<title>Lands Details</title>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="/static/images/icons/favicon.ico"/>
+
+	<link rel="stylesheet" type="text/css" href="/static/vendor/bootstrap/css/bootstrap.min.css">
+
+	<link rel="stylesheet" type="text/css" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" type="text/css" href="/static/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+
+	<link rel="stylesheet" type="text/css" href="/static/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="/static/vendor/css-hamburgers/hamburgers.min.css">
+
+	<link rel="stylesheet" type="text/css" href="/static/vendor/select2/select2.min.css">
+	<script type="text/javascript" src="/static/admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+	<link rel="stylesheet" type="text/css" href="/static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/login.css">
+<link type="text/css" rel="stylesheet" href="/static/css/materialize.css"  media="screen,projection"/>
+
+        <!-- Compiled and minified JavaScript -->
+
+</head>
+<body>
+<div style="align-items:center;"><h3 class="card-panel fray" style="text-align: center;width: 80%;"> Land Details</h3></div>
+    <table class="table table-hover centered">
+    <tr>
+        <th>Address</th>
+        <th>City</th>
+        <th>Area</th>
+        <th>State</th>
+        <th>no of spot</th>
+        <th>Description</th>
+        <th>availability</th>
+        <th>Price/Hour</th>
+        <th>start date</th>
+        <th>end date</th>
+    </tr>
+    {% for land in Land %}
+
+    <tr>
+        <td>{{land.address}}</td>
+        <td>{{land.city}}</td>
+        <td>{{land.area}}</td>
+        <td>{{land.state}}</td>
+        <td>{{land.no_of_spot}}</td>
+        <td>{{land.description}}</td>
+        <td>{{land.availability}}</td>
+        <td>{{land.price_per_hour}}</td>
+        <td>{{land.start_date}}</td>
+        <td>{{land.end_date}}</td>
+        <td><a href="http://maps.google.com/?q={{land.lattitude}},{{land.langitude}}" target="_blank" class="btn btn-success">Map</a></td>
+        <td>{{land.lattitude}} </td>
+        <td>{{land.langitude}}</td>
+    </tr>
+    {% endfor %}
+    </table>
+	<script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
+
+	<script src="/static/vendor/bootstrap/js/popper.js"></script>
+	<script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+	<script src="/static/vendor/select2/select2.min.js"></script>
+
+	<script src="/static/js/login.js"></script>
+	<script type="text/javascript" src="/static/js/materialize.js"></script>
+</body>
+</html>

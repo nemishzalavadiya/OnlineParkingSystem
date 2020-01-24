@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.template.context_processors import csrf
+from Landlord.models import Land_detail
+from django.views.generic import TemplateView,ListView
 from .models import User_detail
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import RegistrationForm,LoginForm,EditProfileForm
 from django.views.generic import TemplateView
-
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db import models
 from django.template import loader
@@ -58,3 +59,10 @@ def EditProfile(request):
         mydetail = User_detail.objects.get(userid=userid)
         form = EditProfileForm(instance=mydetail)
         return render(request, 'EditProfile.html',{'form' : form, 'userid' : userid})
+    
+class ShowLandDetails(ListView):
+    model = Land_detail
+    template_name = 'LandDetails.html'
+    context_object_name = 'Land'
+    paginate_by = 10
+    queryset = Land_detail.objects.filter(verified=0)
