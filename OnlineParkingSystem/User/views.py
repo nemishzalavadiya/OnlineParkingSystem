@@ -77,7 +77,7 @@ def ShowLandDetails(request):
         current = (lat2,lag2)
         d=distance.distance(landloc,current).km
         d=round(d, 2)
-        land['d']=d
-    lands = list(filter(lambda i: i['d'] < 10, lands)) 
+        land['distance']=d
+    lands = list(filter(lambda i: i['distance'] < 10, lands)) 
     lands=sorted(lands, key = lambda i: i['landid'],reverse=True)
     return render(request, 'LandDetails.html',{'Land': lands})
