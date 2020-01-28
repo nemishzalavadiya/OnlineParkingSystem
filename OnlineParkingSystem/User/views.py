@@ -10,6 +10,7 @@ from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db import models
 from django.template import loader
+import math
 # Create your views here.
 
 def Login(request):
@@ -60,9 +61,22 @@ def EditProfile(request):
         form = EditProfileForm(instance=mydetail)
         return render(request, 'EditProfile.html',{'form' : form, 'userid' : userid})
     
-class ShowLandDetails(ListView):
-    model = Land_detail
-    template_name = 'LandDetails.html'
-    context_object_name = 'Land'
-    paginate_by = 10
-    queryset = Land_detail.objects.filter(verified=0)
+def ShowLandDetails(request):
+    c = {}
+    c.update(csrf(request))
+    landobj = Land_detail.objects.filter(verified=0)
+    lands=list(landobj.values())
+    for land in lands:
+        R = 6371
+        lat1=land['lattitude']
+        lag1=land['langitude']
+        lat2 = 21.8002
+        dLat = (21.8002-lat1) * math.pi / 180
+        dLon = (72.9565-lag1) * math.pi / 180
+        a = math.sin(dLat/2) * math.sin(dLat/2) + math.cos(lat1 * math.pi / 180 ) * math.cos(lat2 * math.pi / 180 ) * math.sin(dLon/2) * math.sin(dLon/2)
+        c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+        d = R * c-land['landid']
+        land['d']=d
+    lands=sorted(lands, key = lambda i: i['landid'],reverse=True)
+    print(lands)
+    return render(request, 'LandDetails.html',{'Land': lands})

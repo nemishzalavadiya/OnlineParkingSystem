@@ -112,7 +112,6 @@ class AddLandForm(ModelForm):
             }),
             'userid': forms.HiddenInput(attrs={
                 "id":"userid",
-                "value":"1",
             }),
             'city': forms.TextInput(attrs={
                 "class":"form-control",

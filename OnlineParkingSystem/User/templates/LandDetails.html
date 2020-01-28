@@ -56,9 +56,9 @@
         <td>{{land.price_per_hour}}</td>
         <td>{{land.start_date}}</td>
         <td>{{land.end_date}}</td>
+        <td>{{land.d}}</td>
         <td><a href="http://maps.google.com/?q={{land.lattitude}},{{land.langitude}}" target="_blank" class="btn btn-success">Map</a></td>
-        <td>{{land.lattitude}} </td>
-        <td>{{land.langitude}}</td>
+        <td colspan="2"><img style="width: 200px;height: 200px;" src="/media/{{land.image}}"> </td>
     </tr>
     {% endfor %}
     </table>

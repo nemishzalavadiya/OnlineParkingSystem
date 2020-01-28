@@ -45,13 +45,8 @@ def Registration(request):
 
         
 def AddLandDetail(request):
-    print("$$$$$$$$$$$$$$$$ inside $$$$$$$$$$$$")
     if request.method == 'POST' :
-        print("===starting============")
         form = AddLandForm(request.POST,request.FILES)
-        print("======================")
-        print(form)
-        print("========================")
         if form.is_valid():
             land = Land_detail()
             land.address= form.cleaned_data["address"]
@@ -64,7 +59,7 @@ def AddLandDetail(request):
             land.lattitude = form.cleaned_data["lattitude"]
             land.availability= form.cleaned_data["availability"]
             land.verified=form.cleaned_data["verified"]
-            land.userid= form.cleaned_data["userid"]
+            land.userid= userid
             land.area= form.cleaned_data["area"]
             land.state=form.cleaned_data["state"]
             land.image=form.cleaned_data["image"]
@@ -72,11 +67,10 @@ def AddLandDetail(request):
             land.save()
             return render(request, 'AddLandDetail.html',{'form' : form})
         else:
-            print("=========================Something went wrong=========================")
+            print("dasd")
             return render(request, 'AddLandDetail.html',{'message':'Registration2 Failed','form' : form})
     else:
         c = {}
-        print("get")
         c.update(csrf(request))
         form = AddLandForm()
         return render(request, 'AddLandDetail.html',{'form' : form})
