@@ -10,6 +10,9 @@ from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db import models
 from django.template import loader
+import math
+from geopy import distance
+
 # Create your views here.
 
 def Login(request):
@@ -60,9 +63,21 @@ def EditProfile(request):
         form = EditProfileForm(instance=mydetail)
         return render(request, 'EditProfile.html',{'form' : form, 'userid' : userid})
     
-class ShowLandDetails(ListView):
-    model = Land_detail
-    template_name = 'LandDetails.html'
-    context_object_name = 'Land'
-    paginate_by = 10
-    queryset = Land_detail.objects.filter(verified=0)
+def ShowLandDetails(request):
+    c = {}
+    c.update(csrf(request))
+    landobj = Land_detail.objects.filter(verified=0)
+    lands=list(landobj.values())
+    for land in lands:
+        lat1=land['lattitude']
+        lag1=land['langitude']
+        lat2 = 22.685558
+        lag2 = 72.877867
+        landloc = (lat1,lag1)
+        current = (lat2,lag2)
+        d=distance.distance(landloc,current).km
+        d=round(d, 2)
+        land['distance']=d
+    lands = list(filter(lambda i: i['distance'] < 10, lands)) 
+    lands=sorted(lands, key = lambda i: i['landid'],reverse=True)
+    return render(request, 'LandDetails.html',{'Land': lands})
