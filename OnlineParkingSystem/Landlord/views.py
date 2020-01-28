@@ -59,7 +59,7 @@ def AddLandDetail(request):
             land.lattitude = form.cleaned_data["lattitude"]
             land.availability= form.cleaned_data["availability"]
             land.verified=form.cleaned_data["verified"]
-            land.userid= userid
+            land.userid= form.cleaned_data["userid"]
             land.area= form.cleaned_data["area"]
             land.state=form.cleaned_data["state"]
             land.image=form.cleaned_data["image"]
