@@ -67,7 +67,6 @@ def AddLandDetail(request):
             land.save()
             return render(request, 'AddLandDetail.html',{'form' : form})
         else:
-            print("dasd")
             return render(request, 'AddLandDetail.html',{'message':'Registration2 Failed','form' : form})
     else:
         c = {}
