@@ -10,8 +10,9 @@ from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db import models
 from django.template import loader
-import math
+import math,datetime
 from geopy import distance
+import geocoder
 
 # Create your views here.
 
@@ -66,13 +67,14 @@ def EditProfile(request):
 def ShowLandDetails(request):
     c = {}
     c.update(csrf(request))
-    landobj = Land_detail.objects.filter(verified=0)
+    landobj = Land_detail.objects.filter(start_date__gt=datetime.datetime.now(),verified=0)
     lands=list(landobj.values())
     for land in lands:
         lat1=land['lattitude']
         lag1=land['langitude']
-        lat2 = 22.685558
-        lag2 = 72.877867
+        g = geocoder.ip('me')
+        lat2 = g.latlng[0]
+        lag2 = g.latlng[1]
         landloc = (lat1,lag1)
         current = (lat2,lag2)
         d=distance.distance(landloc,current).km
