@@ -38,10 +38,7 @@
         <th>State</th>
         <th>no of spot</th>
         <th>Description</th>
-        <th>availability</th>
         <th>Price/Hour</th>
-        <th>start date</th>
-        <th>end date</th>
     </tr>
     {% for land in Land %}
 
@@ -52,10 +49,7 @@
         <td>{{land.state}}</td>
         <td>{{land.no_of_spot}}</td>
         <td>{{land.description}}</td>
-        <td>{{land.availability}}</td>
         <td>{{land.price_per_hour}}</td>
-        <td>{{land.start_date}}</td>
-        <td>{{land.end_date}}</td>
         <td>{{land.distance}}</td>
         <td><a href="http://maps.google.com/?q={{land.lattitude}},{{land.langitude}}" target="_blank" class="btn btn-success">Map</a></td>
         <td colspan="2"><img style="width: 200px;height: 200px;" src="/media/{{land.image}}"> </td>

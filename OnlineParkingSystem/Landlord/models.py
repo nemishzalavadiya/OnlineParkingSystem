@@ -16,9 +16,29 @@ class Land_detail(models.Model):
     state = models.CharField(max_length=255) 
     no_of_spot = models.IntegerField()
     description = models.TextField(null=True)
-    availability = models.IntegerField()
     price_per_hour = models.FloatField()
     start_date  = models.DateField()
     end_date = models.DateField()
     verified = models.BooleanField()
     userid = models.ForeignKey(User_detail,on_delete=models.CASCADE)
+
+class Land_record(models.Model):
+    land_record_id = models.AutoField(primary_key=True)
+    landid = models.ForeignKey(Land_detail,on_delete=models.CASCADE)
+    userid = models.ForeignKey(User_detail,on_delete=models.CASCADE)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    start_time=models.TimeField(null=True)
+    end_time=models.TimeField(null=True)
+    total_price = models.IntegerField()
+    payment_remaining = models.BooleanField()
+    feedback = models.CharField(null=True,max_length = 255)
+    class Meta:
+        indexes=[
+            models.Index(
+                fields=['landid'],name='landid_index'
+            ),
+            models.Index(
+                fields=['userid'],name='userid_index'
+            )
+        ]

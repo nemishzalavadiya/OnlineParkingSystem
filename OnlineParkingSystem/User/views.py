@@ -15,7 +15,14 @@ from geopy import distance
 import geocoder
 
 # Create your views here.
-
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = 'me' #request.META.get('REMOTE_ADDR')
+    return ip
+    
 def Login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -67,14 +74,13 @@ def EditProfile(request):
 def ShowLandDetails(request):
     c = {}
     c.update(csrf(request))
-    landobj = Land_detail.objects.filter(start_date__gt=datetime.datetime.now(),verified=0)
+    landobj = Land_detail.objects.filter(end_date__gt=datetime.datetime.now(),verified=0)
     lands=list(landobj.values())
     for land in lands:
         lat1=land['lattitude']
         lag1=land['langitude']
-        g = geocoder.ip('me')
-        lat2 = g.latlng[0]
-        lag2 = g.latlng[1]
+        g = geocoder.ip(get_client_ip(request))
+        lat2,lag2 = g.latlng
         landloc = (lat1,lag1)
         current = (lat2,lag2)
         d=distance.distance(landloc,current).km
