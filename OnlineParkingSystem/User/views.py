@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.template.context_processors import csrf
-from Landlord.models import Land_detail
+from Landlord.models import Land_detail,Land_record
 from django.views.generic import TemplateView,ListView
 from .models import User_detail
 from django.core.mail import send_mail
@@ -15,7 +15,14 @@ from geopy import distance
 import geocoder
 
 # Create your views here.
-
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = 'me' #request.META.get('REMOTE_ADDR')
+    return ip
+    
 def Login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -65,21 +72,45 @@ def EditProfile(request):
         return render(request, 'EditProfile.html',{'form' : form, 'userid' : userid})
     
 def ShowLandDetails(request):
+    if request.method == 'POST':
+        c = {}
+        c.update(csrf(request))
+        date = request.POST.get('rdate')
+        request.session['date'] = date
+        landobj = Land_detail.objects.filter(start_date__lte=datetime.datetime.now(),end_date__gte=datetime.datetime.now(),verified=0)
+        lands=list(landobj.values())
+        nlands=[]
+        for land in lands:
+            lat1=land['lattitude']
+            lag1=land['langitude']
+            g = geocoder.ip(get_client_ip(request))
+            lat2,lag2 = g.latlng
+            landloc = (lat1,lag1)
+            current = (lat2,lag2)
+            d=distance.distance(landloc,current).km
+            d=round(d, 2)
+            land['distance']=d
+            count = Land_record.objects.filter(landid=land['landid'],start_date=date).count()
+            if land['no_of_spot'] > count:
+                nlands.append(land.copy()) 
+        print(nlands)
+        nlands = list(filter(lambda i: i['distance'] < 10, nlands)) 
+        nlands=sorted(nlands, key = lambda i: i['distance'])
+        return render(request, 'LandDetails.html',{'Land': nlands,'Date' : date})
+    else:
+        c = {}
+        c.update(csrf(request))
+        return render(request, 'LandDetails.html',{'page': 'get'})
+
+def ReserveParking(request):
     c = {}
     c.update(csrf(request))
-    landobj = Land_detail.objects.filter(start_date__gt=datetime.datetime.now(),verified=0)
-    lands=list(landobj.values())
-    for land in lands:
-        lat1=land['lattitude']
-        lag1=land['langitude']
-        g = geocoder.ip('me')
-        lat2 = g.latlng[0]
-        lag2 = g.latlng[1]
-        landloc = (lat1,lag1)
-        current = (lat2,lag2)
-        d=distance.distance(landloc,current).km
-        d=round(d, 2)
-        land['distance']=d
-    lands = list(filter(lambda i: i['distance'] < 10, lands)) 
-    lands=sorted(lands, key = lambda i: i['landid'],reverse=True)
-    return render(request, 'LandDetails.html',{'Land': lands})
+    landid = request.POST.get('landid')
+    userid = 2
+    totalprice = float(request.POST.get('price'))
+    totalprice = int(totalprice)
+    date =  request.session['date']
+    date = datetime.datetime.strptime(date, '%Y-%m-%d')
+    landrecord = Land_record(landid=Land_detail.objects.get(landid=landid),userid=User_detail.objects.get(userid=userid),start_date=date,total_price=totalprice,payment_remaining=True)
+    landrecord.save()
+    return render(request, 'LandDetails.html',{'message': "successful reserve"})

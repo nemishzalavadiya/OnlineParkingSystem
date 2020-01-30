@@ -93,7 +93,6 @@
 									{{ form.langitude }}
 									{{ form.lattitude }}
 									{{ form.verified  }}
-									{{ form.availability }}
 									{{ form.userid }}
 								<div class="col">
 										<div class="form-btn">
@@ -109,14 +108,6 @@
 	</div>
 
 	<script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
-
-	<script>
-		$(document).ready(function(){
-  		$("#no_of_spot").change(function(){
-    	$("#availability").val()=$("#no_of_spot").val();
-  });
-});
-	</script>
 	
 <script>
 var langitude = document.getElementById("langitude");

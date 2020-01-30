@@ -64,7 +64,7 @@ class LoginForm(ModelForm):
 class AddLandForm(ModelForm):
     class Meta:
         model=Land_detail
-        fields=('image','lattitude','city','area','state','langitude','address','no_of_spot','description','availability','price_per_hour','start_date','end_date','verified','userid')
+        fields=('image','lattitude','city','area','state','langitude','address','no_of_spot','description','price_per_hour','start_date','end_date','verified','userid')
         widgets = {
             'address': forms.TextInput(attrs={
                 "class":"form-control",
@@ -102,9 +102,6 @@ class AddLandForm(ModelForm):
             }),
             'lattitude': forms.HiddenInput(attrs={
                 "id":"lattitude",
-            }),
-            'availability': forms.HiddenInput(attrs={
-                "id":"availability",
             }),
             'verified': forms.HiddenInput(attrs={
                 "id":"verified",
