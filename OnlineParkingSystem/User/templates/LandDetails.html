@@ -41,7 +41,7 @@
 	<form action="/User/showlanddetails/" method="POST">
     {% csrf_token%}
         <div class="form-group">
-            <input type="Date" class="form-control" name="rdate">
+            <input type="Date" class="form-control" name="rdate" required>
         </div>
         <button type="submit" class="btn btn-success">Search</button>
     </form>
