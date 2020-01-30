@@ -27,7 +27,7 @@ class Land_record(models.Model):
     landid = models.ForeignKey(Land_detail,on_delete=models.CASCADE)
     userid = models.ForeignKey(User_detail,on_delete=models.CASCADE)
     start_date = models.DateField()
-    end_date = models.DateField()
+    end_date = models.DateField(null=True)
     start_time=models.TimeField(null=True)
     end_time=models.TimeField(null=True)
     total_price = models.IntegerField()
