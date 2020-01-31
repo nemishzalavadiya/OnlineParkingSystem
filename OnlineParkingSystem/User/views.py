@@ -154,6 +154,7 @@ def Home(request):
             loginDone="Tr"
     except:
         loginDone="Fal"
+        request.session['role']='User'
     return render(request,'index.html',{'login':loginDone,'role':request.session['role']})
 
 def LogoutHere(request):

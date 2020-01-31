@@ -130,8 +130,19 @@
                             <ul>
                                 <li class="active"><a href="./index.html">Home</a></li>
                                 {% if role == "Landload" %}
-                                <li><a href="{% url 'landlist' %}}">Show Land Details</a></li>
-                                <li><a href="{% url 'addlanddetail' %}}">Add Land</a></li>
+                                <div class="language-option">
+                                    <img src="img/flag.png" alt="">
+                                    <span>Alter Land</span>
+                                    <i class="fa fa-angle-down"></i>
+                                    <div class="flag-dropdown">
+                                        <ul>
+                                            <li><a href="{% url 'landlist' %}}">Show Land </a></li>
+                                            <li><a href="{% url 'addlanddetail' %}}">Add Land</a></li>
+                                            <li><a href="{% url 'addlanddetail' %}}">Edit Land</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
                                 {% endif %}
                                 
                                 {% if role == "User" %}
