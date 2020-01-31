@@ -42,7 +42,7 @@
 		{% endif %}
 
 					<span class="login100-form-title p-b-25 elegantshd">
-						Login
+						Login As {{role}}
 					</span>
 
 					{{ form.non_field_errors }}
@@ -63,7 +63,7 @@
 							<span class="lnr lnr-lock"></span>
 						</span>
 					</div>
-
+					<input type="hidden" name="role" value={{role}}>
 					<div class="contact100-form-checkbox m-l-4">
 						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
 						<label class="label-checkbox100" for="ckb1">

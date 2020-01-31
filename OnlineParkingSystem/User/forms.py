@@ -35,7 +35,6 @@ class RegistrationForm(ModelForm):
             }),
             'role': forms.HiddenInput(attrs={
                 "id":"role",
-                "value":"User"
             }),
         }
         
