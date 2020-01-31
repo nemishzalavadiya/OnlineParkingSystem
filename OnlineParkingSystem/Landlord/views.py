@@ -64,7 +64,7 @@ def AddLandDetail(request):
             land.image=form.cleaned_data["image"]
             land.price_per_hour=form.cleaned_data["price_per_hour"]
             land.save()
-            return render(request, 'AddLandDetail.html',{'form' : form})
+            return HttpResponseRedirect('/')
         else:
             return render(request, 'AddLandDetail.html',{'message':'Registration2 Failed','form' : form})
     else:

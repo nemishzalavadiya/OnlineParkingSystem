@@ -76,7 +76,7 @@
             <div class="top-right">
                 <div class="language-option">
                     <img src="img/flag.png" alt="">
-                    <a class="property-sub" href="/logout/">LogoutThis</a>
+                    <a class="property-sub" href="/logout/">Logout</a>
                 </div>
                 
             </div>
@@ -131,6 +131,11 @@
                                 <li class="active"><a href="./index.html">Home</a></li>
                                 {% if role == "Landload" %}
                                 <li><a href="{% url 'landlist' %}}">Show Land Details</a></li>
+                                <li><a href="{% url 'addlanddetail' %}}">Add Land</a></li>
+                                {% endif %}
+                                
+                                {% if role == "User" %}
+                                <li><a href="{% url 'showlanddetails' %}}">Reserve Lands</a></li>
                                 {% endif %}
                                 <li><a href="./about-us.html">Help</a></li>
                                 <li><a href="./blog.html">New Release</a></li>
@@ -175,7 +180,7 @@
                         <div class="top-right">
                             <div class="language-option">
                                 <img src="img/flag.png" alt="">
-                                <a class="property-sub" href="/logout/">LogoutA</a>
+                                <a class="property-sub" href="{% url 'LogoutHere' %}">Logout</a>
                             </div>
                             
                         </div>
@@ -356,46 +361,30 @@
                     <div class="search-form-text">
                         <div class="search-text">
                             <i class="fa fa-search"></i>
-                            Find Your Home
+                            Find Your Parking Space
                         </div>
                         <div class="home-text">
                             <i class="fa fa-home"></i>
-                            House For Sell
+                            Parking Space for rent
                         </div>
                     </div>
                     <form action="#" class="filter-form">
                         <div class="first-row">
-                            <select>
-                                <option value="">Villa & Pool</option>
-                            </select>
-                            <select>
-                                <option value="">Title</option>
-                            </select>
+                            <input style="margin-left:10px ;margin-top: 10px;" type="date">
+                            
                             <select>
                                 <option value="">Ani City</option>
                             </select>
                             <select>
-                                <option value="">Any Bithrooms</option>
+                                <option value="">Any State</option>
                             </select>
-                        </div>
+                        </div><br/>
                         <div class="second-row">
                             <select>
-                                <option value="">Any Bedrooms</option>
+                                <option value="">Any Pincode</option>
                             </select>
-                            <div class="price-range-wrap">
-                                <div class="price-text">
-                                    <label for="priceRange">Price:</label>
-                                    <input type="text" id="priceRange" readonly>
-                                </div>
-                                <div id="price-range" class="slider"></div>
-                            </div>
-                            <div class="room-size-range">
-                                <div class="price-text">
-                                    <label for="roomsizeRange">Size:</label>
-                                    <input type="text" id="roomsizeRange" readonly>
-                                </div>
-                                <div id="roomsize-range" class="slider"></div>
-                            </div>
+                            
+                            
                             <button type="button" class="search-btn">Search</button>
                         </div>
                     </form>

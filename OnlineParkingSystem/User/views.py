@@ -101,7 +101,7 @@ def EditProfile(request):
         form = EditProfileForm(instance=mydetail)
         return render(request, 'EditProfile.html',{'form' : form, 'userid' : userid})
     
-@myuser_login_required
+#@myuser_login_required
 def ShowLandDetails(request):
     if request.method == 'POST':
         c = {}
@@ -154,15 +154,12 @@ def Home(request):
             loginDone="Tr"
     except:
         loginDone="Fal"
-    print("value of loginDone is",loginDone,request.session['email'])
-    return render(request,'index.html',{'login':loginDone,'role':'User'})
+    return render(request,'index.html',{'login':loginDone,'role':request.session['role']})
 
 def LogoutHere(request):
-    print(request.session['email'],"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$",request.session['role'])
     try:
         del request.session['email']
         del request.session['role']
-        print("Logout done")
         loginDone="Fal"
         return render(request,'index.html',{'login':loginDone,'role':'User'})
 
