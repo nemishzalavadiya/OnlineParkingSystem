@@ -74,9 +74,9 @@
 				<form class="login100-form validate-form" action="/User/registration/" method="POST">
 					{% csrf_token%}
 					<span class="login100-form-title p-b-20">
-
-						Sign Up
+						Sign Up as {{role}}
 					</span>
+					
 					{{ form.non_field_errors }}
 					<div class="wrap-input100 validate-input" data-validate="Name is required">
 						{{ form.name.errors }}
@@ -119,6 +119,7 @@
 						<span class="focus-input100"></span>
 					</div>
 					{{ form.role }}
+					<input type="hidden" name="role" value={{role}}>
 					<div class="flex-m w-full p-b-33">
 						<div class="contact100-form-checkbox">
 							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me" required>
