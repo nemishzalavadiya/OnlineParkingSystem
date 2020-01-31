@@ -30,38 +30,58 @@
 </head>
 <body>
 <div style="align-items:center;"><h3 class="card-panel fray" style="text-align: center;width: 80%;"> Land Details</h3></div>
-    <table class="table table-hover centered">
-    <tr>
-        <th>Address</th>
-        <th>City</th>
-        <th>Area</th>
-        <th>State</th>
-        <th>no of spot</th>
-        <th>Description</th>
-        <th>availability</th>
-        <th>Price/Hour</th>
-        <th>start date</th>
-        <th>end date</th>
-    </tr>
-    {% for land in Land %}
-
-    <tr>
-        <td>{{land.address}}</td>
-        <td>{{land.city}}</td>
-        <td>{{land.area}}</td>
-        <td>{{land.state}}</td>
-        <td>{{land.no_of_spot}}</td>
-        <td>{{land.description}}</td>
-        <td>{{land.availability}}</td>
-        <td>{{land.price_per_hour}}</td>
-        <td>{{land.start_date}}</td>
-        <td>{{land.end_date}}</td>
-        <td>{{land.distance}}</td>
-        <td><a href="http://maps.google.com/?q={{land.lattitude}},{{land.langitude}}" target="_blank" class="btn btn-success">Map</a></td>
-        <td colspan="2"><img style="width: 200px;height: 200px;" src="/media/{{land.image}}"> </td>
-    </tr>
-    {% endfor %}
-    </table>
+    {% if message != None %}
+		<div style="width:100%;	height:50px;"class=" alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+			{{message}}
+        </div>
+	{% endif %}
+    
+			
+	<form action="/User/showlanddetails/" method="POST">
+    {% csrf_token%}
+        <div class="form-group">
+            <input type="Date" class="form-control" name="rdate" required>
+        </div>
+        <button type="submit" class="btn btn-success">Search</button>
+    </form>
+    {% if page == None %}
+        <table class="table table-hover centered">
+        <tr>
+            <th>Address</th>
+            <th>City</th>
+            <th>Area</th>
+            <th>State</th>
+            <th>Number of spot</th>
+            <th>Description</th>
+            <th>Price per Hour</th>
+            <th>Distance(km)</th>
+        </tr>
+        {% for land in Land %}
+        <form action="/User/reserveparking/" method="POST">
+        {% csrf_token%}
+            <tr>
+                <td>{{land.address}}</td>
+                <td>{{land.city}}</td>
+                <td>{{land.area}}</td>
+                <td>{{land.state}}</td>
+                <td>{{land.no_of_spot}}</td>
+                <td>{{land.description}}</td>
+                <td>{{land.price_per_hour}}</td>
+                <td>{{land.distance}}</td>
+                <td>
+                    <input type="hidden" name="landid" value="{{ land.landid }}">
+                    <input type="hidden" name="date" value="{{ Date }}">
+                    <input type="hidden" name="price" value="{{ land.price_per_hour }}">
+                </td>
+                <td><a href="http://maps.google.com/?q={{land.lattitude}},{{land.langitude}}" target="_blank" class="btn btn-success">Map</a></td>
+                <td><button type="submit" class="btn btn-success">Reserve</button></td>
+                <td colspan="2"><img style="width: 200px;height: 200px;" src="/media/{{land.image}}"> </td>
+            </tr>
+        </form>
+        {% endfor %}
+        </table>
+    {% endif %}
 	<script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
 
 	<script src="/static/vendor/bootstrap/js/popper.js"></script>
