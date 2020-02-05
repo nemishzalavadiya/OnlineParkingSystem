@@ -64,7 +64,8 @@ class EditProfileForm(ModelForm):
             'age': forms.NumberInput(attrs={
                 "class":"input100",
                 "id":"age",
-                "placeholder":"Age"
+                "placeholder":"Age",
+                "min":18
             }),
             'name': forms.TextInput(attrs={
                 "class":"input100",

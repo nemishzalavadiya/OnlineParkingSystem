@@ -20,15 +20,15 @@ def myuser_login_required(f):
             if request.session['email']==None:
                 c = {}
                 c.update(csrf(request))
-                form = RegistrationForm()
-                return render(request, 'Login.html',{'message':'Please Login First','form' : form})
+                form = LoginForm()
+                return render(request, 'Login.html',{'message':'Please Login First',"role":'User','form' : form})
             else:
                 return f(request, *args, **kwargs)
         except:
             c = {}
             c.update(csrf(request))
             form = RegistrationForm()
-            return render(request, 'Login.html',{'message':'Please Login First','form' : form})
+            return render(request, 'Login.html',{'message':'Please Login First',"role":'User','form' : form})
     login_first.__doc__=f.__doc__
     login_first.__name__=f.__name__
     return login_first
@@ -49,9 +49,9 @@ def Login(request):
         if(User_detail.objects.filter(email=email,password=password,role=request.POST.get('role'))):
             request.session['email']=email
             request.session['role']=request.POST.get('role')
-            return render(request,'index.html',{'role':request.POST.get('role')})
+            return render(request,'index.html',{'login':'True','role':request.POST.get('role')})
         else:
-            return render(request, 'Login.html',{'message':'Invalid email or password!!!','form' : form})
+            return render(request, 'Login.html',{'message':'Invalid email or password!!!','role':request.POST.get('role'),'form' : form})
     else:
         c = {}
         c.update(csrf(request))
@@ -73,15 +73,15 @@ def Registration(request):
             c = {}
             c.update(csrf(request))
             form = LoginForm()
-            return render(request, 'Login.html',{'message':'Registration Successful','form' : form})
+            return render(request, 'Login.html',{'role':request.POST.get('role'),'message':'Registration Successful','form' : form})
         else:
-            return render(request, 'Registration.html',{'message':'Registration Failed','form' : form})
+            return render(request, 'Registration.html',{'role':request.POST.get('role'),'message':'Registration Failed','form' : form})
     else:
         c = {}
         c.update(csrf(request))
         form = RegistrationForm()
         return render(request, 'Registration.html',{'form' : form,'role':request.GET.get('role')})
-    
+@myuser_login_required    
 def EditProfile(request):
     if request.method == 'POST':
         userid = request.POST.get('userid')
@@ -89,18 +89,18 @@ def EditProfile(request):
         form = EditProfileForm(request.POST,instance=mydetail)
         if form.is_valid():
             form.save()
-            return render(request, 'EditProfile.html',{'form' : form})
+            return render(request,'index.html',{'login':'True','role':request.session.get('role')})
         else:
-            return render(request, 'EditProfile.html',{'message':'Edit fail','form' : form})
+            return render(request, 'EditProfile.html',{'login':'True','role':request.session.get('role'),'message':'Edit fail','form' : form})
     else:
         c = {}
         c.update(csrf(request))
         userid = 1
         mydetail = User_detail.objects.get(userid=userid)
         form = EditProfileForm(instance=mydetail)
-        return render(request, 'EditProfile.html',{'form' : form, 'userid' : userid})
+        return render(request, 'EditProfile.html',{'login':'True','role':request.session.get('role'),'form' : form, 'userid' : userid})
     
-#@myuser_login_required
+@myuser_login_required
 def ShowLandDetails(request):
     if request.method == 'POST':
         c = {}
@@ -126,12 +126,13 @@ def ShowLandDetails(request):
         print(nlands)
         nlands = list(filter(lambda i: i['distance'] < 100, nlands)) 
         nlands=sorted(nlands, key = lambda i: i['distance'])
-        return render(request, 'LandDetails.html',{'Land': nlands,'Date' : date})
+        return render(request, 'LandDetails.html',{'login':'True','role':request.session.get('role'),'Land': nlands,'Date' : date})
     else:
         c = {}
         c.update(csrf(request))
-        return render(request, 'LandDetails.html',{'page': 'get'})
+        return render(request, 'LandDetails.html',{'login':'True','role':request.session.get('role'),'page': 'get'})
 
+@myuser_login_required
 def ReserveParking(request):
     c = {}
     c.update(csrf(request))
@@ -143,16 +144,16 @@ def ReserveParking(request):
     date = datetime.datetime.strptime(date, '%Y-%m-%d')
     landrecord = Land_record(landid=Land_detail.objects.get(landid=landid),userid=User_detail.objects.get(userid=userid),start_date=date,total_price=totalprice,payment_remaining=True)
     landrecord.save()
-    return render(request, 'LandDetails.html',{'message': "successful reserve"})
+    return render(request, 'LandDetails.html',{'login':'True','role':request.session.get('role'),'message': "successful reserve"})
 
     
 def Home(request):
-    loginDone="Fal"
+    loginDone="False"
     try:
         if request.session['email']!=None and request.session['role']!=None:
-            loginDone="Tr"
+            loginDone="True"
     except:
-        loginDone="Fal"
+        loginDone="False"
         request.session['role']='User'
     return render(request,'index.html',{'login':loginDone,'role':request.session['role']})
 
@@ -160,7 +161,7 @@ def LogoutHere(request):
     try:
         del request.session['email']
         del request.session['role']
-        loginDone="Fal"
+        loginDone="False"
         return render(request,'index.html',{'login':loginDone,'role':'User'})
 
     except:

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div style="align-items:center;"><h3 class="card-panel fray" style="text-align: center;width: 80%;"> Approval Needed</h3></div>
+<div style="align-items:center;"><h3 class="card-panel fray" style="background-color:darkgreen;margin: 60px;padding: 10px 20px;text-align: center;align-items: center;"> Approval Needed</h3></div>
 <div style="margin:60px;margin-top: 20px;">
 <table class="table table-bordered table-hover centered">
   <thead>
@@ -34,27 +34,26 @@
         <td>{{ user.price_per_hour }}</td>
         <td>{{ user.start_date }}</td>
         <td>{{ user.end_date }}</td>
-        <td>{% if user.verified %}<button class="btn btn-success " onclick="run()">Approve</button>{% endif %}</td>
+        {% if user.verified %}<td><button type="submit" class="btn btn-success ">Verification Required</button></td>{% endif %}
+        {% if not user.verified %}<td><i class="fa fa-check" aria-hidden="true"></i> Done</td>{% endif %}
       </tr>
      </form>
     {% endfor %}
   </tbody>
 </table>
 <script>
-  function run(){
-    var toastHTML = '<span>Approval Granted</span><button id="butClick" class="btn-flat toast-action">Undo</button>';
-  M.toast({html: toastHTML,classes:"rounded"});
-  }
+  
 
   function approve($this){
     console.log("button clicked");
     var request_data = $this;
     console.log("data: " + request_data);
     var url = "{% url 'UserShortedView' %}";
-
+    console.log("url : "+url);
     var id = $this;
     console.log(url + "/" + id);
-    document.location.href = '/admin_role/sortLand?id='+ id;
+ 
+    document.location.href = '/admin_role/sortLand/?id='+ id;
   }
 </script>
 <div class="center">
@@ -81,4 +80,5 @@
 {% endif %}
 </div>
 </div>
+<a href="{% url 'Home' %}"><button class="btn btn-primary" style="margin-left:60px">Home</button></a>
 {% endblock %}
