@@ -92,5 +92,6 @@ def EditLandDetail(request):
         return render(request, 'EditLandDetail.html',{'form' : form, 'landid' : landid})
     
 def landlist(request):
-    landlist= Land_detail.objects.filter(userid=request.session['userid'])
-    return render(request, 'show.html',{ 'list' : landlist })
+    userlist= User_detail.objects.get(email=request.session['email'],role=request.session['role'])
+    land=Land_detail.objects.filter(userid_id=userlist.userid)
+    return render(request, 'show.html',{ 'list' : land })

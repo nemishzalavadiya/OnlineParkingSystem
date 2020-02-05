@@ -125,23 +125,28 @@
         <div class="top-nav">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-7">
+                    <div class="col-lg-6">
                         <nav class="main-menu">
                             <ul>
                                 <li class="active"><a href="./index.html">Home</a></li>
                                 {% if role == "Landload" %}
-                                <div class="language-option">
-                                    <img src="img/flag.png" alt="">
-                                    <span>Alter Land</span>
-                                    <i class="fa fa-angle-down"></i>
-                                    <div class="flag-dropdown">
-                                        <ul>
-                                            <li><a href="{% url 'landlist' %}}">Show Land </a></li>
-                                            <li><a href="{% url 'addlanddetail' %}}">Add Land</a></li>
-                                            <li><a href="{% url 'addlanddetail' %}}">Edit Land</a></li>
-                                        </ul>
+                                <div class="col-lg-3">
+                                    <div class="top-right">
+                                        <div class="language-option">
+                                            <img src="img/flag.png" alt="">
+                                            <span>Alter Land</span>
+                                            <i class="fa fa-angle-down"></i>
+                                            <div class="flag-dropdown">
+                                                <ul>
+                                                    <li><a href="{% url 'landlist' %}}">Show Land </a></li>
+                                                    <li><a href="{% url 'addlanddetail' %}}">Add Land</a></li>
+                                                    <li><a href="{% url 'addlanddetail' %}}">Edit Land</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                                
                                 
                                 {% endif %}
                                 
@@ -156,7 +161,7 @@
                         </nav>
                     </div>
                     {% if login == "Fal" %}
-                    <div class="col-lg-5">
+                    <div class="col-lg-3">
                         <div class="top-right">
                             <div class="language-option">
                                 <img src="img/flag.png" alt="">

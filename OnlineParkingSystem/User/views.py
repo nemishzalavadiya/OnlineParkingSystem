@@ -13,7 +13,6 @@ from django.template import loader
 import math,datetime
 from geopy import distance
 import geocoder
-
 # Create your views here.
 def myuser_login_required(f):
     def login_first(request, *args, **kwargs):
@@ -47,7 +46,7 @@ def Login(request):
         form = LoginForm(request.POST)
         email = form.data['email']
         password = form.data['password']
-        if(User_detail.objects.filter(email=email,password=password)):
+        if(User_detail.objects.filter(email=email,password=password,role=request.POST.get('role'))):
             request.session['email']=email
             request.session['role']=request.POST.get('role')
             return render(request,'index.html',{'role':request.POST.get('role')})
@@ -125,7 +124,7 @@ def ShowLandDetails(request):
             if land['no_of_spot'] > count:
                 nlands.append(land.copy()) 
         print(nlands)
-        nlands = list(filter(lambda i: i['distance'] < 10, nlands)) 
+        nlands = list(filter(lambda i: i['distance'] < 100, nlands)) 
         nlands=sorted(nlands, key = lambda i: i['distance'])
         return render(request, 'LandDetails.html',{'Land': nlands,'Date' : date})
     else:
