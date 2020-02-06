@@ -12,6 +12,7 @@ class UserListView(ListView):
     context_object_name = 'users' 
     paginate_by = 10
     queryset = Land_detail.objects.all().order_by('no_of_spot')
+    
 class UserShortedView(ListView):
     id='lattitude'
     model = Land_detail
@@ -23,6 +24,7 @@ class UserShortedView(ListView):
         order_by = self.request.GET.get('id') or 'lattitude'
         qs = super(UserShortedView, self).get_queryset()
         return qs.order_by(order_by)
+
 @myuser_login_required
 def UserApproved(request):
     if request.method == 'POST':

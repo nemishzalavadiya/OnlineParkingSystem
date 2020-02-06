@@ -1,0 +1,38 @@
+
+
+{% extends 'base.html' %}
+{% block content %}
+        <table class="table table-hover centered" style="margin: 30px;">
+        <tr>
+            <th>Date</th>
+            <th>Price</th>
+            <th>Land Address</th>
+            <th>Landlord Name</th>
+            <th>Landlord Email</th>
+            <th>Landlord Mobile Number</th>
+            <th>Landlord Age</th>
+        </tr>
+        {% for land in LandRecord %}
+            <tr>
+                <td>{{land.start_date}}</td>
+                <td>{{land.total_price}}</td>
+                <td>{{land.address}}</td>
+                <td>{{land.name}}</td>
+                <td>{{land.email}}</td>
+                <td>{{land.mobile_no}}</td>
+                <td>{{land.age}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+	<script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
+
+	<script src="/static/vendor/bootstrap/js/popper.js"></script>
+	<script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+	<script src="/static/vendor/select2/select2.min.js"></script>
+
+	<script src="/static/js/login.js"></script>
+        <script type="text/javascript" src="/static/js/materialize.min.js"></script>
+        <script type="text/css" rel="stylesheet" src="/static/css/materialize.min.css" ></script>
+
+    {% endblock %}

@@ -4,7 +4,7 @@ from User.models import User_detail
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import RegistrationForm,LoginForm,AddLandForm
-from .models import Land_detail
+from .models import Land_detail,Land_record
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db import models
@@ -42,6 +42,7 @@ def AddLandDetail(request):
         c.update(csrf(request))
         form = AddLandForm()
         return render(request, 'AddLandDetail.html',{'form' : form})
+
 @myuser_login_required
 def EditLandDetail(request):
     if request.method == 'POST':
@@ -56,12 +57,26 @@ def EditLandDetail(request):
     else:
         c = {}
         c.update(csrf(request))
-        landid = 1
+        landid = request.GET.get('landid')
         mydetail = Land_detail.objects.get(landid=landid)
         form = AddLandForm(instance=mydetail)
         return render(request, 'EditLandDetail.html',{'form' : form, 'landid' : landid})
-@myuser_login_required    
+
+@myuser_login_required
 def landlist(request):
     userlist= User_detail.objects.get(email=request.session['email'],role=request.session['role'])
     land=Land_detail.objects.filter(userid_id=userlist.userid)
     return render(request, 'show.html',{ 'list' : land })
+    
+@myuser_login_required
+def ShowHistory(request):
+    landid = request.GET.get("landid")
+    landrecords=Land_record.objects.filter(landid=landid)
+    landrecords= list(landrecords.values())
+    for landrecord in landrecords:
+        user = User_detail.objects.get(userid=landrecord['userid_id'])
+        landrecord['name']= user.name
+        landrecord['email']= user.email
+        landrecord['mobile_no']= user.mobile_no
+        landrecord['age']= user.age
+    return render(request, 'ShowHistory.html',{ 'LandRecord' : landrecords })

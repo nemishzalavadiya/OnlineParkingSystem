@@ -84,6 +84,7 @@ def Registration(request):
         c.update(csrf(request))
         form = RegistrationForm()
         return render(request, 'Registration.html',{'form' : form,'role':request.GET.get('role')})
+
 @myuser_login_required    
 def EditProfile(request):
     if request.method == 'POST':
@@ -110,7 +111,7 @@ def ShowLandDetails(request):
         c.update(csrf(request))
         date = request.POST.get('rdate')
         request.session['date'] = date
-        landobj = Land_detail.objects.filter(start_date__lte=datetime.datetime.now(),end_date__gte=datetime.datetime.now(),verified=0)
+        landobj = Land_detail.objects.filter(start_date__lte=date,end_date__gte=date,verified=0)
         lands=list(landobj.values())
         nlands=[]
         for land in lands:
@@ -139,7 +140,7 @@ def ReserveParking(request):
     c = {}
     c.update(csrf(request))
     landid = request.POST.get('landid')
-    userid=request.session['uid']
+    userid = request.session['uid']
     totalprice = float(request.POST.get('price'))
     totalprice = int(totalprice)
     date =  request.session['date']
@@ -148,7 +149,6 @@ def ReserveParking(request):
     landrecord.save()
     land_data = Land_detail.objects.get(landid=landid)
     address=land_data.address
-    price=land_data.price_per_hour
     description=land_data.description
     city=land_data.city
     area=land_data.area
@@ -169,6 +169,21 @@ def Home(request):
         loginDone="False"
         request.session['role']='User'
     return render(request,'index.html',{'login':loginDone,'role':request.session['role']})
+
+@myuser_login_required
+def ShowUserHistory(request):
+    userid = request.session['uid']
+    landrecords = Land_record.objects.filter(userid=userid)
+    landrecords= list(landrecords.values())
+    for landrecord in landrecords:
+        landdetail = Land_detail.objects.get(landid=landrecord['landid_id'])
+        user = User_detail.objects.get(userid=landdetail.userid_id)
+        landrecord['address']=landdetail.address+","+landdetail.area+","+landdetail.city+","+landdetail.state
+        landrecord['name']= user.name
+        landrecord['email']= user.email
+        landrecord['mobile_no']= user.mobile_no
+        landrecord['age']= user.age
+    return render(request, 'ShowUserHistory.html',{ 'LandRecord' : landrecords })
 
 def LogoutHere(request):
     try:
