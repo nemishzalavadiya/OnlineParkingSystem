@@ -12,6 +12,7 @@ from django.db import models
 from django.template import loader
 import math,datetime
 from geopy import distance
+from django.core.mail import send_mail
 import geocoder
 # Create your views here.
 def myuser_login_required(f):
@@ -46,8 +47,14 @@ def Login(request):
         form = LoginForm(request.POST)
         email = form.data['email']
         password = form.data['password']
-        if(User_detail.objects.filter(email=email,password=password,role=request.POST.get('role'))):
+        print(email)
+        print(password)
+        print(request.POST.get('role'))
+        user_data=User_detail.objects.get(email=email,password=password,role=request.POST.get('role'))
+        if(user_data):
+            request.session['uid']=user_data.userid
             request.session['email']=email
+            print(request.session['email'])
             request.session['role']=request.POST.get('role')
             return render(request,'index.html',{'login':'True','role':request.POST.get('role')})
         else:
@@ -123,7 +130,6 @@ def ShowLandDetails(request):
             count = Land_record.objects.filter(landid=land['landid'],start_date=date).count()
             if land['no_of_spot'] > count:
                 nlands.append(land.copy()) 
-        print(nlands)
         nlands = list(filter(lambda i: i['distance'] < 100, nlands)) 
         nlands=sorted(nlands, key = lambda i: i['distance'])
         return render(request, 'LandDetails.html',{'login':'True','role':request.session.get('role'),'Land': nlands,'Date' : date})
@@ -137,16 +143,22 @@ def ReserveParking(request):
     c = {}
     c.update(csrf(request))
     landid = request.POST.get('landid')
-    userid = 2
+    address = request.POST.get('address')
+    print(address)
+    userid=request.session['uid']
     totalprice = float(request.POST.get('price'))
     totalprice = int(totalprice)
     date =  request.session['date']
     date = datetime.datetime.strptime(date, '%Y-%m-%d')
     landrecord = Land_record(landid=Land_detail.objects.get(landid=landid),userid=User_detail.objects.get(userid=userid),start_date=date,total_price=totalprice,payment_remaining=True)
     landrecord.save()
+    subject = 'Confirmation Mail For Booking'
+    message = 'Your booking details are below.'+'\n'+'Total price:'+str(totalprice)+'\n'+'Date:'+str(date)+'\n'+'address'+str(address)
+    from_email = settings.EMAIL_HOST_USER
+    to_list = [request.session['email']]
+    send_mail(subject, message, from_email, to_list, fail_silently=False)
     return render(request, 'LandDetails.html',{'login':'True','role':request.session.get('role'),'message': "successful reserve"})
 
-    
 def Home(request):
     loginDone="False"
     try:

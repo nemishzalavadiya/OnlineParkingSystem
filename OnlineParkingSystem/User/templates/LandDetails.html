@@ -38,7 +38,7 @@
         <form action="/User/reserveparking/" method="POST">
         {% csrf_token%}
             <tr>
-                <td>{{land.address}}</td>
+                <td name="address">{{land.address}}</td>
                 <td>{{land.city}}</td>
                 <td>{{land.area}}</td>
                 <td>{{land.state}}</td>
@@ -52,7 +52,7 @@
                     <input type="hidden" name="price" value="{{ land.price_per_hour }}">
                 </td>
                 <td><a href="http://maps.google.com/?q={{land.lattitude}},{{land.langitude}}" target="_blank" class="btn btn-success">Map</a></td>
-                <td><button type="submit" class="btn btn-success">Reserve</button></td>
+                <td><input type="submit" value="Reserve"class="btn btn-success"></input></td>
                 <td colspan="2"><img style="width: 200px;height: 200px;" src="/media/{{land.image}}"> </td>
             </tr>
         </form>
