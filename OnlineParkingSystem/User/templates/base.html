@@ -59,26 +59,25 @@
          
          <div class="language-bar">
              <div class="language-option">
-                 <img src="img/flag.png" alt="">
+                 <img src="/static/img/flag.png" alt="">
                  <span>Register</span>
                  <i class="fa fa-angle-down"></i>
                  <div class="flag-dropdown">
                      <ul>
-                         <li><a href="{% url 'Registration'  %}?role=Admin">Admin</a></li>
-                         <li><a href="{% url 'Registration'  %}?role=Landload">Landload</a></li>
+                         <li><a href="{% url 'Registration'  %}?role=Landlord">Landlord</a></li>
                          <li><a href="{% url 'Registration'  %}?role=User">User</a></li>
                      </ul>
                  </div>
              </div>
              
                  <div class="language-option">
-                     <img src="img/flag.png" alt="">
+                     <img src="/static/img/flag.png" alt="">
                      <span class="property-sub">Login</span>
                      <i class="fa fa-angle-down"></i>
                      <div class="flag-dropdown">
                          <ul>
                              <li><a href="{% url 'Login'  %}?role=Admin">Admin</a></li>
-                             <li><a href="{% url 'Login'  %}?role=Landload">Landload</a></li>
+                             <li><a href="{% url 'Login'  %}?role=Landlord">Landlord</a></li>
                              <li><a href="{% url 'Login'  %}?role=User">User</a></li>
                          </ul>
                      </div>
@@ -90,7 +89,7 @@
          <div class="col-lg-5">
              <div class="top-right">
                  <div class="language-option">
-                     <img src="img/flag.png" alt="">
+                     <img src="/static/img/flag.png" alt="">
                      <a class="property-sub" href="/logout/">Logout</a>
                  </div>
                  
@@ -100,12 +99,12 @@
          <nav class="main-menu">
              <ul>
                  <li ><a href="./index.html">Home</a></li>
-                                 {% if role == "Landload" %}
+                                 {% if role == "Landlord" %}
                                  
                                                  <ul>
-                                                     <li><a href="{% url 'landlist' %}}">Show Land </a></li>
-                                                     <li><a href="{% url 'addlanddetail' %}}">Add Land</a></li>
-                                                     <li><a href="{% url 'addlanddetail' %}}">Edit Land</a></li>
+                                                     <li><a href="{% url 'landlist' %}">Show Land </a></li>
+                                                     <li><a href="{% url 'addlanddetail' %}">Add Land</a></li>
+                                                     <li><a href="{% url 'addlanddetail' %}">Edit Land</a></li>
                                                      <li><a href="./about-us.html">Help</a></li>
                                  <li><a href="./blog.html">New Release</a></li>
                                  <li><a href="./contact.html">Contact</a></li>
@@ -117,8 +116,8 @@
                                  {% endif %}
                                  
                                  {% if role == "User" %}
-                                 <li><a href="{% url 'showlanddetails' %}}">Reserve Lands</a></li>
-                                 <li><a href="{% url 'editprofile' %}}">Edit Profile</a></li>
+                                 <li><a href="{% url 'showlanddetails' %}">Reserve Lands</a></li>
+                                 <li><a href="{% url 'editprofile' %}">Edit Profile</a></li>
                                  <li><a href="./about-us.html">Help</a></li>
                                  <li><a href="./blog.html">New Release</a></li>
                                  <li><a href="./contact.html">Contact</a></li>
@@ -147,20 +146,20 @@
                          <nav class="main-menu">
                              <ul>
                                  
-                                 {% if role == "Landload" %}
+                                 {% if role == "Landlord" %}
 
                                      <div class="top-right" style="text-align: left;">
                                         <li class="active"><a href="./index.html">Home</a></li>
 
                                          <div class="language-option">
-                                             <img src="img/flag.png" alt="">
+                                             <img src="/static/img/flag.png" alt="">
                                              <span>Alter Land</span>
                                              <i class="fa fa-angle-down"></i>
                                              <div class="flag-dropdown">
                                                  <ul>
-                                                     <li><a href="{% url 'landlist' %}}">Show</a></li>
-                                                     <li><a href="{% url 'addlanddetail' %}}">Add</a></li>
-                                                     <li><a href="{% url 'addlanddetail' %}}">Edit</a></li>
+                                                     <li><a href="{% url 'landlist' %}">Show</a></li>
+                                                     <li><a href="{% url 'addlanddetail' %}">Add</a></li>
+                                                     <li><a href="{% url 'addlanddetail' %}">Edit</a></li>
                                                  </ul>
                                              </div>
                                          </div>
@@ -199,25 +198,25 @@
                      <div class="col-lg-4">
                          <div class="top-right">
                              <div class="language-option">
-                                 <img src="img/flag.png" alt="">
+                                 <img src="/static/img/flag.png" alt="">
                                  <span>Register</span>
                                  <i class="fa fa-angle-down"></i>
                                  <div class="flag-dropdown">
                                      <ul>
                                          <li><a href="{% url 'Registration'  %}?role=Admin">Admin</a></li>
-                                         <li><a href="{% url 'Registration'  %}?role=Landload">Landload</a></li>
+                                         <li><a href="{% url 'Registration'  %}?role=Landlord">Landlord</a></li>
                                          <li><a href="{% url 'Registration'  %}?role=User">User</a></li>
                                      </ul>
                                  </div>
                              </div>
                              <div class="language-option">
-                                 <img src="img/flag.png" alt="">
+                                 <img src="/static/img/flag.png" alt="">
                                  <span>Login</span>
                                  <i class="fa fa-angle-down"></i>
                                  <div class="flag-dropdown">
                                      <ul>
                                          <li><a href="{% url 'Login'  %}?role=Admin">Admin</a></li>
-                                         <li><a href="{% url 'Login'  %}?role=Landload">Landload</a></li>
+                                         <li><a href="{% url 'Login'  %}?role=Landlord">Landlord</a></li>
                                          <li><a href="{% url 'Login'  %}?role=User">User</a></li>
                                      </ul>
                                  </div>
@@ -230,7 +229,7 @@
                      <div class="col-lg-4">
                          <div class="top-right">
                              <div class="language-option">
-                                 <img src="img/flag.png" alt="">
+                                 <img src="/static/img/flag.png" alt="">
                                  <a class="property-sub" href="{% url 'LogoutHere' %}">Logout</a>
                              </div>
                              
@@ -246,7 +245,7 @@
                  <div class="row">
                      <div class="col-lg-3">
                          <div class="logo">
-                             <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                             <a href="./index.html"><img src="/static/img/logo.png" alt=""></a>
                          </div>
                      </div>
                      <div class="col-lg-9">
@@ -287,14 +286,14 @@
     {% endblock %}
     <!-- Footer Section Begin -->
     <hr  />
-    <footer class="footer-section set-bg" data-setbg="img/footer-bg.jpg">
+    <footer class="footer-section set-bg" data-setbg="/static/img/footer-bg.jpg">
         <div class="container">
             <div class="footer-text">
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="footer-logo">
                             <div class="logo">
-                                <a href="#"><img src="img/footer-logo.png" alt=""></a>
+                                <a href="#"><img src="/static/img/footer-logo.png" alt=""></a>
                             </div>
                             <p>Subscribe our newsletter gor get notification about new updates.</p>
                             <form action="#" class="newslatter-form">

@@ -107,7 +107,7 @@ def ShowLandDetails(request):
         c.update(csrf(request))
         date = request.POST.get('rdate')
         request.session['date'] = date
-        landobj = Land_detail.objects.filter(start_date__lte=datetime.datetime.now(),end_date__gte=datetime.datetime.now(),verified=0)
+        landobj = Land_detail.objects.filter(start_date__lte=date,end_date__gte=date,verified=0)
         lands=list(landobj.values())
         nlands=[]
         for land in lands:
@@ -123,7 +123,6 @@ def ShowLandDetails(request):
             count = Land_record.objects.filter(landid=land['landid'],start_date=date).count()
             if land['no_of_spot'] > count:
                 nlands.append(land.copy()) 
-        print(nlands)
         nlands = list(filter(lambda i: i['distance'] < 100, nlands)) 
         nlands=sorted(nlands, key = lambda i: i['distance'])
         return render(request, 'LandDetails.html',{'login':'True','role':request.session.get('role'),'Land': nlands,'Date' : date})
