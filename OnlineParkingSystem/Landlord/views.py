@@ -42,6 +42,7 @@ def AddLandDetail(request):
         c.update(csrf(request))
         form = AddLandForm()
         return render(request, 'AddLandDetail.html',{'form' : form})
+
 @myuser_login_required
 def EditLandDetail(request):
     if request.method == 'POST':
@@ -66,6 +67,7 @@ def landlist(request):
     userlist= User_detail.objects.get(email=request.session['email'],role=request.session['role'])
     land=Land_detail.objects.filter(userid_id=userlist.userid)
     return render(request, 'show.html',{ 'list' : land })
+    
 @myuser_login_required
 def ShowHistory(request):
     landid = request.GET.get("landid")
