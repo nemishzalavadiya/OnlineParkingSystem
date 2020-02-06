@@ -143,8 +143,6 @@ def ReserveParking(request):
     c = {}
     c.update(csrf(request))
     landid = request.POST.get('landid')
-    address = request.POST.get('address')
-    print(address)
     userid=request.session['uid']
     totalprice = float(request.POST.get('price'))
     totalprice = int(totalprice)
@@ -152,8 +150,15 @@ def ReserveParking(request):
     date = datetime.datetime.strptime(date, '%Y-%m-%d')
     landrecord = Land_record(landid=Land_detail.objects.get(landid=landid),userid=User_detail.objects.get(userid=userid),start_date=date,total_price=totalprice,payment_remaining=True)
     landrecord.save()
+    land_data = Land_detail.objects.get(landid=landid)
+    address=land_data.address
+    price=land_data.price_per_hour
+    description=land_data.description
+    city=land_data.city
+    area=land_data.area
+    state=land_data.state
     subject = 'Confirmation Mail For Booking'
-    message = 'Your booking details are below.'+'\n'+'Total price:'+str(totalprice)+'\n'+'Date:'+str(date)+'\n'+'address'+str(address)
+    message = 'Your booking details are below.'+'\n'+'Total price: '+str(totalprice)+'\n'+'Date: '+str(date)+'\n'+'address: '+str(address)+'\n'+'Description: '+str(description)+'\n'+'City: '+str(city)+'\n'+'Area: '+str(area)+'\n'+'State: '+str(state)
     from_email = settings.EMAIL_HOST_USER
     to_list = [request.session['email']]
     send_mail(subject, message, from_email, to_list, fail_silently=False)

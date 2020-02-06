@@ -38,7 +38,7 @@
         <form action="/User/reserveparking/" method="POST">
         {% csrf_token%}
             <tr>
-                <td name="address">{{land.address}}</td>
+                <td>{{land.address}}</td>
                 <td>{{land.city}}</td>
                 <td>{{land.area}}</td>
                 <td>{{land.state}}</td>
