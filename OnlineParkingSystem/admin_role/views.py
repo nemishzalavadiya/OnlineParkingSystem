@@ -18,6 +18,7 @@ class UserShortedView(ListView):
     template_name = 'list.html'  
     context_object_name = 'users' 
     paginate_by = 10
+    @myuser_login_required
     def get_queryset(self):
         print("Sorted list getting")
         order_by = self.request.GET.get('id') or 'lattitude'
