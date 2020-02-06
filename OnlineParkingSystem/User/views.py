@@ -47,14 +47,10 @@ def Login(request):
         form = LoginForm(request.POST)
         email = form.data['email']
         password = form.data['password']
-        print(email)
-        print(password)
-        print(request.POST.get('role'))
         user_data=User_detail.objects.get(email=email,password=password,role=request.POST.get('role'))
         if(user_data):
             request.session['uid']=user_data.userid
             request.session['email']=email
-            print(request.session['email'])
             request.session['role']=request.POST.get('role')
             return render(request,'index.html',{'login':'True','role':request.POST.get('role')})
         else:
