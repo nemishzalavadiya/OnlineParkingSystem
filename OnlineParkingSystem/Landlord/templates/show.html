@@ -26,6 +26,7 @@
                 <h5>Date : {{i.start_date}} to {{i.end_date}}</h5>
                 <h6>Description : {{i.description}}</h6>
                 <a class="btn btn-success" href="/Landlord/showhistory/?landid={{ i.landid }}" >Show History</a>
+                <a class="btn btn-success" href="/Landlord/editlanddetail/?landid={{ i.landid }}" >Edit Land Detail</a>
             </div>
         </div>
     {% endfor %}

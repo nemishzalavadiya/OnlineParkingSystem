@@ -117,6 +117,7 @@
                                  
                                  {% if role == "User" %}
                                  <li><a href="{% url 'showlanddetails' %}">Reserve Lands</a></li>
+                                 <li><a href="{% url 'ShowUserHistory' %}">Show History</a></li>
                                  <li><a href="{% url 'editprofile' %}">Edit Profile</a></li>
                                  <li><a href="./about-us.html">Help</a></li>
                                  <li><a href="./blog.html">New Release</a></li>
@@ -167,15 +168,12 @@
                                  <li><a href="./blog.html">New Release</a></li>
                                  <li><a href="./contact.html">Contact</a></li>
                                      </div>
-                                 
-                                 
-                                 
                                  {% endif %}
                                  
                                  {% if role == "User" %}
                                  <li class="active"><a href="./index.html">Home</a></li>
-
                                  <li><a href="{% url 'showlanddetails' %}}">Reserve Lands</a></li>
+                                 <li><a href="{% url 'ShowUserHistory' %}">Show History</a></li>
                                  <li><a href="{% url 'editprofile' %}}">Edit Profile</a></li>
                                  <li><a href="./about-us.html">Help</a></li>
                                  <li><a href="./blog.html">New Release</a></li>

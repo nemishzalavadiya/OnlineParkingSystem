@@ -57,7 +57,7 @@ def EditLandDetail(request):
     else:
         c = {}
         c.update(csrf(request))
-        landid = 1
+        landid = request.GET.get('landid')
         mydetail = Land_detail.objects.get(landid=landid)
         form = AddLandForm(instance=mydetail)
         return render(request, 'EditLandDetail.html',{'form' : form, 'landid' : landid})
