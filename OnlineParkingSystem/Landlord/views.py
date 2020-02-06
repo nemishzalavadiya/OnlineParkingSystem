@@ -9,41 +9,11 @@ from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db import models
 from django.template import loader
+from User.views import myuser_login_required
 # Create your views here.
 
-def Login(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        email = form.data['email']
-        password = form.data['password']
-        role = 'Landlord'
-        if(User_detail.objects.filter(email=email,password=password,role=role)):
-            request.session['userid']=User_detail.objects.get(email=email).userid
-            return render(request,'LandlordLogin.html',{'message':'Login Successful','form' : form})
-        else:
-            return render(request, 'LandlordLogin.html',{'message':'Invalid email or password!!!','form' : form})
-    else:
-        c = {}
-        c.update(csrf(request))
-        form = LoginForm()
-        return render(request, 'LandlordLogin.html',{'form' : form})
 
-
-def Registration(request):
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return render(request, 'LandlordRegistration.html',{'form' : form})
-        else:
-            return render(request, 'LandlordRegistration.html',{'message':'Registration1 Failed','form' : form})
-    else:
-        c = {}
-        c.update(csrf(request))
-        form = RegistrationForm()
-        return render(request, 'LandlordRegistration.html',{'form' : form})
-
-        
+@myuser_login_required       
 def AddLandDetail(request):
     if request.method == 'POST' :
         form = AddLandForm(request.POST,request.FILES)
@@ -72,7 +42,7 @@ def AddLandDetail(request):
         c.update(csrf(request))
         form = AddLandForm()
         return render(request, 'AddLandDetail.html',{'form' : form})
-
+@myuser_login_required
 def EditLandDetail(request):
     if request.method == 'POST':
         landid = request.POST.get('landid')
@@ -90,7 +60,8 @@ def EditLandDetail(request):
         mydetail = Land_detail.objects.get(landid=landid)
         form = AddLandForm(instance=mydetail)
         return render(request, 'EditLandDetail.html',{'form' : form, 'landid' : landid})
-    
+@myuser_login_required    
 def landlist(request):
-    landlist= Land_detail.objects.filter(userid=request.session['userid'])
-    return render(request, 'show.html',{ 'list' : landlist })
+    userlist= User_detail.objects.get(email=request.session['email'],role=request.session['role'])
+    land=Land_detail.objects.filter(userid_id=userlist.userid)
+    return render(request, 'show.html',{ 'list' : land })
