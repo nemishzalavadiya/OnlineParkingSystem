@@ -45,7 +45,7 @@ def get_client_ip(request):
 def Login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
-        emailP = form.data['email']``
+        emailP = form.data['email']
         passwordP = form.data['password']
         user_data=User_detail.objects.filter(email=emailP,password=passwordP,role=request.POST.get('role')).first()
         if(user_data):
