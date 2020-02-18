@@ -45,9 +45,9 @@ def get_client_ip(request):
 def Login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
-        email = form.data['email']
-        password = form.data['password']
-        user_data=User_detail.objects.get(email=email,password=password,role=request.POST.get('role'))
+        emailP = form.data['email']``
+        passwordP = form.data['password']
+        user_data=User_detail.objects.filter(email=emailP,password=passwordP,role=request.POST.get('role')).first()
         if(user_data):
             request.session['uid']=user_data.userid
             request.session['email']=email
@@ -183,7 +183,7 @@ def ShowUserHistory(request):
         landrecord['email']= user.email
         landrecord['mobile_no']= user.mobile_no
         landrecord['age']= user.age
-    return render(request, 'ShowUserHistory.html',{ 'LandRecord' : landrecords })
+    return render(request, 'ShowUserHistory.html',{ 'LandRecord' : landrecords ,'login':"True",'role':'User'})
 
 def LogoutHere(request):
     try:
@@ -198,3 +198,11 @@ def LogoutHere(request):
         form = LoginForm()
         return render(request, 'Login.html',{'message':'Please Login First','form' : form})
     
+@myuser_login_required
+def feedback(request):
+    rate = request.GET['rate']
+    id = request.GET['id']
+    Land_rate_field = Land_record.objects.get(land_record_id=id)
+    Land_rate_field.feedback = rate
+    Land_rate_field.save()
+    return HttpResponseRedirect('../showuserhistory/')

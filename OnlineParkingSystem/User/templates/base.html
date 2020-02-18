@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/static/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="/static/css/elegant-icons.css" type="text/css">
@@ -44,7 +45,110 @@
     <link rel="stylesheet" type="text/css" href="/static/css/signup.css">
     <link rel="stylesheet" type="text/css" href="/static/css/login.css">
 </head>
+<style>
+ 
+.clearfix {
+  clear:both;
+}
 
+.text-center {text-align:center;}
+
+a {
+  color: tomato;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #2196f3;
+}
+
+pre {
+display: block;
+padding: 9.5px;
+margin: 0 0 10px;
+font-size: 13px;
+line-height: 1.42857143;
+color: #333;
+word-break: break-all;
+word-wrap: break-word;
+background-color: #F5F5F5;
+border: 1px solid #CCC;
+border-radius: 4px;
+}
+
+.new-react-version {
+  padding: 20px 20px;
+  border: 1px solid #eee;
+  border-radius: 20px;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
+  
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.new-react-version .react-svg-logo {
+  text-align: center;
+  max-width: 60px;
+  margin: 20px auto;
+  margin-top: 0;
+}
+
+
+
+
+
+.success-box {
+  margin:50px 0;
+  padding:10px 10px;
+  border:1px solid #eee;
+  background:#f9f9f9;
+}
+
+.success-box img {
+  margin-right:10px;
+  display:inline-block;
+  vertical-align:top;
+}
+
+.success-box > div {
+  vertical-align:top;
+  display:inline-block;
+  color:#888;
+}
+
+
+
+/* Rating Star Widgets Style */
+.rating-stars ul {
+  list-style-type:none;
+  padding:0;
+  
+  -moz-user-select:none;
+  -webkit-user-select:none;
+}
+.rating-stars ul > li.star {
+  display:inline-block;
+  
+}
+
+/* Idle State of the stars */
+.rating-stars ul > li.star > i.fa {
+  font-size:2.5em; /* Change the size of the stars */
+  color:#ccc; /* Color on idle state */
+}
+
+/* Hover state of the stars */
+.rating-stars ul > li.star.hover > i.fa {
+  color:#FFCC36;
+}
+
+/* Selected state of the stars */
+.rating-stars ul > li.star.selected > i.fa {
+  color:#FF912C;
+}
+
+</style>
 <body>
      <!-- Offcanvas Menu Section Begin -->
      <div class="offcanvas-menu-overlay"></div>
@@ -59,7 +163,6 @@
          
          <div class="language-bar">
              <div class="language-option">
-                 <img src="/static/img/flag.png" alt="">
                  <span>Register</span>
                  <i class="fa fa-angle-down"></i>
                  <div class="flag-dropdown">
@@ -71,7 +174,6 @@
              </div>
              
                  <div class="language-option">
-                     <img src="/static/img/flag.png" alt="">
                      <span class="property-sub">Login</span>
                      <i class="fa fa-angle-down"></i>
                      <div class="flag-dropdown">
@@ -89,7 +191,6 @@
          <div class="col-lg-5">
              <div class="top-right">
                  <div class="language-option">
-                     <img src="/static/img/flag.png" alt="">
                      <a class="property-sub" href="/logout/">Logout</a>
                  </div>
                  
@@ -196,7 +297,6 @@
                      <div class="col-lg-4">
                          <div class="top-right">
                              <div class="language-option">
-                                 <img src="/static/img/flag.png" alt="">
                                  <span>Register</span>
                                  <i class="fa fa-angle-down"></i>
                                  <div class="flag-dropdown">
@@ -208,7 +308,6 @@
                                  </div>
                              </div>
                              <div class="language-option">
-                                 <img src="/static/img/flag.png" alt="">
                                  <span>Login</span>
                                  <i class="fa fa-angle-down"></i>
                                  <div class="flag-dropdown">
@@ -227,7 +326,6 @@
                      <div class="col-lg-4">
                          <div class="top-right">
                              <div class="language-option">
-                                 <img src="/static/img/flag.png" alt="">
                                  <a class="property-sub" href="{% url 'LogoutHere' %}">Logout</a>
                              </div>
                              
