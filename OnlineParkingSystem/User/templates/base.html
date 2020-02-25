@@ -8,11 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Parking Management System</title>
-
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-
-    <!-- Css Styles -->
     <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/static/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="/static/css/elegant-icons.css" type="text/css">
@@ -46,7 +42,6 @@
 </head>
 
 <body>
-     <!-- Offcanvas Menu Section Begin -->
      <div class="offcanvas-menu-overlay"></div>
      <div class="canvas-open">
          <i class="icon_menu"></i>
@@ -59,7 +54,6 @@
          
          <div class="language-bar">
              <div class="language-option">
-                 <img src="/static/img/flag.png" alt="">
                  <span>Register</span>
                  <i class="fa fa-angle-down"></i>
                  <div class="flag-dropdown">
@@ -71,7 +65,6 @@
              </div>
              
                  <div class="language-option">
-                     <img src="/static/img/flag.png" alt="">
                      <span class="property-sub">Login</span>
                      <i class="fa fa-angle-down"></i>
                      <div class="flag-dropdown">
@@ -89,7 +82,6 @@
          <div class="col-lg-5">
              <div class="top-right">
                  <div class="language-option">
-                     <img src="/static/img/flag.png" alt="">
                      <a class="property-sub" href="/logout/">Logout</a>
                  </div>
                  
@@ -98,16 +90,13 @@
          {% endif %}
          <nav class="main-menu">
              <ul>
-                 <li ><a href="./index.html">Home</a></li>
+                 <li ><a href="/">Home</a></li>
                                  {% if role == "Landlord" %}
                                  
                                                  <ul>
                                                      <li><a href="{% url 'landlist' %}">Show Land </a></li>
                                                      <li><a href="{% url 'addlanddetail' %}">Add Land</a></li>
                                                      <li><a href="{% url 'addlanddetail' %}">Edit Land</a></li>
-                                                     <li><a href="./about-us.html">Help</a></li>
-                                 <li><a href="./blog.html">New Release</a></li>
-                                 <li><a href="./contact.html">Contact</a></li>
                                                  </ul>
                                              </div>
                                          </div>
@@ -116,29 +105,18 @@
                                  {% endif %}
                                  
                                  {% if role == "User" %}
-                                 <li><a href="{% url 'showlanddetails' %}">Reserve Lands</a></li>
+                                 <li><a href="#1">Reserve Lands</a></li>
                                  <li><a href="{% url 'ShowUserHistory' %}">Show History</a></li>
                                  <li><a href="{% url 'editprofile' %}">Edit Profile</a></li>
-                                 <li><a href="./about-us.html">Help</a></li>
-                                 <li><a href="./blog.html">New Release</a></li>
-                                 <li><a href="./contact.html">Contact</a></li>
                                  {% endif %}
                                  {% if role == "Admin" %}
                                  <li><a href="{% url 'UserListView' %}}">New Lands</a></li>
-                                 
-                                 <li><a href="./about-us.html">Help</a></li>
-                                 <li><a href="./blog.html">New Release</a></li>
-                                 <li><a href="./contact.html">Contact</a></li>
                                  {% endif %}
                                  
                                 
              </ul>
          </nav>
-         
      </div>
-     <!-- Offcanvas Menu Section End -->
- 
-     <!-- Header Section Begin -->
      <header >
          <div class="top-nav">
              <div class="container">
@@ -150,10 +128,9 @@
                                  {% if role == "Landlord" %}
 
                                      <div class="top-right" style="text-align: left;">
-                                        <li class="active"><a href="./index.html">Home</a></li>
+                                        <li class="active"><a href="/">Home</a></li>
 
                                          <div class="language-option">
-                                             <img src="/static/img/flag.png" alt="">
                                              <span>Alter Land</span>
                                              <i class="fa fa-angle-down"></i>
                                              <div class="flag-dropdown">
@@ -164,29 +141,19 @@
                                                  </ul>
                                              </div>
                                          </div>
-                                         <li><a href="./about-us.html">Help</a></li>
-                                 <li><a href="./blog.html">New Release</a></li>
-                                 <li><a href="./contact.html">Contact</a></li>
                                      </div>
                                  {% endif %}
                                  
                                  {% if role == "User" %}
-                                 <li class="active"><a href="./index.html">Home</a></li>
-                                 <li><a href="{% url 'showlanddetails' %}}">Reserve Lands</a></li>
+                                 <li class="active"><a href="/">Home</a></li>
+                                 <li><a href="#1">Reserve Lands</a></li>
                                  <li><a href="{% url 'ShowUserHistory' %}">Show History</a></li>
-                                 <li><a href="{% url 'editprofile' %}}">Edit Profile</a></li>
-                                 <li><a href="./about-us.html">Help</a></li>
-                                 <li><a href="./blog.html">New Release</a></li>
-                                 <li><a href="./contact.html">Contact</a></li>
+                                 <li><a href="{% url 'editprofile' %}">Edit Profile</a></li>
                                  {% endif %}
                                  {% if role == "Admin" %}
-                                 <li class="active"><a href="./index.html">Home</a></li>
+                                 <li class="active"><a href="/">Home</a></li>
 
-                                 <li><a href="{% url 'UserListView' %}}">New Lands</a></li>
-
-                                 <li><a href="./about-us.html">Help</a></li>
-                                 <li><a href="./blog.html">New Release</a></li>
-                                 <li><a href="./contact.html">Contact</a></li>
+                                 <li><a href="{% url 'UserListView' %}">New Lands</a></li>
                                  {% endif %}
                                  
                              </ul>
@@ -196,19 +163,17 @@
                      <div class="col-lg-4">
                          <div class="top-right">
                              <div class="language-option">
-                                 <img src="/static/img/flag.png" alt="">
                                  <span>Register</span>
                                  <i class="fa fa-angle-down"></i>
                                  <div class="flag-dropdown">
                                      <ul>
-                                         <li><a href="{% url 'Registration'  %}?role=Admin">Admin</a></li>
+                                         
                                          <li><a href="{% url 'Registration'  %}?role=Landlord">Landlord</a></li>
                                          <li><a href="{% url 'Registration'  %}?role=User">User</a></li>
                                      </ul>
                                  </div>
                              </div>
                              <div class="language-option">
-                                 <img src="/static/img/flag.png" alt="">
                                  <span>Login</span>
                                  <i class="fa fa-angle-down"></i>
                                  <div class="flag-dropdown">
@@ -227,7 +192,7 @@
                      <div class="col-lg-4">
                          <div class="top-right">
                              <div class="language-option">
-                                 <img src="/static/img/flag.png" alt="">
+
                                  <a class="property-sub" href="{% url 'LogoutHere' %}">Logout</a>
                              </div>
                              
@@ -243,7 +208,7 @@
                  <div class="row">
                      <div class="col-lg-3">
                          <div class="logo">
-                             <a href="./index.html"><img src="/static/img/logo.png" alt=""></a>
+                             <a href="/"><img src="/static/img/logo.png" alt=""></a>
                          </div>
                      </div>
                      <div class="col-lg-9">
@@ -253,14 +218,14 @@
                                      <i class="icon_phone"></i>
                                      <div class="info-text">
                                          <span>Phone:</span>
-                                         <p>(+12) 345 6789</p>
+                                         <p>(+91) 9664911300</p>
                                      </div>
                                  </li>
                                  <li>
                                      <i class="icon_map"></i>
                                      <div class="info-text">
                                          <span>Address:</span>
-                                         <p>16 Creek Ave, <span>NY</span></p>
+                                         <p> DDU <span>,Nadiad</span></p>
                                      </div>
                                  </li>
                                  <li>
@@ -277,13 +242,9 @@
              </div>
          </div>
      </header>
-     <!-- Header End -->
- 
  
     {% block content %}
     {% endblock %}
-    <!-- Footer Section Begin -->
-    <hr  />
     <footer class="footer-section set-bg" data-setbg="/static/img/footer-bg.jpg">
         <div class="container">
             <div class="footer-text">
@@ -291,7 +252,7 @@
                     <div class="col-lg-3">
                         <div class="footer-logo">
                             <div class="logo">
-                                <a href="#"><img src="/static/img/footer-logo.png" alt=""></a>
+                                <a href="/"><img src="/static/img/footer-logo.png" alt=""></a>
                             </div>
                             <p>Subscribe our newsletter gor get notification about new updates.</p>
                             <form action="#" class="newslatter-form">
@@ -304,16 +265,16 @@
                         <div class="footer-widget">
                             <h4>Property City</h4>
                             <ul>
-                                <li><i class="fa fa-caret-right"></i> <a href="#">Florida</a></li>
-                                <li><i class="fa fa-caret-right"></i> <a href="#">New York</a></li>
-                                <li><i class="fa fa-caret-right"></i> <a href="#">Washington</a></li>
-                                <li><i class="fa fa-caret-right"></i> <a href="#">Los Angeles</a></li>
+                                <li><i class="fa fa-caret-right"></i> <a >Rajkot</a></li>
+                                <li><i class="fa fa-caret-right"></i> <a >Surat</a></li>
+                                <li><i class="fa fa-caret-right"></i> <a >Ahmedabad</a></li>
+                                <li><i class="fa fa-caret-right"></i> <a >Nadiad</a></li>
                             </ul>
                             <ul>
-                                <li><i class="fa fa-caret-right"></i> <a href="#">St Louis</a></li>
-                                <li><i class="fa fa-caret-right"></i> <a href="#">Jacksonville</a></li>
-                                <li><i class="fa fa-caret-right"></i> <a href="#">San Jose</a></li>
-                                <li><i class="fa fa-caret-right"></i> <a href="#">San Diego</a></li>
+                                <li><i class="fa fa-caret-right"></i> <a >Jamnagar</a></li>
+                                <li><i class="fa fa-caret-right"></i> <a >Junagadh</a></li>
+                                <li><i class="fa fa-caret-right"></i> <a >Vadodara</a></li>
+                                <li><i class="fa fa-caret-right"></i> <a >Amreli</a></li>
                             </ul>
                         </div>
                     </div>
@@ -321,10 +282,10 @@
                         <div class="footer-widget">
                             <h4>Social</h4>
                             <ul class="social">
-                                <li><i class="ti-facebook"></i> <a href="#">Facebook</a></li>
-                                <li><i class="ti-instagram"></i> <a href="#">Instagram</a></li>
-                                <li><i class="ti-twitter-alt"></i> <a href="#">Twitter</a></li>
-                                <li><i class="ti-google"></i> <a href="#">Google+</a></li>
+                                <li><i class="ti-facebook"></i> <a >Facebook</a></li>
+                                <li><i class="ti-instagram"></i> <a >Instagram</a></li>
+                                <li><i class="ti-twitter-alt"></i> <a >Twitter</a></li>
+                                <li><i class="ti-google"></i> <a >Google+</a></li>
                             </ul>
                         </div>
                     </div>
@@ -332,9 +293,9 @@
                         <div class="footer-widget">
                             <h4>Contact Us</h4>
                             <ul class="contact-option">
-                                <li><i class="fa fa-map-marker"></i> 16 Creek Ave. Farming, NY</li>
-                                <li><i class="fa fa-phone"></i> (+88) 666 121 4321</li>
-                                <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
+                                <li><i class="fa fa-map-marker"></i> Dharmsinh Desai Univercity</li>
+                                <li><i class="fa fa-phone"></i> (+91)9664911300</li>
+                                <li><i class="fa fa-envelope"></i> ParkingSystem123@gmail.com</li>
                                 <li><i class="fa fa-clock-o"></i> Mon - Sat, 08 AM - 06 PM</li>
                             </ul>
                         </div>
@@ -342,15 +303,11 @@
                 </div>
             </div>
             <div class="copyright-text">
-                <p><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></p>
+                <p><p>
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</p></p>
             </div>
         </div>
     </footer>
-    <!-- Footer Section End -->
-
-    <!-- Js Plugins -->
     <script src="/static/js/jquery-3.3.1.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/jquery.magnific-popup.min.js"></script>
