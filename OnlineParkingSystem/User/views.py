@@ -132,6 +132,7 @@ def ShowLandDetails(request):
         nlands=sorted(nlands, key = lambda i: i['distance'])
         return render(request, 'LandDetails.html',{'login':'True','role':request.session.get('role'),'Land': nlands,'Date' : date})
 
+
 def ReserveParking(request):
     c = {}
     c.update(csrf(request))

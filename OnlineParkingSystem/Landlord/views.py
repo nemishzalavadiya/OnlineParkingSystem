@@ -17,6 +17,7 @@ from User.views import myuser_login_required
 def AddLandDetail(request):
     if request.method == 'POST' :
         form = AddLandForm(request.POST,request.FILES)
+        print(form)
         if form.is_valid():
             land = Land_detail()
             land.address= form.cleaned_data["address"]
@@ -41,8 +42,7 @@ def AddLandDetail(request):
     else:
         c = {}
         c.update(csrf(request))
-        form = AddLandForm(request.session['uid'])
-        print("Show Add land")
+        form = AddLandForm()
         return render(request, 'AddLandDetail.html',{'form' : form,'login':'True','role':request.session['role']})
 
 @myuser_login_required
