@@ -9,21 +9,9 @@
 			{{message}}
         </div>
 	{% endif %}
-    
-		<div style="background-color: aqua;padding: 10px 30px;margin: 30px;">	
-	<form action="/User/showlanddetails/" method="POST">
-    {% csrf_token%}
-    
-        <div class="form-group center" style="align-items: center;text-align: center;">
-            <span style="font-weight: bold;"></span>Pick Date :</span>
-            <input type="Date" placeholder="select date"  style="width: 50%;align-items: center;"  name="rdate" required>
-       
-        <button type="submit" class="btn btn-success">Search</button>
-    </div>
-    </form>
 </div>
     {% if page == None %}
-        <table class="table table-hover centered" style="margin: 30px;">
+        <table class="table table-hover centered">
         <tr>
             <th>Address</th>
             <th>City</th>

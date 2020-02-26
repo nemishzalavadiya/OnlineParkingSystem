@@ -131,12 +131,7 @@ def ShowLandDetails(request):
         nlands = list(filter(lambda i: i['distance'] < 100, nlands)) 
         nlands=sorted(nlands, key = lambda i: i['distance'])
         return render(request, 'LandDetails.html',{'login':'True','role':request.session.get('role'),'Land': nlands,'Date' : date})
-    else:
-        c = {}
-        c.update(csrf(request))
-        return render(request, 'LandDetails.html',{'login':'True','role':request.session.get('role'),'page': 'get'})
 
-@myuser_login_required
 def ReserveParking(request):
     c = {}
     c.update(csrf(request))
@@ -154,8 +149,10 @@ def ReserveParking(request):
     city=land_data.city
     area=land_data.area
     state=land_data.state
+    lattitude=land_data.lattitude
+    langitude=land_data.langitude
     subject = 'Confirmation Mail For Booking'
-    message = 'Your booking details are below.'+'\n'+'Total price: '+str(totalprice)+'\n'+'Date: '+str(date)+'\n'+'address: '+str(address)+'\n'+'Description: '+str(description)+'\n'+'City: '+str(city)+'\n'+'Area: '+str(area)+'\n'+'State: '+str(state)
+    message = 'Your booking details are below.'+'\n'+'Total price: '+str(totalprice)+'\n'+'Date: '+str(date)+'\n'+'address: '+str(address)+'\n'+'Description: '+str(description)+'\n'+'City: '+str(city)+'\n'+'Area: '+str(area)+'\n'+'State: '+str(state)+'\n'+'Root: '+'http://maps.google.com/?q='+str(lattitude)+','+str(langitude)
     from_email = settings.EMAIL_HOST_USER
     to_list = [request.session['email']]
     send_mail(subject, message, from_email, to_list, fail_silently=False)
@@ -184,7 +181,11 @@ def ShowUserHistory(request):
         landrecord['email']= user.email
         landrecord['mobile_no']= user.mobile_no
         landrecord['age']= user.age
+<<<<<<< HEAD
     return render(request, 'ShowUserHistory.html',{ 'LandRecord' : landrecords ,'login':"True",'role':'User'})
+=======
+    return render(request, 'ShowUserHistory.html',{ 'login':'True','role':request.session.get('role'),'LandRecord' : landrecords })
+>>>>>>> 7d488690ed3b2d84932fd65c05b6c99542537e8d
 
 def LogoutHere(request):
     try:

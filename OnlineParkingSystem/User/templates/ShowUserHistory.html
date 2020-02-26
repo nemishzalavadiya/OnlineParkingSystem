@@ -2,6 +2,7 @@
 
 {% extends 'base.html' %}
 {% block content %}
+<<<<<<< HEAD
 <script>
     $(document).ready(function(){
   
@@ -59,14 +60,23 @@ function responseMessage(msg) {
 </script>
         <table class="table table-hover centered" style="margin: 30px;">
         <tr>
+=======
+        <table class="table table-striped centered">
+        <tr class="table-primary">
+>>>>>>> 7d488690ed3b2d84932fd65c05b6c99542537e8d
             <th>Date</th>
             <th>Price</th>
             <th>Land Address</th>
             <th>Landlord Name</th>
             <th>Landlord Email</th>
+<<<<<<< HEAD
             <th>Landlord Mobile Number</th>
             <th>Landlord Age</th>
             <th>FeedBack</th>
+=======
+            <th>Mobile Number</th>
+            <th>Age</th>
+>>>>>>> 7d488690ed3b2d84932fd65c05b6c99542537e8d
         </tr>
         {% for land in LandRecord %}
             <tr>
