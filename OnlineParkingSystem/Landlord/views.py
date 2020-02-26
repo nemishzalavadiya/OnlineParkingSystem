@@ -13,7 +13,7 @@ from User.views import myuser_login_required
 # Create your views here.
 
 
-@myuser_login_required       
+#@myuser_login_required       
 def AddLandDetail(request):
     if request.method == 'POST' :
         form = AddLandForm(request.POST,request.FILES)
@@ -34,14 +34,15 @@ def AddLandDetail(request):
             land.image=form.cleaned_data["image"]
             land.price_per_hour=form.cleaned_data["price_per_hour"]
             land.save()
+            print("land added")
             return HttpResponseRedirect('/')
         else:
-            return render(request, 'AddLandDetail.html',{'message':'Registration2 Failed','form' : form})
+            return render(request, 'AddLandDetail.html',{'message':'Land Registration Failed','form' : form,'login':'True','role':request.session['role']})
     else:
         c = {}
         c.update(csrf(request))
-        form = AddLandForm()
-        return render(request, 'AddLandDetail.html',{'form' : form})
+        form = AddLandForm(request.session['uid'])
+        return render(request, 'AddLandDetail.html',{'form' : form,'login':'True','role':request.session['role']})
 
 @myuser_login_required
 def EditLandDetail(request):
@@ -51,22 +52,22 @@ def EditLandDetail(request):
         form = AddLandForm(request.POST,instance=mydetail)
         if form.is_valid():
             form.save()
-            return render(request, 'EditLandDetail.html',{'form' : form})
+            return render(request, 'EditLandDetail.html',{'form' : form,'login':'True','role':request.session['role']})
         else:
-            return render(request, 'EditLandDetail.html',{'message':'Edit fail','form' : form})
+            return render(request, 'EditLandDetail.html',{'message':'Edit fail','form' : form,'login':'True','role':request.session['role']})
     else:
         c = {}
         c.update(csrf(request))
         landid = request.GET.get('landid')
         mydetail = Land_detail.objects.get(landid=landid)
         form = AddLandForm(instance=mydetail)
-        return render(request, 'EditLandDetail.html',{'form' : form, 'landid' : landid})
+        return render(request, 'EditLandDetail.html',{'form' : form, 'landid' : landid,'login':'True','role':request.session['role']})
 
 @myuser_login_required
 def landlist(request):
     userlist= User_detail.objects.get(email=request.session['email'],role=request.session['role'])
     land=Land_detail.objects.filter(userid_id=userlist.userid)
-    return render(request, 'show.html',{ 'list' : land })
+    return render(request, 'show.html',{ 'list' : land,'login':'True','role':request.session['role'] })
     
 @myuser_login_required
 def ShowHistory(request):
@@ -79,4 +80,4 @@ def ShowHistory(request):
         landrecord['email']= user.email
         landrecord['mobile_no']= user.mobile_no
         landrecord['age']= user.age
-    return render(request, 'ShowHistory.html',{ 'LandRecord' : landrecords })
+    return render(request, 'ShowHistory.html',{ 'LandRecord' : landrecords,'login':'True','role':request.session['role'] })

@@ -28,8 +28,8 @@ def myuser_login_required(f):
         except:
             c = {}
             c.update(csrf(request))
-            form = RegistrationForm()
-            return render(request, 'Login.html',{'message':'Please Login First',"role":'User','form' : form})
+            form = LoginForm()
+            return render(request, 'Login.html',{'message':'Something went wrong Do it later!!',"role":'User','form' : form})
     login_first.__doc__=f.__doc__
     login_first.__name__=f.__name__
     return login_first
@@ -45,20 +45,21 @@ def get_client_ip(request):
 def Login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
-        emailP = form.data['email']
-        passwordP = form.data['password']
-        user_data=User_detail.objects.filter(email=emailP,password=passwordP,role=request.POST.get('role')).first()
+        email = form.data['email']
+        password = form.data['password']
+        user_data=User_detail.objects.filter(email=email,password=password,role=request.POST.get('role')).first()
         if(user_data):
             request.session['uid']=user_data.userid
             request.session['email']=email
             request.session['role']=request.POST.get('role')
+            print("session started ####@#@@@@ ",request.session['email'])
             return render(request,'index.html',{'login':'True','role':request.POST.get('role')})
         else:
             return render(request, 'Login.html',{'message':'Invalid email or password!!!','role':request.POST.get('role'),'form' : form})
     else:
         c = {}
         c.update(csrf(request))
-        form = LoginForm()
+        form = LoginForm() 
         return render(request, 'Login.html',{'form' : form,'role':request.GET.get('role')})
 
 def Registration(request):

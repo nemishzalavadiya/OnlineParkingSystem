@@ -60,7 +60,6 @@ class LoginForm(ModelForm):
         }
 
 
-
 class AddLandForm(ModelForm):
     class Meta:
         model=Land_detail
@@ -109,7 +108,7 @@ class AddLandForm(ModelForm):
             }),
             'userid': forms.HiddenInput(attrs={
                 "id":"userid",
-                "value":"1",
+                "value":"2",
             }),
             'city': forms.TextInput(attrs={
                 "class":"form-control",

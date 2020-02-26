@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="/static/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="/static/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/static/css/style.css" type="text/css">
+	<link type="text/css" rel="stylesheet" href="/static/css/AddLandDetail.css" />
 
     <link rel="icon" type="image/png" href="/static/images/icons/favicon.ico"/>
 
@@ -199,13 +200,13 @@ border-radius: 4px;
          {% endif %}
          <nav class="main-menu">
              <ul>
-                 <li ><a href="./index.html">Home</a></li>
+                 <li ><a href="/">Home</a></li>
                                  {% if role == "Landlord" %}
                                  
                                                  <ul>
                                                      <li><a href="{% url 'landlist' %}">Show Land </a></li>
                                                      <li><a href="{% url 'addlanddetail' %}">Add Land</a></li>
-                                                     <li><a href="{% url 'addlanddetail' %}">Edit Land</a></li>
+                                                     <li><a href="{% url 'editlanddetail' %}">Edit Land</a></li>
                                                      <li><a href="./about-us.html">Help</a></li>
                                  <li><a href="./blog.html">New Release</a></li>
                                  <li><a href="./contact.html">Contact</a></li>
@@ -251,17 +252,16 @@ border-radius: 4px;
                                  {% if role == "Landlord" %}
 
                                      <div class="top-right" style="text-align: left;">
-                                        <li class="active"><a href="./index.html">Home</a></li>
+                                        <li class="active"><a href="/">Home</a></li>
 
                                          <div class="language-option">
-                                             <img src="/static/img/flag.png" alt="">
                                              <span>Alter Land</span>
                                              <i class="fa fa-angle-down"></i>
                                              <div class="flag-dropdown">
                                                  <ul>
                                                      <li><a href="{% url 'landlist' %}">Show</a></li>
                                                      <li><a href="{% url 'addlanddetail' %}">Add</a></li>
-                                                     <li><a href="{% url 'addlanddetail' %}">Edit</a></li>
+                                                     <li><a href="{% url 'editlanddetail' %}">Edit</a></li>
                                                  </ul>
                                              </div>
                                          </div>
@@ -272,7 +272,7 @@ border-radius: 4px;
                                  {% endif %}
                                  
                                  {% if role == "User" %}
-                                 <li class="active"><a href="./index.html">Home</a></li>
+                                 <li class="active"><a href="/">Home</a></li>
                                  <li><a href="{% url 'showlanddetails' %}}">Reserve Lands</a></li>
                                  <li><a href="{% url 'ShowUserHistory' %}">Show History</a></li>
                                  <li><a href="{% url 'editprofile' %}}">Edit Profile</a></li>
@@ -281,7 +281,7 @@ border-radius: 4px;
                                  <li><a href="./contact.html">Contact</a></li>
                                  {% endif %}
                                  {% if role == "Admin" %}
-                                 <li class="active"><a href="./index.html">Home</a></li>
+                                 <li class="active"><a href="/">Home</a></li>
 
                                  <li><a href="{% url 'UserListView' %}}">New Lands</a></li>
 
