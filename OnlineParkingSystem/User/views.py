@@ -181,11 +181,7 @@ def ShowUserHistory(request):
         landrecord['email']= user.email
         landrecord['mobile_no']= user.mobile_no
         landrecord['age']= user.age
-<<<<<<< HEAD
-    return render(request, 'ShowUserHistory.html',{ 'LandRecord' : landrecords ,'login':"True",'role':'User'})
-=======
     return render(request, 'ShowUserHistory.html',{ 'login':'True','role':request.session.get('role'),'LandRecord' : landrecords })
->>>>>>> 7d488690ed3b2d84932fd65c05b6c99542537e8d
 
 def LogoutHere(request):
     try:

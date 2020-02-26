@@ -42,6 +42,7 @@ def AddLandDetail(request):
         c = {}
         c.update(csrf(request))
         form = AddLandForm(request.session['uid'])
+        print("Show Add land")
         return render(request, 'AddLandDetail.html',{'form' : form,'login':'True','role':request.session['role']})
 
 @myuser_login_required
