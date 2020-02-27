@@ -10,8 +10,32 @@
         </div>
 	{% endif %}
 </div>
+<div style="margin-left: 40%;">
+    {% if page_obj.has_other_pages %}
+    <ul class="pagination">
+      {% if page_obj.has_previous %}
+        <li style="padding: 18px;font-size: 18px;"><a href="?page={{ page_obj.previous_page_number }}&rdate={{Date}}"><span style="font-size: 20px;">&laquo;</span></a></li>
+      {% else %}
+        <li class="disabled" style="padding: 18px;"><span style="font-size: 20px;">&laquo;</span></li>
+      {% endif %}
+      {% for i in page_obj.paginator.page_range %}
+        {% if page_obj.number == i %}
+          <li class="active btn btn-success"><span><h3>{{ i }} </h3><span class="sr-only">(current)</span></span></li>
+        {% else %}
+          <li class="btn" style="padding: 15px;color: black;font-size: 10px;"><a href="?page={{ i }}&rdate={{Date}}"><h3>{{ i }}</h3></a></li>
+        {% endif %}
+      {% endfor %}
+      {% if page_obj.has_next %}
+        <li style="padding: 18px;font-size: 8px;"><a href="?page={{ page_obj.next_page_number }}&rdate={{Date}}"><span style="font-size: 20px;">&raquo;</span></a></li>
+      {% else %}
+        <li class="disabled" style="padding: 18px;"><span style="font-size: 20px;">&raquo;</span></li>
+      {% endif %}
+    </ul>
+    {% endif %}
+ 
+  </div>
     {% if page == None %}
-        <table class="table table-hover centered">
+        <table class="table table-hover centered" style="margin-left:25px;margin-right: 25px;">
         <tr>
             <th>Address</th>
             <th>City</th>
@@ -22,7 +46,7 @@
             <th>Price per Hour</th>
             <th>Distance(km)</th>
         </tr>
-        {% for land in Land %}
+        {% for land in page_obj %}
         <form action="/User/reserveparking/" method="POST">
         {% csrf_token%}
             <tr>
@@ -40,8 +64,9 @@
                     <input type="hidden" name="price" value="{{ land.price_per_hour }}">
                 </td>
                 <td><a href="http://maps.google.com/?q={{land.lattitude}},{{land.langitude}}" target="_blank" class="btn btn-success">Map</a></td>
+                <input type="hidden" id="date" name="date" value="{{Date}}" >
                 <td><input type="submit" value="Reserve"class="btn btn-success"></input></td>
-                <td colspan="2"><img style="width: 200px;height: 200px;" src={{land.image.url}} alt="Land Picture"></td>
+                <td colspan="2"><img style="width: 150px;height: 150px;" src={{land.image.url}} alt="Land Picture"></td>
             </tr>
         </form>
         {% endfor %}

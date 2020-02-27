@@ -62,7 +62,9 @@
 							<span class="lnr lnr-lock"></span>
 						</span>
 					</div>
+					{% if date != null %}
 					<input type="hidden" name="date" value={{date}}>
+					{% endif %}
 					<input type="hidden" name="role" value={{role}}>
 					<div class="contact100-form-checkbox m-l-4">
 						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">

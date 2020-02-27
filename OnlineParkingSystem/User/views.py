@@ -14,6 +14,7 @@ import math,datetime
 from geopy import distance
 from django.core.mail import send_mail
 import geocoder
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 def myuser_login_required(f):
     def login_first(request, *args, **kwargs):
@@ -57,8 +58,10 @@ def Login(request):
             request.session['uid']=user_data.userid
             request.session['email']=email
             request.session['role']=request.POST.get('role')
+            print(request.POST.get('date'))
             if request.POST.get('date')!=None:
-                return showLand(request,request.POST.get('date'))
+                nlands,date = showLand(request,request.POST.get('date'))
+                return render(request, 'LandDetails.html',{'login':'True','role':request.session.get('role'),'Land': nlands,'Date' : date})
             return render(request,'index.html',{'login':'True','role':request.POST.get('role')})
         else:
             return render(request, 'Login.html',{'message':'Invalid email or password!!!','role':request.POST.get('role'),'form' : form})
@@ -112,11 +115,10 @@ def EditProfile(request):
         return render(request, 'EditProfile.html',{'login':'True','role':request.session.get('role'),'form' : form, 'userid' : userid})
 
 def showLand(request,dateOf):
-    if request.method == 'POST':
+    if request.method == 'GET':
             c = {}
             c.update(csrf(request))
             date = dateOf
-            request.session['date'] = date
             landobj = Land_detail.objects.filter(start_date__lte=date,end_date__gte=date,verified=0)
             lands=list(landobj.values())
             nlands=[]
@@ -135,14 +137,25 @@ def showLand(request,dateOf):
                     nlands.append(land.copy()) 
             nlands = list(filter(lambda i: i['distance'] < 100, nlands)) 
             nlands=sorted(nlands, key = lambda i: i['distance'])
-            return render(request, 'LandDetails.html',{'login':'True','role':request.session.get('role'),'Land': nlands,'Date' : date})
+            return nlands,date
 
 
 @myuser_login_required
 def ShowLandDetails(request):
     try:
-        return showLand(request,request.POST.get('rdate'))
-    except:
+        print(request.GET.get('rdate'))
+        nlands,date = showLand(request,request.GET.get('rdate'))
+        print(nlands[0],date)
+        paginator = Paginator(nlands, 5)
+        page =  request.GET.get('page',1) 
+        try:
+            users = paginator.page(page)
+        except PageNotAnInteger:
+            users = paginator.page(1)
+        except EmptyPage:
+            users = paginator.page(paginator.num_pages)
+        return render(request, 'LandDetails.html',{'login':'True','role':request.session.get('role'),'page_obj': users ,'Date' : date})
+    except :
         c = {}
         c.update(csrf(request))
         form = LoginForm()
@@ -155,7 +168,7 @@ def ReserveParking(request):
     userid = request.session['uid']
     totalprice = float(request.POST.get('price'))
     totalprice = int(totalprice)
-    date =  request.session['date']
+    date =  request.POST.get('date')
     date = datetime.datetime.strptime(date, '%Y-%m-%d')
     landrecord = Land_record(landid=Land_detail.objects.get(landid=landid),userid=User_detail.objects.get(userid=userid),start_date=date,total_price=totalprice,payment_remaining=True)
     landrecord.save()
