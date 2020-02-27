@@ -1,34 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title>Add Land Details</title>	
-	
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-            
-</head>
-<body style="background-color:rgb(200, 154, 243);">
-    {% for i in list %}
-        <div class="card horizontal blue" style="margin: 7%;border-radius: 10px;">
-            <img class="card-image"  src="{{i.image.url}}" alt="Card image">
-            <div class="card-body" style="margin: 5%;">
-                <h5>City : {{i.city}} </h5><h5>State : {{i.state}} </h5><h5>Area : {{i.area}}</h5>
-                <h5>Price : {{i.price_per_hour}}</h5>
-                <h5>Spots : {{i.no_of_spot}}</h5>
-                <h5>Verified : {{i.verified}}</h5>
-                <h5>Date : {{i.start_date}} to {{i.end_date}}</h5>
-                <h6>Description : {{i.description}}</h6>
-                <a class="btn btn-success" href="/Landlord/showhistory/?landid={{ i.landid }}" >Show History</a>
-                <a class="btn btn-success" href="/Landlord/editlanddetail/?landid={{ i.landid }}" >Edit Land Detail</a>
-            </div>
+{% extends 'base.html' %}
+{% block content %}
+    <hr/>
+    {% if message != None %}
+        <div style="width:100%;	height:50px;"class=" alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{message}}
         </div>
-    {% endfor %}
-</body>
-</html>
+    {% endif %}
+{% for i in list %}    
+<div class="card mb-3" style="width:90%;margin:0 auto;float:none;background-color:#2CBDB8;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+	  <img class="card-img" style="width:100%;height:100%;" src="/static/images/wall-car-vehicle-vintage-1897.jpg" alt="Card image">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+                <p style="color:black;font-size:20px;">City : {{i.city}} </p>
+				<p style="color:black;font-size:20px;">State : {{i.state}} </p>
+				<p style="color:black;font-size:20px;">Area : {{i.area}}</p>
+                <p style="color:black;font-size:20px;">Price : {{i.price_per_hour}}</p>
+                <p style="color:black;font-size:20px;">Spots : {{i.no_of_spot}}</p>
+                <p style="color:black;font-size:20px;">Verified : {{i.verified}}</p>
+                <p style="color:black;font-size:20px;">Date : {{i.start_date}} to {{i.end_date}}</p>
+                <p style="color:black;font-size:20px;">Description : {{i.description}}</p>
+				<br/>
+                <a class="btn btn-primary" href="/Landlord/showhistory/?landid={{ i.landid }}" >Show History</a>
+                <a class="btn btn-primary" href="/Landlord/editlanddetail/?landid={{ i.landid }}" >Edit Land Detail</a>
+				<a class="btn btn-primary" href="/Landlord/deleteland/?landid={{ i.landid }}" >Delete Land</a>
+                <a class="btn btn-primary" href="/Landlord/payment/?landid={{ i.landid }}" >Payment</a>
+
+				
+      </div>
+    </div>
+  </div>
+</div>       		
+{% endfor %}
+{% endblock %}
