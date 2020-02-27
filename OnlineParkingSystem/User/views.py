@@ -28,8 +28,8 @@ def myuser_login_required(f):
         except:
             c = {}
             c.update(csrf(request))
-            form = RegistrationForm()
-            return render(request, 'Login.html',{'message':'Please Login First',"role":'User','form' : form})
+            form = LoginForm()
+            return render(request, 'Login.html',{'message':'Something went wrong Do it later!!',"role":'User','form' : form})
     login_first.__doc__=f.__doc__
     login_first.__name__=f.__name__
     return login_first
@@ -47,7 +47,7 @@ def Login(request):
         form = LoginForm(request.POST)
         email = form.data['email']
         password = form.data['password']
-        user_data=User_detail.objects.get(email=email,password=password,role=request.POST.get('role'))
+        user_data=User_detail.objects.filter(email=email,password=password,role=request.POST.get('role')).first()
         if(user_data):
             request.session['uid']=user_data.userid
             request.session['email']=email
@@ -58,7 +58,7 @@ def Login(request):
     else:
         c = {}
         c.update(csrf(request))
-        form = LoginForm()
+        form = LoginForm() 
         return render(request, 'Login.html',{'form' : form,'role':request.GET.get('role')})
 
 def Registration(request):
@@ -131,6 +131,7 @@ def ShowLandDetails(request):
         nlands=sorted(nlands, key = lambda i: i['distance'])
         return render(request, 'LandDetails.html',{'login':'True','role':request.session.get('role'),'Land': nlands,'Date' : date})
 
+
 def ReserveParking(request):
     c = {}
     c.update(csrf(request))
@@ -195,3 +196,11 @@ def LogoutHere(request):
         form = LoginForm()
         return render(request, 'Login.html',{'message':'Please Login First','form' : form})
     
+@myuser_login_required
+def feedback(request):
+    rate = request.GET['rate']
+    id = request.GET['id']
+    Land_rate_field = Land_record.objects.get(land_record_id=id)
+    Land_rate_field.feedback = rate
+    Land_rate_field.save()
+    return HttpResponseRedirect('../showuserhistory/')

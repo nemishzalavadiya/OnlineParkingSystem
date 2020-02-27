@@ -1,25 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title>Add Land Details</title>	
-	<link rel="stylesheet" type="text/css" href="/static/vendor/bootstrap/css/bootstrap.min.css">
-	<link type="text/css" rel="stylesheet" href="/static/css/AddLandDetail.css" />
-</head>
-<body>
+{% block content %}
 	<div id="booking" class="section">
 		<div class="section-center">
 			<div class="container">
 				<div class="row" style="display:block;">
+
 					<div class="booking-form">
 						<div class="booking-bg"></div>
 						<form action="/Landlord/addlanddetail/" enctype="multipart/form-data" method="POST">
+							{% if message != NULL %}
+								<h6 style="color: red;">{{message}}</h6>
+
+							{% endif %}
 						{% csrf_token%}
 							<div class="form-header">
-								<h2>ADD PARKING DETAILS</h2>
+								<h2>ADD PARKING DETAILS</h2>				
 							</div>
 							{{ form.non_field_errors }}
 
@@ -93,7 +89,8 @@
 									{{ form.langitude }}
 									{{ form.lattitude }}
 									{{ form.verified  }}
-									{{ form.userid }}
+									{{ form.userid }}	
+									
 								<div class="col">
 										<div class="form-btn">
 											<button class="submit-btn">Add Now</button>
@@ -146,5 +143,4 @@ function showPosition(position) {
 			}
 		}
 	</script>
-</body>
-</html>
+{% endblock %}

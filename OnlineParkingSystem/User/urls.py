@@ -1,5 +1,7 @@
 from django.conf.urls import url
-
+from OnlineParkingSystem import settings
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from . import views
 
 urlpatterns = [
@@ -10,5 +12,7 @@ urlpatterns = [
     url(r'logout/', views.LogoutHere, name="LogoutHere"),
     url(r'reserveparking/',views.ReserveParking, name="reserveparking"),
     url(r'showuserhistory/',views.ShowUserHistory,name='ShowUserHistory'),
+    url(r'feedback/',views.feedback,name='feedback'),
     url(r'', views.Home, name="Home"),
 ]
+
