@@ -17,19 +17,22 @@ import geocoder
 # Create your views here.
 def myuser_login_required(f):
     def login_first(request, *args, **kwargs):
+        date='False'
         try:
+            if request.POST.get('rdate')!=None:
+                date=request.POST.get('rdate')
             if request.session['email']==None:
                 c = {}
                 c.update(csrf(request))
                 form = LoginForm()
-                return render(request, 'Login.html',{'message':'Please Login First',"role":'User','form' : form})
+                return render(request, 'Login.html',{'message':'Please Login First',"role":'User','form' : form,'date':date})
             else:
                 return f(request, *args, **kwargs)
         except:
             c = {}
             c.update(csrf(request))
             form = LoginForm()
-            return render(request, 'Login.html',{'message':'Something went wrong Do it later!!',"role":'User','form' : form})
+            return render(request, 'Login.html',{'message':'Please login,something wrong',"role":'User','form' : form,'date':date})
     login_first.__doc__=f.__doc__
     login_first.__name__=f.__name__
     return login_first
@@ -41,7 +44,9 @@ def get_client_ip(request):
     else:
         ip = 'me' #request.META.get('REMOTE_ADDR')
     return ip
-    
+
+
+
 def Login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -52,6 +57,8 @@ def Login(request):
             request.session['uid']=user_data.userid
             request.session['email']=email
             request.session['role']=request.POST.get('role')
+            if request.POST.get('date')!=None:
+                return showLand(request,request.POST.get('date'))
             return render(request,'index.html',{'login':'True','role':request.POST.get('role')})
         else:
             return render(request, 'Login.html',{'message':'Invalid email or password!!!','role':request.POST.get('role'),'form' : form})
@@ -103,34 +110,43 @@ def EditProfile(request):
         mydetail = User_detail.objects.get(userid=userid)
         form = EditProfileForm(instance=mydetail)
         return render(request, 'EditProfile.html',{'login':'True','role':request.session.get('role'),'form' : form, 'userid' : userid})
-    
+
+def showLand(request,dateOf):
+    if request.method == 'POST':
+            c = {}
+            c.update(csrf(request))
+            date = dateOf
+            request.session['date'] = date
+            landobj = Land_detail.objects.filter(start_date__lte=date,end_date__gte=date,verified=0)
+            lands=list(landobj.values())
+            nlands=[]
+            for land in lands:
+                lat1=land['lattitude']
+                lag1=land['langitude']
+                g = geocoder.ip(get_client_ip(request))
+                lat2,lag2 = g.latlng
+                landloc = (lat1,lag1)
+                current = (lat2,lag2)
+                d=distance.distance(landloc,current).km
+                d=round(d, 2)
+                land['distance']=d
+                count = Land_record.objects.filter(landid=land['landid'],start_date=date).count()
+                if land['no_of_spot'] > count:
+                    nlands.append(land.copy()) 
+            nlands = list(filter(lambda i: i['distance'] < 100, nlands)) 
+            nlands=sorted(nlands, key = lambda i: i['distance'])
+            return render(request, 'LandDetails.html',{'login':'True','role':request.session.get('role'),'Land': nlands,'Date' : date})
+
+
 @myuser_login_required
 def ShowLandDetails(request):
-    if request.method == 'POST':
+    try:
+        return showLand(request,request.POST.get('rdate'))
+    except:
         c = {}
         c.update(csrf(request))
-        date = request.POST.get('rdate')
-        request.session['date'] = date
-        landobj = Land_detail.objects.filter(start_date__lte=date,end_date__gte=date,verified=0)
-        lands=list(landobj.values())
-        nlands=[]
-        for land in lands:
-            lat1=land['lattitude']
-            lag1=land['langitude']
-            g = geocoder.ip(get_client_ip(request))
-            lat2,lag2 = g.latlng
-            landloc = (lat1,lag1)
-            current = (lat2,lag2)
-            d=distance.distance(landloc,current).km
-            d=round(d, 2)
-            land['distance']=d
-            count = Land_record.objects.filter(landid=land['landid'],start_date=date).count()
-            if land['no_of_spot'] > count:
-                nlands.append(land.copy()) 
-        nlands = list(filter(lambda i: i['distance'] < 100, nlands)) 
-        nlands=sorted(nlands, key = lambda i: i['distance'])
-        return render(request, 'LandDetails.html',{'login':'True','role':request.session.get('role'),'Land': nlands,'Date' : date})
-
+        form = LoginForm()
+        return render(request, 'Login.html',{'message':'Something Went Wrong',"role":'User','form' : form})
 
 def ReserveParking(request):
     c = {}
