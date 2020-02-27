@@ -84,17 +84,13 @@ def Newpassword(request):
 			from_email = settings.EMAIL_HOST_USER
 			to_list = [i.email]
 			send_mail(subject, message, from_email, to_list, fail_silently=False)
-			print("message sent")
 			request.session['otp'] = OTP
-			print(request.session['otp'])
 			return render(request, 'newpassword.html', c)
 	else:
 		return render(request, 'forgotpassword.html', {'error': 'Enter a correct information'})
 
 def Addnewpassword(request):
-	print(request.session['otp'])
 	if request.session.get('otp') is None:
-		print("none")
 		password = request.POST.get('password', '')
 		cpass = request.POST.get('confirmpassword', '')
 		if password != cpass:
@@ -107,10 +103,8 @@ def Addnewpassword(request):
 			return render(request, 'Login.html', {'message': 'Password successfully changed.'})
 	else:
 		otp = request.POST.get('otp')
-		print(otp)
 		if otp == request.session['otp']:
 			del request.session['otp']
-			print("hii")
 			return render(request, 'newpassword.html')
 		else:
 			return render(request, 'newpassword.html', {'error': 'Enter correct OTP'})
