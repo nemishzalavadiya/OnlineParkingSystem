@@ -212,6 +212,7 @@ border-radius: 4px;
                                  
                                  {% if role == "User" %}
                                  <li><a href="#1">Reserve Lands</a></li>
+                                 <li><a href="{% url 'advanceReservation' %}">Advance Reservation</a></li>
                                  <li><a href="{% url 'ShowUserHistory' %}">Show History</a></li>
                                  <li><a href="{% url 'editprofile' %}">Edit Profile</a></li>
                                  {% endif %}
@@ -243,6 +244,7 @@ border-radius: 4px;
                                  {% if role == "User" %}
                                  <li class="active"><a href="/">Home</a></li>
                                  <li><a href="#1">Reserve Lands</a></li>
+                                 <li><a href="{% url 'advanceReservation' %}">Advance Reservation</a></li>
                                  <li><a href="{% url 'ShowUserHistory' %}">Show History</a></li>
                                  <li><a href="{% url 'editprofile' %}">Edit Profile</a></li>
                                  {% endif %}

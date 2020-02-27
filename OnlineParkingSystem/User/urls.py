@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'showuserhistory/',views.ShowUserHistory,name='ShowUserHistory'),
     url(r'feedback/',views.feedback,name='feedback'),
     url(r'addLocation/',views.addLocation,name="addLocation"),
+    url(r'search/',views.advanceReservation,name="advanceReservation"),
     url(r'', views.Home, name="Home"),
 ]
 

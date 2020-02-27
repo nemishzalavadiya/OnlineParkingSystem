@@ -55,7 +55,10 @@ def Login(request):
         form = LoginForm(request.POST)
         email = form.data['email']
         password = form.data['password']
-        user_data=User_detail.objects.filter(email=email,password=password,role=request.POST.get('role')).first()
+        role='User'
+        if request.POST.get('role')!=None:
+            role=request.POST.get('role')
+        user_data=User_detail.objects.filter(email=email,password=password,role=role).first()
         if(user_data):
             request.session['uid']=user_data.userid
             request.session['email']=email
@@ -165,6 +168,7 @@ def showLand(request,dateOf):
             c = {}
             c.update(csrf(request))
             date = dateOf
+            request.session['date']=date
             landobj = Land_detail.objects.filter(start_date__lte=date,end_date__gte=date,verified=0)
             lands=list(landobj.values())
             nlands=[]
@@ -229,7 +233,7 @@ def ReserveParking(request):
         send_mail(subject, message, from_email, to_list, fail_silently=False)
         return render(request, 'LandDetails.html',{'title':'Edit User Detail','login':'True','role':request.session.get('role'),'message': "successful reserve"})
     except:
-        return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.session.get('role')})
+       return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.session.get('role')})
 
 def Home(request):
     loginDone="False"
@@ -291,3 +295,87 @@ def addLocation(request):
     location.userid=User_detail.objects.get(userid=userid)
     location.save()
     return render(request,'index.html',{'title':'Location Done','login':'True','role':'User'})
+
+def advanceReservation(request):
+    if request.method=='POST':
+        place=request.POST.get('place')
+        location=User_Location.objects.filter(userid=request.session['uid'],name=place).first()
+        c = {}
+        c.update(csrf(request))
+        date = request.POST.get('date')
+        request.session['date']=date
+        landobj = Land_detail.objects.filter(start_date__lte=date,end_date__gte=date,verified=0)
+        lands=list(landobj.values())
+        nlands=[]
+        for land in lands:
+            lat1=land['lattitude']
+            lag1=land['langitude']
+            landloc = (lat1,lag1)
+            current = (location.lattitude,location.langitude)
+            d=distance.distance(landloc,current).km
+            d=round(d, 2)
+            land['distance']=d
+            count = Land_record.objects.filter(landid=land['landid'],start_date=date).count()
+            if land['no_of_spot'] > count:
+                nlands.append(land.copy()) 
+        nlands = list(filter(lambda i: i['distance'] < 10000, nlands)) 
+        nlands=sorted(nlands, key = lambda i: i['distance'])
+        paginator = Paginator(nlands, 5)
+        page =  request.GET.get('page',1) 
+        try:
+            users = paginator.page(page)
+        except PageNotAnInteger:
+            users = paginator.page(1)
+        except EmptyPage:
+            users = paginator.page(paginator.num_pages)
+        userid=request.session['uid']
+        listLocation = User_Location.objects.filter(userid=userid)
+        listitem=set()
+        for i in listLocation:
+            listitem.add(i.name)
+        return render(request,'advanceSearch.html',{'place':place,'title':'Reserve your favorite space','places':listitem,'data':'True','login':'True','role':request.session.get('role'),'page_obj': users ,'Date' : date})
+
+    else:
+        if request.GET.get('place')!=None and request.GET.get('date')!=None:
+            place=request.GET.get('place')
+            location=User_Location.objects.filter(userid=request.session['uid'],name=place).first()
+            c = {}
+            c.update(csrf(request))
+            date = request.GET.get('date')
+            request.session['date']=date
+            landobj = Land_detail.objects.filter(start_date__lte=date,end_date__gte=date,verified=0)
+            lands=list(landobj.values())
+            nlands=[]
+            for land in lands:
+                lat1=land['lattitude']
+                lag1=land['langitude']
+                landloc = (lat1,lag1)
+                current = (location.lattitude,location.langitude)
+                d=distance.distance(landloc,current).km
+                d=round(d, 2)
+                land['distance']=d
+                count = Land_record.objects.filter(landid=land['landid'],start_date=date).count()
+                if land['no_of_spot'] > count:
+                    nlands.append(land.copy()) 
+            nlands = list(filter(lambda i: i['distance'] < 10000, nlands)) 
+            nlands=sorted(nlands, key = lambda i: i['distance'])
+            paginator = Paginator(nlands, 5)
+            page =  request.GET.get('page',1) 
+            try:
+                users = paginator.page(page)
+            except PageNotAnInteger:
+                users = paginator.page(1)
+            except EmptyPage:
+                users = paginator.page(paginator.num_pages)
+            userid=request.session['uid']
+            listLocation = User_Location.objects.filter(userid=userid)
+            listitem=set()
+            for i in listLocation:
+                listitem.add(i.name)
+            return render(request,'advanceSearch.html',{'place':place,'title':'Reserve your favorite space','places':listitem,'data':'True','login':'True','role':request.session.get('role'),'page_obj': users ,'Date' : date})
+        userid=request.session['uid']
+        listLocation = User_Location.objects.filter(userid=userid)
+        listitem=set()
+        for i in listLocation:
+            listitem.add(i.name)
+        return render(request,'advanceSearch.html',{'data':'False','places':listitem})
