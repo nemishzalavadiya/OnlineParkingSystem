@@ -22,14 +22,14 @@ def myuser_login_required(f):
                 c = {}
                 c.update(csrf(request))
                 form = LoginForm()
-                return render(request, 'Login.html',{'message':'Please Login First',"role":'User','form' : form})
+                return render(request, 'Login.html',{'title':'Login Page','message':'Please Login First',"role":'User','form' : form})
             else:
                 return f(request, *args, **kwargs)
         except:
             c = {}
             c.update(csrf(request))
             form = LoginForm()
-            return render(request, 'Login.html',{'message':'Something went wrong Do it later!!',"role":'User','form' : form})
+            return render(request, 'Login.html',{'title':'Login Page','message':'Something went wrong Do it later!!',"role":'User','form' : form})
     login_first.__doc__=f.__doc__
     login_first.__name__=f.__name__
     return login_first
@@ -52,14 +52,14 @@ def Login(request):
             request.session['uid']=user_data.userid
             request.session['email']=email
             request.session['role']=request.POST.get('role')
-            return render(request,'index.html',{'login':'True','role':request.POST.get('role')})
+            return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.POST.get('role')})
         else:
-            return render(request, 'Login.html',{'message':'Invalid email or password!!!','role':request.POST.get('role'),'form' : form})
+            return render(request, 'Login.html',{'title':'Login Page','message':'Invalid email or password!!!','role':request.POST.get('role'),'form' : form})
     else:
         c = {}
         c.update(csrf(request))
         form = LoginForm() 
-        return render(request, 'Login.html',{'form' : form,'role':request.GET.get('role')})
+        return render(request, 'Login.html',{'title':'Login Page','form' : form,'role':request.GET.get('role')})
 
 def Registration(request):
     if request.method == 'POST':
@@ -76,14 +76,14 @@ def Registration(request):
             c = {}
             c.update(csrf(request))
             form = LoginForm()
-            return render(request, 'Login.html',{'role':request.POST.get('role'),'message':'Registration Successful','form' : form})
+            return render(request, 'Login.html',{'title':'Login Page','role':request.POST.get('role'),'message':'Registration Successful','form' : form})
         else:
-            return render(request, 'Registration.html',{'role':request.POST.get('role'),'message':'Registration Failed','form' : form})
+            return render(request, 'Registration.html',{'title':'Registration Page','role':request.POST.get('role'),'message':'Registration Failed','form' : form})
     else:
         c = {}
         c.update(csrf(request))
         form = RegistrationForm()
-        return render(request, 'Registration.html',{'form' : form,'role':request.GET.get('role')})
+        return render(request, 'Registration.html',{'title':'Registration Page','form' : form,'role':request.GET.get('role')})
 
 @myuser_login_required    
 def EditProfile(request):
@@ -93,16 +93,16 @@ def EditProfile(request):
         form = EditProfileForm(request.POST,instance=mydetail)
         if form.is_valid():
             form.save()
-            return render(request,'index.html',{'login':'True','role':request.session.get('role')})
+            return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.session.get('role')})
         else:
-            return render(request, 'EditProfile.html',{'login':'True','role':request.session.get('role'),'message':'Edit fail','form' : form})
+            return render(request, 'EditProfile.html',{'title':'Edit User Detail','login':'True','role':request.session.get('role'),'message':'Edit fail','form' : form})
     else:
         c = {}
         c.update(csrf(request))
         userid = 1
         mydetail = User_detail.objects.get(userid=userid)
         form = EditProfileForm(instance=mydetail)
-        return render(request, 'EditProfile.html',{'login':'True','role':request.session.get('role'),'form' : form, 'userid' : userid})
+        return render(request, 'EditProfile.html',{'title':'Edit User Detail','login':'True','role':request.session.get('role'),'form' : form, 'userid' : userid})
     
 @myuser_login_required
 def ShowLandDetails(request):
@@ -110,53 +110,58 @@ def ShowLandDetails(request):
         c = {}
         c.update(csrf(request))
         date = request.POST.get('rdate')
-        request.session['date'] = date
-        landobj = Land_detail.objects.filter(start_date__lte=date,end_date__gte=date,verified=0)
-        lands=list(landobj.values())
-        nlands=[]
-        for land in lands:
-            lat1=land['lattitude']
-            lag1=land['langitude']
-            g = geocoder.ip(get_client_ip(request))
-            lat2,lag2 = g.latlng
-            landloc = (lat1,lag1)
-            current = (lat2,lag2)
-            d=distance.distance(landloc,current).km
-            d=round(d, 2)
-            land['distance']=d
-            count = Land_record.objects.filter(landid=land['landid'],start_date=date).count()
-            if land['no_of_spot'] > count:
-                nlands.append(land.copy()) 
-        nlands = list(filter(lambda i: i['distance'] < 100, nlands)) 
-        nlands=sorted(nlands, key = lambda i: i['distance'])
-        return render(request, 'LandDetails.html',{'login':'True','role':request.session.get('role'),'Land': nlands,'Date' : date})
-
+        try:
+            request.session['date'] = date
+            landobj = Land_detail.objects.filter(start_date__lte=date,end_date__gte=date,verified=0)
+            lands=list(landobj.values())
+            nlands=[]
+            for land in lands:
+                lat1=land['lattitude']
+                lag1=land['langitude']
+                g = geocoder.ip(get_client_ip(request))
+                lat2,lag2 = g.latlng
+                landloc = (lat1,lag1)
+                current = (lat2,lag2)
+                d=distance.distance(landloc,current).km
+                d=round(d, 2)
+                land['distance']=d
+                count = Land_record.objects.filter(landid=land['landid'],start_date=date).count()
+                if land['no_of_spot'] > count:
+                    nlands.append(land.copy()) 
+            nlands = list(filter(lambda i: i['distance'] < 100, nlands)) 
+            nlands=sorted(nlands, key = lambda i: i['distance'])
+            return render(request, 'LandDetails.html',{'title':'Reserve your favorite space','login':'True','role':request.session.get('role'),'Land': nlands,'Date' : date})
+        except:
+            return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.session.get('role')})
 
 def ReserveParking(request):
     c = {}
     c.update(csrf(request))
-    landid = request.POST.get('landid')
-    userid = request.session['uid']
-    totalprice = float(request.POST.get('price'))
-    totalprice = int(totalprice)
-    date =  request.session['date']
-    date = datetime.datetime.strptime(date, '%Y-%m-%d')
-    landrecord = Land_record(landid=Land_detail.objects.get(landid=landid),userid=User_detail.objects.get(userid=userid),start_date=date,total_price=totalprice,payment_remaining=True)
-    landrecord.save()
-    land_data = Land_detail.objects.get(landid=landid)
-    address=land_data.address
-    description=land_data.description
-    city=land_data.city
-    area=land_data.area
-    state=land_data.state
-    lattitude=land_data.lattitude
-    langitude=land_data.langitude
-    subject = 'Confirmation Mail For Booking'
-    message = 'Your booking details are below.'+'\n'+'Total price: '+str(totalprice)+'\n'+'Date: '+str(date)+'\n'+'address: '+str(address)+'\n'+'Description: '+str(description)+'\n'+'City: '+str(city)+'\n'+'Area: '+str(area)+'\n'+'State: '+str(state)+'\n'+'Root: '+'http://maps.google.com/?q='+str(lattitude)+','+str(langitude)
-    from_email = settings.EMAIL_HOST_USER
-    to_list = [request.session['email']]
-    send_mail(subject, message, from_email, to_list, fail_silently=False)
-    return render(request, 'LandDetails.html',{'login':'True','role':request.session.get('role'),'message': "successful reserve"})
+    try:
+        landid = request.POST.get('landid')
+        userid = request.session['uid']
+        totalprice = float(request.POST.get('price'))
+        totalprice = 24*int(totalprice)
+        date =  request.session['date']
+        date = datetime.datetime.strptime(date, '%Y-%m-%d')
+        landrecord = Land_record(landid=Land_detail.objects.get(landid=landid),userid=User_detail.objects.get(userid=userid),start_date=date,total_price=totalprice,payment_remaining=True)
+        landrecord.save()
+        land_data = Land_detail.objects.get(landid=landid)
+        address=land_data.address
+        description=land_data.description
+        city=land_data.city
+        area=land_data.area
+        state=land_data.state
+        lattitude=land_data.lattitude
+        langitude=land_data.langitude
+        subject = 'Confirmation Mail For Booking'
+        message = 'Your booking details are below.'+'\n'+'Total price: '+str(totalprice)+'\n'+'Date: '+str(date)+'\n'+'address: '+str(address)+'\n'+'Description: '+str(description)+'\n'+'City: '+str(city)+'\n'+'Area: '+str(area)+'\n'+'State: '+str(state)+'\n'+'Root: '+'http://maps.google.com/?q='+str(lattitude)+','+str(langitude)
+        from_email = settings.EMAIL_HOST_USER
+        to_list = [request.session['email']]
+        send_mail(subject, message, from_email, to_list, fail_silently=False)
+        return render(request, 'LandDetails.html',{'title':'Edit User Detail','login':'True','role':request.session.get('role'),'message': "successful reserve"})
+    except:
+        return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.session.get('role')})
 
 def Home(request):
     loginDone="False"
@@ -166,7 +171,7 @@ def Home(request):
     except:
         loginDone="False"
         request.session['role']='User'
-    return render(request,'index.html',{'login':loginDone,'role':request.session['role']})
+    return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.session.get('role')})
 
 @myuser_login_required
 def ShowUserHistory(request):
@@ -181,20 +186,20 @@ def ShowUserHistory(request):
         landrecord['email']= user.email
         landrecord['mobile_no']= user.mobile_no
         landrecord['age']= user.age
-    return render(request, 'ShowUserHistory.html',{ 'login':'True','role':request.session.get('role'),'LandRecord' : landrecords })
+    return render(request, 'ShowUserHistory.html',{'title':'History', 'login':'True','role':request.session.get('role'),'LandRecord' : landrecords })
 
 def LogoutHere(request):
     try:
         del request.session['email']
         del request.session['role']
         loginDone="False"
-        return render(request,'index.html',{'login':loginDone,'role':'User'})
+        return render(request,'index.html',{'title':'Car Parking Space Reservation','login':loginDone,'role':'User'})
 
     except:
         c = {}
         c.update(csrf(request))
         form = LoginForm()
-        return render(request, 'Login.html',{'message':'Please Login First','form' : form})
+        return render(request, 'Login.html',{'title':'Login Page','message':'Please Login First','form' : form})
     
 @myuser_login_required
 def feedback(request):

@@ -20,7 +20,6 @@ class UserShortedView(ListView):
     context_object_name = 'users' 
     paginate_by = 10
     def get_queryset(self):
-        print("Sorted list getting")
         order_by = self.request.GET.get('id') or 'lattitude'
         qs = super(UserShortedView, self).get_queryset()
         return qs.order_by(order_by)
@@ -32,6 +31,6 @@ def UserApproved(request):
         landdetail = Land_detail.objects.get(landid=landid)
         landdetail.verified = 0
         landdetail.save()
-        return HttpResponseRedirect('/admin_role/newLandList/',{'login':'True','role':request.session.get('role')})
+        return HttpResponseRedirect('/admin_role/newLandList/',{'title':'User List','login':'True','role':request.session.get('role')})
 
         
