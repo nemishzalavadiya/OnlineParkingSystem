@@ -2,6 +2,7 @@
 
 {% extends 'base.html' %}
 {% block content %}
+	<div style="overflow-x:auto;">
         <table class="table table-striped centered">
         <tr class="table-primary">
             <th>Date</th>
@@ -24,6 +25,7 @@
             </tr>
         {% endfor %}
         </table>
+		</div>
 	<script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
 
 	<script src="/static/vendor/bootstrap/js/popper.js"></script>

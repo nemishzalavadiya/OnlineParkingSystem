@@ -14,6 +14,8 @@ import math,datetime
 from geopy import distance
 from django.core.mail import send_mail
 import geocoder
+import math, random
+
 # Create your views here.
 def myuser_login_required(f):
     def login_first(request, *args, **kwargs):
@@ -61,6 +63,58 @@ def Login(request):
         form = LoginForm()
         return render(request, 'Login.html',{'form' : form,'role':request.GET.get('role')})
 
+def Forgotpassword(request):
+    c = {}
+    c = c.update(csrf(request))
+    return render(request, 'forgotpassword.html', c)
+
+def Newpassword(request):
+	c = {}
+	c = c.update(csrf(request))
+	email = request.POST.get('email')
+	request.session['email1'] = email
+	digits = "0123456789"
+	OTP = ""
+	for i in range(6):
+		OTP += digits[math.floor(random.random() * 10)]
+	for i in User_detail.objects.all():
+		if i.email == email:
+			subject = 'Your confidential OTP'
+			message = 'Your OTP is ' + OTP
+			from_email = settings.EMAIL_HOST_USER
+			to_list = [i.email]
+			send_mail(subject, message, from_email, to_list, fail_silently=False)
+			print("message sent")
+			request.session['otp'] = OTP
+			print(request.session['otp'])
+			return render(request, 'newpassword.html', c)
+	else:
+		return render(request, 'forgotpassword.html', {'error': 'Enter a correct information'})
+
+def Addnewpassword(request):
+	print(request.session['otp'])
+	if request.session.get('otp') is None:
+		print("none")
+		password = request.POST.get('password', '')
+		cpass = request.POST.get('confirmpassword', '')
+		if password != cpass:
+			return render(request, 'newpassword.html', {'error': 'Can not change password. Your both Passwords are different'})
+		else:
+			target = User_detail.objects.get(email=request.session['email1'])
+			target.password = password
+			target.save()
+			del request.session['email1']
+			return render(request, 'Login.html', {'message': 'Password successfully changed.'})
+	else:
+		otp = request.POST.get('otp')
+		print(otp)
+		if otp == request.session['otp']:
+			del request.session['otp']
+			print("hii")
+			return render(request, 'newpassword.html')
+		else:
+			return render(request, 'newpassword.html', {'error': 'Enter correct OTP'})
+			
 def Registration(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)

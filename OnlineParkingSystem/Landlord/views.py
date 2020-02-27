@@ -9,6 +9,8 @@ from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db import models
 from django.template import loader
+import math, random
+
 from User.views import myuser_login_required
 # Create your views here.
 
@@ -36,12 +38,12 @@ def AddLandDetail(request):
             land.save()
             return HttpResponseRedirect('/')
         else:
-            return render(request, 'AddLandDetail.html',{'message':'Registration2 Failed','form' : form})
+            return render(request, 'AddLandDetail.html',{'login':'True','role':request.session.get('role'),'message':'Registration2 Failed','form' : form})
     else:
         c = {}
         c.update(csrf(request))
         form = AddLandForm()
-        return render(request, 'AddLandDetail.html',{'form' : form})
+        return render(request, 'AddLandDetail.html',{'login':'True','role':request.session.get('role'),'form' : form})
 
 @myuser_login_required
 def EditLandDetail(request):
@@ -51,7 +53,7 @@ def EditLandDetail(request):
         form = AddLandForm(request.POST,instance=mydetail)
         if form.is_valid():
             form.save()
-            return render(request, 'EditLandDetail.html',{'form' : form})
+            return render(request, 'EditLandDetail.html',{'login':'True','role':request.session.get('role'),'form' : form})
         else:
             return render(request, 'EditLandDetail.html',{'message':'Edit fail','form' : form})
     else:
@@ -66,7 +68,7 @@ def EditLandDetail(request):
 def landlist(request):
     userlist= User_detail.objects.get(email=request.session['email'],role=request.session['role'])
     land=Land_detail.objects.filter(userid_id=userlist.userid)
-    return render(request, 'show.html',{ 'list' : land })
+    return render(request, 'show.html',{'login':'True','role':request.session.get('role'),'list' : land })
     
 @myuser_login_required
 def ShowHistory(request):
@@ -79,4 +81,4 @@ def ShowHistory(request):
         landrecord['email']= user.email
         landrecord['mobile_no']= user.mobile_no
         landrecord['age']= user.age
-    return render(request, 'ShowHistory.html',{ 'LandRecord' : landrecords })
+    return render(request, 'ShowHistory.html',{'login':'True','role':request.session.get('role'),'LandRecord' : landrecords })
