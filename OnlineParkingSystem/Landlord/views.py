@@ -15,7 +15,7 @@ from User.views import myuser_login_required
 # Create your views here.
 
 
-@myuser_login_required       
+#@myuser_login_required       
 def AddLandDetail(request):
     if request.method == 'POST' :
         form = AddLandForm(request.POST,request.FILES)
@@ -38,12 +38,12 @@ def AddLandDetail(request):
             land.save()
             return HttpResponseRedirect('/')
         else:
-            return render(request, 'AddLandDetail.html',{'login':'True','role':request.session.get('role'),'message':'Registration2 Failed','form' : form})
+            return render(request, 'AddLandDetail.html',{'title':'Add Land Detail','message':'Land Registration Failed','form' : form,'login':'True','role':request.session['role']})
     else:
         c = {}
         c.update(csrf(request))
         form = AddLandForm()
-        return render(request, 'AddLandDetail.html',{'login':'True','role':request.session.get('role'),'form' : form})
+        return render(request, 'AddLandDetail.html',{'title':'Add Land Detail','form' : form,'login':'True','role':request.session['role']})
 
 @myuser_login_required
 def EditLandDetail(request):
@@ -53,22 +53,22 @@ def EditLandDetail(request):
         form = AddLandForm(request.POST,instance=mydetail)
         if form.is_valid():
             form.save()
-            return render(request, 'EditLandDetail.html',{'login':'True','role':request.session.get('role'),'form' : form})
+            return render(request, 'EditLandDetail.html',{'title':'Edit Land Detail','form' : form,'login':'True','role':request.session['role']})
         else:
-            return render(request, 'EditLandDetail.html',{'message':'Edit fail','form' : form})
+            return render(request, 'EditLandDetail.html',{'title':'Edit Land Detail','message':'Edit fail','form' : form,'login':'True','role':request.session['role']})
     else:
         c = {}
         c.update(csrf(request))
         landid = request.GET.get('landid')
         mydetail = Land_detail.objects.get(landid=landid)
         form = AddLandForm(instance=mydetail)
-        return render(request, 'EditLandDetail.html',{'form' : form, 'landid' : landid})
+        return render(request, 'EditLandDetail.html',{'title':'Edit Land Detail','form' : form, 'landid' : landid,'login':'True','role':request.session['role']})
 
 @myuser_login_required
 def landlist(request):
     userlist= User_detail.objects.get(email=request.session['email'],role=request.session['role'])
-    land=Land_detail.objects.filter(userid_id=userlist.userid)
-    return render(request, 'show.html',{'login':'True','role':request.session.get('role'),'list' : land })
+    land = Land_detail.objects.filter(userid_id=userlist.userid)
+    return render(request, 'show.html',{'title':'All Land Detail', 'list' : land,'login':'True','role':request.session['role'] })
     
 @myuser_login_required
 def ShowHistory(request):
@@ -81,4 +81,35 @@ def ShowHistory(request):
         landrecord['email']= user.email
         landrecord['mobile_no']= user.mobile_no
         landrecord['age']= user.age
-    return render(request, 'ShowHistory.html',{'login':'True','role':request.session.get('role'),'LandRecord' : landrecords })
+    return render(request, 'ShowHistory.html',{ 'title':'User History For Land:'+landid,'LandRecord' : landrecords,'login':'True','role':request.session['role'] })
+
+@myuser_login_required
+def DeleteLand(request):
+    landid = request.GET.get("landid")
+    count = Land_record.objects.filter(landid=landid).count()
+    if count==0:
+        Land_detail.objects.filter(landid=landid).delete()
+        message = "Land (landid:"+landid+") deleted successfully!!!"
+    else:
+        message = "You cann't delete this land (landid:"+landid+") because land already reserved by some user!!!"
+    user= User_detail.objects.get(email=request.session['email'],role=request.session['role'])
+    land=Land_detail.objects.filter(userid_id=user.userid)
+    return render(request, 'show.html',{ 'title':'All Land Detail','list' : land,'login':'True','role':request.session['role'] ,'message':message})
+
+@myuser_login_required
+def Payment(request):
+    landid = request.GET.get("landid")
+    landrecord = Land_detail.objects.filter(landid=landid)
+    landrecord = list(landrecord.values())
+    paymentrecords = Land_record.objects.filter(landid=landid,payment_remaining=True)
+    count = paymentrecords.count() 
+    if count==0:
+        message = "Already paid all payment for land (landid:"+landid+")!!"
+    else:
+        payment = 24*count*landrecord[0]['price_per_hour']
+        paymentrecords.update(payment_remaining=False)
+        paymentrecords= list(paymentrecords.values())
+        message = "For Land (landid:"+landid+") successfully payment done!!!Payment Rs:"+str(payment)
+    user = User_detail.objects.get(email=request.session['email'],role=request.session['role'])
+    land = Land_detail.objects.filter(userid_id=user.userid)
+    return render(request, 'show.html',{'title':'All Land Detail', 'list' : land,'login':'True','role':request.session['role'],'message':message})

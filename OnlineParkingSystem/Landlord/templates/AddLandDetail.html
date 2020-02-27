@@ -4,12 +4,17 @@
 		<div class="section-center">
 			<div class="container">
 				<div class="row" style="display:block;">
+
 					<div class="booking-form">
 						<div class="booking-bg"></div>
 						<form action="/Landlord/addlanddetail/" enctype="multipart/form-data" method="POST">
+							{% if message != NULL %}
+								<h6 style="color: red;">{{message}}</h6>
+
+							{% endif %}
 						{% csrf_token%}
 							<div class="form-header">
-								<h2>ADD PARKING DETAILS</h2>
+								<h2>ADD PARKING DETAILS</h2>				
 							</div>
 							{{ form.non_field_errors }}
 
@@ -83,7 +88,8 @@
 									{{ form.langitude }}
 									{{ form.lattitude }}
 									{{ form.verified  }}
-									{{ form.userid }}
+									{{ form.userid }}	
+									
 								<div class="col">
 										<div class="form-btn">
 											<button class="submit-btn">Add Now</button>

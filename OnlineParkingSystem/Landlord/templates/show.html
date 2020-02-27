@@ -20,19 +20,16 @@
                 <p style="color:black;font-size:20px;">Verified : {{i.verified}}</p>
                 <p style="color:black;font-size:20px;">Date : {{i.start_date}} to {{i.end_date}}</p>
                 <p style="color:black;font-size:20px;">Description : {{i.description}}</p>
-				<p style="color:black;font-size:20px;">Payment : 0 RS.</p>
-
 				<br/>
                 <a class="btn btn-primary" href="/Landlord/showhistory/?landid={{ i.landid }}" >Show History</a>
                 <a class="btn btn-primary" href="/Landlord/editlanddetail/?landid={{ i.landid }}" >Edit Land Detail</a>
-				<a class="btn btn-primary" href="/Landlord/showhistory/?landid={{ i.landid }}" >Show History</a>
-                <a class="btn btn-primary" href="/Landlord/showhistory/?landid={{ i.landid }}" >Show History</a>
+				<a class="btn btn-primary" href="/Landlord/deleteland/?landid={{ i.landid }}" >Delete Land</a>
+                <a class="btn btn-primary" href="/Landlord/payment/?landid={{ i.landid }}" >Payment</a>
 
 				
       </div>
     </div>
   </div>
-</div>       
-		
-    {% endfor %}
+</div>       		
+{% endfor %}
 {% endblock %}
