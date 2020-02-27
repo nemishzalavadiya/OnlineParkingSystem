@@ -52,7 +52,6 @@ def Login(request):
             request.session['uid']=user_data.userid
             request.session['email']=email
             request.session['role']=request.POST.get('role')
-            print("session started ####@#@@@@ ",request.session['email'])
             return render(request,'index.html',{'login':'True','role':request.POST.get('role')})
         else:
             return render(request, 'Login.html',{'message':'Invalid email or password!!!','role':request.POST.get('role'),'form' : form})
