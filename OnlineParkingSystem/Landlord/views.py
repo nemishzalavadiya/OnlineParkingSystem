@@ -17,8 +17,8 @@ from User.views import myuser_login_required
 def AddLandDetail(request):
     if request.method == 'POST' :
         form = AddLandForm(request.POST,request.FILES)
-        print(form)
         if form.is_valid():
+            user = User_detail.objects.get(userid=request.POST.get("userid"))
             land = Land_detail()
             land.address= form.cleaned_data["address"]
             land.no_of_spot= form.cleaned_data["no_of_spot"]
@@ -29,13 +29,12 @@ def AddLandDetail(request):
             land.langitude= form.cleaned_data["langitude"]
             land.lattitude = form.cleaned_data["lattitude"]
             land.verified=form.cleaned_data["verified"]
-            land.userid= form.cleaned_data["userid"]
+            land.userid= user
             land.area= form.cleaned_data["area"]
             land.state=form.cleaned_data["state"]
             land.image=form.cleaned_data["image"]
             land.price_per_hour=form.cleaned_data["price_per_hour"]
             land.save()
-            print("land added")
             return HttpResponseRedirect('/')
         else:
             return render(request, 'AddLandDetail.html',{'message':'Land Registration Failed','form' : form,'login':'True','role':request.session['role']})
@@ -43,7 +42,7 @@ def AddLandDetail(request):
         c = {}
         c.update(csrf(request))
         form = AddLandForm()
-        return render(request, 'AddLandDetail.html',{'form' : form,'login':'True','role':request.session['role']})
+        return render(request, 'AddLandDetail.html',{'form' : form,'login':'True','role':request.session['role'],'userid':request.session['uid']})
 
 @myuser_login_required
 def EditLandDetail(request):
