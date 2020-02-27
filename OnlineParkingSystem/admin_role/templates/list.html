@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div style="align-items:center;"><h3 class="card-panel fray" style="background-color:darkgreen;margin: 60px;padding: 10px 20px;text-align: center;align-items: center;"> Approval Needed</h3></div>
-<div style="margin:60px;margin-top: 20px;">
-<table class="table table-bordered table-hover centered">
-  <thead>
-    <tr>
+<div style="align-items:center;"><h3 class="card-panel fray bg-primary" style="margin: 30px;padding: 10px 20px;text-align: center;align-items: center;"> Approval Needed</h3></div>
+	<div style="overflow-x:auto;">
+        <table class="table table-striped centered">
+		<thead>
+     <tr class="table-primary">
       <th class="card-panel teal" onclick="approve('lattitude')" style="cursor: grab;">Latitude</th>
       <th class="card-panel teal" onclick="approve('langitude')" style="cursor: grab;">Longitude</th>
       <th class="card-panel teal" onclick="approve('address')" style="cursor: grab;">Address</th>
@@ -41,6 +41,7 @@
     {% endfor %}
   </tbody>
 </table>
+</div>
 <script>
   
 
@@ -80,5 +81,6 @@
 {% endif %}
 </div>
 </div>
-<a href="{% url 'Home' %}"><button class="btn btn-primary" style="margin-left:60px">Home</button></a>
+<div style="text-align:center">
+<a href="{% url 'Home' %}"><button class="btn btn-primary" style="margin-bottom:3%">Home</button></a></div>
 {% endblock %}

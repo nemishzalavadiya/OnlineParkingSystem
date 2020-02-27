@@ -9,6 +9,8 @@ from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.db import models
 from django.template import loader
+import math, random
+
 from User.views import myuser_login_required
 # Create your views here.
 
