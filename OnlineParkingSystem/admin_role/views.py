@@ -35,6 +35,6 @@ def UserApproved(request):
         landdetail = Land_detail.objects.get(landid=landid)
         landdetail.verified = 0
         landdetail.save()
-        return HttpResponseRedirect('/admin_role/newLandList/',{'login':'True','role':request.session.get('role')})
+        return HttpResponseRedirect('/admin_role/newLandList/',{'title':'User List','login':'True','role':request.session.get('role')})
 
         
