@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'reserveparking/',views.ReserveParking, name="reserveparking"),
     url(r'showuserhistory/',views.ShowUserHistory,name='ShowUserHistory'),
     url(r'feedback/',views.feedback,name='feedback'),
+    url(r'addLocation/',views.addLocation,name="addLocation"),
     url(r'', views.Home, name="Home"),
 ]
 

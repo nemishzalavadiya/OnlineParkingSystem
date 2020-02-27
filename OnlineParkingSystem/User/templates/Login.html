@@ -31,7 +31,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-37 p-b-10">
-				<form class="login100-form validate-form" action="/User/login/" method="POST">
+				<form class="login100-form validate-form" action="/User/login/?page=1&rdate={{date}}" method="POST">
 				{% csrf_token%}
 
 		{% if message != None %}
@@ -63,7 +63,7 @@
 						</span>
 					</div>
 					{% if date != null %}
-					<input type="hidden" name="date" value={{date}}>
+					<input type="hidden" id="date" name="date" value={{date}}>
 					{% endif %}
 					<input type="hidden" name="role" value={{role}}>
 					<div class="contact100-form-checkbox m-l-4">

@@ -26,9 +26,9 @@
             </div>
         </div>
     </section>
-    <div id="1" class="search-form">
+    <div  class="search-form">
         <div class="container">
-            <div class="row">
+            <div id="1" class="row" style="margin-bottom: 15px;">
                 <div class="col-lg-12">
                     <div class="search-form-text">
                         <div class="search-text">
@@ -39,7 +39,27 @@
                     <form action="/User/showlanddetails/" method="GET" class="filter-form">
                        {% csrf_token%}
                         <div class="first-row" style="text-align:center">
-                            <input  placeholder="select date" type="date" name="rdate" required>
+                            Pick Date : <input  placeholder="select date" type="date" style="margin-left: 9px;padding-left: 15px;padding-right: 5px;border-radius:25px;background-color: cornflowerblue;" name="rdate" required>
+                            <button type="submit" class="btn btn-primary" style="background: #2cbdb8;">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="2" class="row" style="margin-bottom: 15px;">
+                <div class="col-lg-12">
+                    <div class="search-form-text">
+                        <div class="search-text">
+                            <i class="fa fa-search"></i>
+                            Add Locations In Advance
+                        </div>
+                    </div>
+                    <form action="/User/addLocation/" method="POST" class="filter-form">
+                       {% csrf_token%}
+                        <div class="first-row" style="text-align:center">
+                            Location Name :<input  placeholder="Give Name" style="margin-left: 9px;padding-left: 15px;padding-right: 5px;border-radius:25px;background-color:cornflowerblue;" type="text" name="location_name" required>
+                            <input type="checkbox" id="ckb1" onclick="getLocation()" required> <span style="color:black">Add Location</span>
+                                <input type="hidden" id="langitude" name="langitude">
+                                <input type="hidden" id="lattitude" name="lattitude">
                             <button type="submit" class="btn btn-primary" style="background: #2cbdb8;">Search</button>
                         </div>
                     </form>
@@ -47,6 +67,7 @@
             </div>
         </div>
     </div>
+    
     <section class="howit-works spad">
         <div class="container">
             <div class="row">
@@ -82,6 +103,25 @@
             </div>
         </div>
     </section>
+    <script>
+        var langitude = document.getElementById("langitude");
+        var lattitude = document.getElementById("lattitude");
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          } else { 
+            x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+        }
+        function getAvailablity() {
+            var x=document.getElementById("no_of_spot").value;
+            document.getElementById("availability").value = x;
+        }
+        function showPosition(position) {
+            lattitude.value = position.coords.latitude;
+            langitude.value = position.coords.longitude;
+        }
+        </script>
     <section class="agent-section spad">
         <div class="container">
             <div class="row">

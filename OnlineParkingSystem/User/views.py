@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.template.context_processors import csrf
 from Landlord.models import Land_detail,Land_record
 from django.views.generic import TemplateView,ListView
-from .models import User_detail
+from .models import User_detail,User_Location
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import RegistrationForm,LoginForm,EditProfileForm
@@ -14,12 +14,9 @@ import math,datetime
 from geopy import distance
 from django.core.mail import send_mail
 import geocoder
-<<<<<<< HEAD
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-=======
 import math, random
 
->>>>>>> 1042ee5d5456d4082c164da088f5a474e3d42b2f
 # Create your views here.
 def myuser_login_required(f):
     def login_first(request, *args, **kwargs):
@@ -31,22 +28,14 @@ def myuser_login_required(f):
                 c = {}
                 c.update(csrf(request))
                 form = LoginForm()
-<<<<<<< HEAD
-                return render(request, 'Login.html',{'message':'Please Login First',"role":'User','form' : form,'date':date})
-=======
-                return render(request, 'Login.html',{'title':'Login Page','message':'Please Login First',"role":'User','form' : form})
->>>>>>> 1042ee5d5456d4082c164da088f5a474e3d42b2f
+                return render(request, 'Login.html',{'title':'Login Page','message':'Please Login First',"role":'User','form' : form,'date':date})
             else:
                 return f(request, *args, **kwargs)
         except:
             c = {}
             c.update(csrf(request))
             form = LoginForm()
-<<<<<<< HEAD
-            return render(request, 'Login.html',{'message':'Please login,something wrong',"role":'User','form' : form,'date':date})
-=======
-            return render(request, 'Login.html',{'title':'Login Page','message':'Something went wrong Do it later!!',"role":'User','form' : form})
->>>>>>> 1042ee5d5456d4082c164da088f5a474e3d42b2f
+            return render(request, 'Login.html',{'title':'Login Page','message':'Something went wrong Do it later!!',"role":'User','form' : form,'date':date})
     login_first.__doc__=f.__doc__
     login_first.__name__=f.__name__
     return login_first
@@ -71,22 +60,16 @@ def Login(request):
             request.session['uid']=user_data.userid
             request.session['email']=email
             request.session['role']=request.POST.get('role')
-<<<<<<< HEAD
-            print(request.POST.get('date'))
             if request.POST.get('date')!=None:
-                nlands,date = showLand(request,request.POST.get('date'))
-                return render(request, 'LandDetails.html',{'login':'True','role':request.session.get('role'),'Land': nlands,'Date' : date})
-            return render(request,'index.html',{'login':'True','role':request.POST.get('role')})
-=======
+               return ShowLandDetails(request)
             return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.POST.get('role')})
->>>>>>> 1042ee5d5456d4082c164da088f5a474e3d42b2f
         else:
             return render(request, 'Login.html',{'title':'Login Page','message':'Invalid email or password!!!','role':request.POST.get('role'),'form' : form})
     else:
         c = {}
         c.update(csrf(request))
         form = LoginForm() 
-        return render(request, 'Login.html',{'title':'Login Page','form' : form,'role':request.GET.get('role')})
+        return render(request, 'Login.html',{'title':'Login Page','form' : form,'role':request.GET.get('role'),'date':request.GET.get('rdate')})
 
 def Forgotpassword(request):
     c = {}
@@ -206,9 +189,7 @@ def showLand(request,dateOf):
 @myuser_login_required
 def ShowLandDetails(request):
     try:
-        print(request.GET.get('rdate'))
         nlands,date = showLand(request,request.GET.get('rdate'))
-        print(nlands[0],date)
         paginator = Paginator(nlands, 5)
         page =  request.GET.get('page',1) 
         try:
@@ -296,3 +277,17 @@ def feedback(request):
     Land_rate_field.feedback = rate
     Land_rate_field.save()
     return HttpResponseRedirect('../showuserhistory/')
+
+@myuser_login_required
+def addLocation(request):
+    lat=request.POST.get('langitude')
+    lon=request.POST.get('lattitude')
+    name=request.POST.get('location_name')
+    userid=request.session['uid']
+    location= User_Location()
+    location.name=name
+    location.lattitude=lat
+    location.langitude=lon
+    location.userid=User_detail.objects.get(userid=userid)
+    location.save()
+    return render(request,'index.html',{'title':'Location Done','login':'True','role':'User'})
