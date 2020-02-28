@@ -231,7 +231,7 @@ def ReserveParking(request):
         from_email = settings.EMAIL_HOST_USER
         to_list = [request.session['email']]
         send_mail(subject, message, from_email, to_list, fail_silently=False)
-        return render(request, 'LandDetails.html',{'title':'Edit User Detail','login':'True','role':request.session.get('role'),'message': "successful reserve"})
+        return render(request, 'index.html',{'title':'Land Reserved','login':'True','role':request.session.get('role'),'message': "successful reserve"})
     except:
        return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.session.get('role')})
 

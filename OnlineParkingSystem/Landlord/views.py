@@ -97,7 +97,7 @@ def DeleteLand(request):
     land=Land_detail.objects.filter(userid_id=user.userid)
     return render(request, 'show.html',{ 'title':'All Land Detail','list' : land,'login':'True','role':request.session['role'] ,'message':message})
 
-@myuser_login_required
+#@myuser_login_required
 def Payment(request):
     landid = request.GET.get("landid")
     landrecord = Land_detail.objects.filter(landid=landid)
