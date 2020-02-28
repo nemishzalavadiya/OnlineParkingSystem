@@ -243,7 +243,7 @@ def Home(request):
     except:
         loginDone="False"
         request.session['role']='User'
-    return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.session.get('role')})
+    return render(request,'index.html',{'title':'Car Parking Space Reservation','login':loginDone,'role':request.session.get('role')})
 
 @myuser_login_required
 def ShowUserHistory(request):
@@ -378,4 +378,4 @@ def advanceReservation(request):
         listitem=set()
         for i in listLocation:
             listitem.add(i.name)
-        return render(request,'advanceSearch.html',{'data':'False','places':listitem})
+        return render(request,'advanceSearch.html',{'data':'False','places':listitem,'login':'True','role':request.session.get('role')})
