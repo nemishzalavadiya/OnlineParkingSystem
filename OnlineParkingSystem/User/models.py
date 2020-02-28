@@ -20,3 +20,10 @@ class User_detail(models.Model):
         super().clean_fields(exclude=exclude)
         if self.age != None and self.age < 18:
             raise ValidationError(_('Age must be greater than 17'), code='Invalid')
+
+class User_Location(models.Model):
+    Locationid = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255)
+    lattitude =  models.FloatField(max_length=25)
+    langitude = models.FloatField(max_length=25)
+    userid = models.ForeignKey(User_detail,on_delete=models.CASCADE)

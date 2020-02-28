@@ -20,7 +20,11 @@ class UserShortedView(ListView):
     context_object_name = 'users' 
     paginate_by = 10
     def get_queryset(self):
-        order_by = self.request.GET.get('id') or 'lattitude'
+        l=['address','description','end_date','langitude', 'lattitude', 'no_of_spot', 'price_per_hour', 'start_date']
+        if self.request.GET.get('id') in l:
+            order_by = self.request.GET.get('id') or 'lattitude'
+        else:
+            order_by = 'lattitude'
         qs = super(UserShortedView, self).get_queryset()
         return qs.order_by(order_by)
 

@@ -57,25 +57,25 @@
     document.location.href = '/admin_role/sortLand/?id='+ id;
   }
 </script>
-<div class="center">
+<div  style="margin-left: 40%;">
   {% if is_paginated %}
   <ul class="pagination">
     {% if page_obj.has_previous %}
-      <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+      <li style="padding: 18px;font-size: 18px;"><a href="?page={{ page_obj.previous_page_number }}"><span style="font-size: 20px;">&laquo;</span></a></li>
     {% else %}
-      <li class="disabled"><span>&laquo;</span></li>
+      <li class="disabled" style="padding: 18px;"><span style="font-size: 20px;">&laquo;</span></li>
     {% endif %}
     {% for i in paginator.page_range %}
       {% if page_obj.number == i %}
-        <li class="active btn btn-success"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        <li class="active btn btn-success"><span><h3>{{ i }} </h3><span class="sr-only">(current)</span></span></li>
       {% else %}
-        <li><a href="?page={{ i }}">{{ i }}</a></li>
+        <li class="btn" style="padding: 15px;color: black;font-size: 10px;"><a href="?page={{ i }}"><h3>{{ i }}</h3></a></li>
       {% endif %}
     {% endfor %}
     {% if page_obj.has_next %}
-      <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+      <li style="padding: 18px;font-size: 8px;"><a href="?page={{ page_obj.next_page_number }}"><span style="font-size: 20px;">&raquo;</span></a></li>
     {% else %}
-      <li class="disabled"><span>&raquo;</span></li>
+      <li class="disabled" style="padding: 18px;"><span style="font-size: 20px;">&raquo;</span></li>
     {% endif %}
   </ul>
 {% endif %}
