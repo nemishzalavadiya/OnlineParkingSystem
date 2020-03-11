@@ -20,12 +20,14 @@ from django.conf import settings
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
-urlpatterns = [
+urlpatterns=[]
+if settings.DEBUG:
+    urlpatterns = staticfiles_urlpatterns()
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += [
     path('admin/', admin.site.urls),
     url('User/', include("User.urls")),   
     url('Landlord/', include("Landlord.urls")),
     url('admin_role/', include("admin_role.urls")),  
     url(r'', include("User.urls")), 
 ]
-urlpatterns += staticfiles_urlpatterns()
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

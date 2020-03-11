@@ -51,7 +51,9 @@
 			<th style="width: 250px;text-align:center">Image</th>
         </tr>
         {% for land in page_obj %}
+       
         <form action="/User/reserveparking/" method="POST">
+
         {% csrf_token%}
             <tr>
                 <td>{{land.address}}</td>
@@ -62,10 +64,9 @@
                 <td>{{land.description}}</td>
                 <td>{{land.price_per_hour}}</td>
                 <td>{{land.distance}}</td>
-                
                 <td><a href="http://maps.google.com/?q={{land.lattitude}},{{land.langitude}}" target="_blank" class="btn btn-success">Map</a></td>
                 <td><input type="submit" value="Reserve"class="btn btn-success"></input></td>
-                <td colspan="2"><img style="width: 200px;height: 200px;" src="/media/{{land.image.url}}" alt="Land Picture"> </td>
+                <td colspan="2"><img style="width: 200px;height: 200px;" src="/media/{{land.image}}" alt="Land Picture"> </td>
 				<td>
                     <input type="hidden" name="landid" value="{{ land.landid }}">
                     <input type="hidden" name="date" value="{{ Date }}">
