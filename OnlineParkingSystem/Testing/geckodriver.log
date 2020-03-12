@@ -300,8 +300,6 @@ JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't fin
 1583947482121	Marionette	INFO	Stopped listening on port 54229
 1583947482122	Marionette	DEBUG	Marionette stopped listening
 
-###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
-
-
-###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+###!!! [Child][RunMessage] Error: Channel closing: too late to send1583951164632	Marionette	INFO	Stopped listening on port 54293
+::SendAndWait] Error: Channel error: cannot send/recv
 
