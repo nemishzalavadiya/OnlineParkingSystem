@@ -295,7 +295,8 @@ def addLocation(request):
     location.userid=User_detail.objects.get(userid=userid)
     location.save()
     return render(request,'index.html',{'title':'Location Done','login':'True','role':'User'})
-
+    
+@myuser_login_required
 def advanceReservation(request):
     if request.method=='POST':
         place=request.POST.get('place')
