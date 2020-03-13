@@ -185,7 +185,7 @@ def showLand(request,dateOf):
                 count = Land_record.objects.filter(landid=land['landid'],start_date=date).count()
                 if land['no_of_spot'] > count:
                     nlands.append(land.copy()) 
-            nlands = list(filter(lambda i: i['distance'] < 100, nlands)) 
+            nlands = list(filter(lambda i: i['distance'] < 10000, nlands)) 
             nlands=sorted(nlands, key = lambda i: i['distance'])
             return nlands,date
 
