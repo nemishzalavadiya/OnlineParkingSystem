@@ -11,6 +11,7 @@ class RegistrationForm(ModelForm):
             'age': forms.NumberInput(attrs={
                 "class":"input100",
                 "id":"age",
+                "min":"18",
                 "placeholder":"Age"
             }),
             'name': forms.TextInput(attrs={

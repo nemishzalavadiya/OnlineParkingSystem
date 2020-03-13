@@ -15,7 +15,7 @@ from User.views import myuser_login_required
 # Create your views here.
 
 
-#@myuser_login_required       
+@myuser_login_required       
 def AddLandDetail(request):
     if request.method == 'POST' :
         form = AddLandForm(request.POST,request.FILES)

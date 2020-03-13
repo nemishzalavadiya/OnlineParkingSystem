@@ -243,7 +243,7 @@ def Home(request):
     except:
         loginDone="False"
         request.session['role']='User'
-    return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.session.get('role')})
+    return render(request,'index.html',{'title':'Car Parking Space Reservation','login':loginDone,'role':request.session.get('role')})
 
 @myuser_login_required
 def ShowUserHistory(request):
@@ -295,7 +295,8 @@ def addLocation(request):
     location.userid=User_detail.objects.get(userid=userid)
     location.save()
     return render(request,'index.html',{'title':'Location Done','login':'True','role':'User'})
-
+    
+@myuser_login_required
 def advanceReservation(request):
     if request.method=='POST':
         place=request.POST.get('place')
@@ -378,4 +379,4 @@ def advanceReservation(request):
         listitem=set()
         for i in listLocation:
             listitem.add(i.name)
-        return render(request,'advanceSearch.html',{'data':'False','places':listitem})
+        return render(request,'advanceSearch.html',{'data':'False','places':listitem,'login':'True','role':request.session.get('role')})

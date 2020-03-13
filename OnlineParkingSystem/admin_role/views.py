@@ -10,7 +10,7 @@ class UserListView(ListView):
     model = Land_detail
     template_name = 'list.html' 
     context_object_name = 'users' 
-    paginate_by = 10
+    paginate_by = 5
     queryset = Land_detail.objects.all().order_by('no_of_spot')
     
 class UserShortedView(ListView):

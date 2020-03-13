@@ -200,9 +200,8 @@ border-radius: 4px;
                                  {% if role == "Landlord" %}
                                  
                                                  <ul>
-                                                     <li><a href="{% url 'landlist' %}">Show Land </a></li>
-                                                     <li><a href="{% url 'addlanddetail' %}">Add Land</a></li>
-                                                     <li><a href="{% url 'addlanddetail' %}">Edit Land</a></li>
+                                                    <li><a href="{% url 'landlist' %}">Land Details</a></li>
+                                                    <li><a href="{% url 'addlanddetail' %}">Add Land</a></li>
                                                  </ul>
                                              </div>
                                          </div>
@@ -289,7 +288,7 @@ border-radius: 4px;
                      <div class="col-lg-4">
                          <div class="top-right">
                              <div class="language-option">
-                                 <a class="property-sub" href="{% url 'LogoutHere' %}">Logout</a>
+                                 <a class="property-sub" style="border-radius: 10px;margin-right: -30px;padding: 15px;" href="{% url 'LogoutHere' %}">Logout</a>
                              </div>
                              
                          </div>
