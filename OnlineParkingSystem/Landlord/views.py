@@ -54,7 +54,7 @@ def EditLandDetail(request):
         form = AddLandForm(request.POST,instance=mydetail)
         if form.is_valid():
             form.save()
-            return render(request, 'EditLandDetail.html',{'title':'Edit Land Detail','form' : form,'login':'True','role':request.session['role']})
+            return render(request, 'EditLandDetail.html',{'title':'Edit Land Detail','message1':'Edit land detail successfully','form' : form,'login':'True','role':request.session['role']})
         else:
             return render(request, 'EditLandDetail.html',{'title':'Edit Land Detail','message':'Edit fail','form' : form,'login':'True','role':request.session['role']})
     else:

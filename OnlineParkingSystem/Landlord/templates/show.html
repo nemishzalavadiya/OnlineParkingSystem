@@ -9,7 +9,7 @@
        
 
 
-<div class="card mb-3" style="width:90%;margin:0 auto;float:none;background-color:pink;">
+<div class="card mb-3" style="width:90%;margin:0 auto;float:none;background-color:#acecea;">
   <div class="row no-gutters">
     <div class="col-md-4">
 	  <img class="card-img" style="width:100%;height:100%;" src="{{i.image.url}}" alt="Card image">
@@ -21,7 +21,7 @@
 				<p style="color:black;font-size:20px;">Area : {{i.area}}</p>
                 <p style="color:black;font-size:20px;">Price : {{i.price_per_hour}}</p>
                 <p style="color:black;font-size:20px;">Spots : {{i.no_of_spot}}</p>
-                <p style="color:black;font-size:20px;">Verified : {{i.verified}}</p>
+                <p style="color:black;font-size:20px;">Verified : {% if not i.verified %}Yes{% endif%} {% if i.verified %}Not verified{% endif%}</p>
                 <p style="color:black;font-size:20px;">Date : {{i.start_date}} to {{i.end_date}}</p>
                 <p style="color:black;font-size:20px;">Description : {{i.description}}</p>
 				<br/>

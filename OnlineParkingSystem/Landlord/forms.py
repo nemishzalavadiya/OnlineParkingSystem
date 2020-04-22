@@ -1,5 +1,6 @@
 from django.forms import ModelForm , Textarea
 from django import forms
+import datetime
 from User.models import User_detail
 from .models import Land_detail
 
@@ -91,11 +92,15 @@ class AddLandForm(ModelForm):
                 "type":"Date",
                 "class":"form-control",
                 "id":"start_date",
+                "min":datetime.date.today().isoformat(),
+                "max":(datetime.date.today() + datetime.timedelta(3*365/12)).isoformat(),
             }),
             'end_date': forms.DateInput(attrs={
                 "type":"Date",
                 "class":"form-control",
                 "id":"end_date",
+                "min":datetime.date.today().isoformat(),
+                "max":(datetime.date.today() + datetime.timedelta(3*365/12)).isoformat(),
             }),
             'langitude': forms.HiddenInput(attrs={
                 "id":"langitude",
