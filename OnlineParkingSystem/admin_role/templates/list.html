@@ -2,12 +2,10 @@
 
 {% block content %}
 <div style="align-items:center;"><h3 class="card-panel fray bg-primary" style="margin: 30px;padding: 10px 20px;text-align: center;align-items: center;"> Approval Needed</h3></div>
-	<div style="overflow-x:auto;">
-        <table class="table table-striped centered">
+	<div style="overflow-x:auto;margin-left: 30px;margin-right: 30px;">
+        <table class="table table-striped centered" >
 		<thead>
      <tr class="table-primary">
-      <th class="card-panel teal" onclick="approve('lattitude')" style="cursor: grab;">Latitude</th>
-      <th class="card-panel teal" onclick="approve('langitude')" style="cursor: grab;">Longitude</th>
       <th class="card-panel teal" onclick="approve('address')" style="cursor: grab;">Address</th>
       <th class="card-panel teal" onclick="approve('no_of_spot')" style="cursor: grab;">No Of Spots</th>
       <th class="card-panel teal" onclick="approve('description')" style="cursor: grab;">Description</th>
@@ -26,8 +24,6 @@
       {% csrf_token %}
       <tr>
         <input type="hidden" name="landid" value="{{ user.landid }}">
-        <td>{{ user.lattitude }}</td>
-        <td>{{ user.langitude }}</td>
         <td>{{ user.address }}</td>
         <td>{{ user.no_of_spot }}</td>
         <td>{{ user.description }}</td>
