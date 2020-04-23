@@ -286,8 +286,8 @@ def feedback(request):
 
 @myuser_login_required
 def addLocation(request):
-    lat=request.POST.get('langitude')
-    lon=request.POST.get('lattitude')
+    lat=request.POST.get('lattitude')
+    lon=request.POST.get('langitude')
     name=request.POST.get('location_name')
     userid=request.session['uid']
     location= User_Location()
@@ -336,7 +336,7 @@ def advanceReservation(request):
         listitem=set()
         for i in listLocation:
             listitem.add(i.name)
-        return render(request,'advanceSearch.html',{'place':place,'title':'Reserve your favorite space','places':listitem,'data':'True','login':'True','role':request.session.get('role'),'page_obj': users ,'Date' : date})
+        return render(request,'advanceSearch.html',{'place':place,'title':'Reserve your favorite space','places':listitem,'data':'True','tdate': datetime.date.today().isoformat(),'login':'True','role':request.session.get('role'),'page_obj': users ,'Date' : date})
 
     else:
         if request.GET.get('place')!=None and request.GET.get('date')!=None:
@@ -375,10 +375,10 @@ def advanceReservation(request):
             listitem=set()
             for i in listLocation:
                 listitem.add(i.name)
-            return render(request,'advanceSearch.html',{'place':place,'title':'Reserve your favorite space','places':listitem,'data':'True','login':'True','role':request.session.get('role'),'page_obj': users ,'Date' : date})
+            return render(request,'advanceSearch.html',{'place':place,'title':'Reserve your favorite space','places':listitem,'data':'True','login':'True','role':request.session.get('role'),'page_obj': users ,'Date' : date,'tdate': datetime.date.today().isoformat()})
         userid=request.session['uid']
         listLocation = User_Location.objects.filter(userid=userid)
         listitem=set()
         for i in listLocation:
             listitem.add(i.name)
-        return render(request,'advanceSearch.html',{'data':'False','places':listitem,'login':'True','role':request.session.get('role')})
+        return render(request,'advanceSearch.html',{'data':'False','places':listitem,'login':'True','title':'Reserve your favorite space','role':request.session.get('role'),'tdate': datetime.date.today().isoformat()})

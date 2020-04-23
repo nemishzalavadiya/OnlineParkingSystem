@@ -62,9 +62,9 @@
                         {% csrf_token%}
                             <div class="first-row" style="text-align:center">
                                 Location Name :<input  placeholder="Give Name" style="margin-left: 12px;margin-right: 20px;padding-left: 15px;padding-right: 5px;border-radius:5px;background-color: cornflowerblue;height:35px;" type="text" name="location_name" required>
-                                 <input type="checkbox" id="ckb1"  style="margin-left: 12px;" onclick="getLocation()" required> <span style="margin-right: 20px;color:black">Enable Location</span>
-                                 <input type="hidden" id="langitude" name="langitude">
-                                    <input type="hidden" id="lattitude" name="lattitude">
+                                 <input type="checkbox" id="ckb2"  style="margin-left: 12px;" onclick="getLocation()" required> <span style="margin-right: 20px;color:black">Enable Location</span>
+                                 <input type="hidden" name="langitude" id="langitude1">
+                                 <input type="hidden" name="lattitude" id="lattitude1">                               
                                 <button type="submit" class="btn btn-primary" style="background: #2cbdb8;">Add Location</button>
                             </div>
                         </form>
@@ -111,6 +111,8 @@
     <script>
         var langitude = document.getElementById("langitude");
         var lattitude = document.getElementById("lattitude");
+        var langitude1 = document.getElementById("langitude1");
+        var lattitude1 = document.getElementById("lattitude1");
         function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
@@ -125,6 +127,8 @@
         function showPosition(position) {
             lattitude.value = position.coords.latitude;
             langitude.value = position.coords.longitude;
+            lattitude1.value = position.coords.latitude;
+            langitude1.value = position.coords.longitude;
         }
     </script>
     <section class="agent-section spad">

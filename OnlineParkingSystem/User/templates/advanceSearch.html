@@ -23,15 +23,26 @@
                 </div>
                 <form action="/User/search/" method="POST" class="filter-form">
                    {% csrf_token%}
-                    <div class="first-row" style="text-align:center">
-                        Pick Place : <select name="place" required>
-                                        {% for place in places %}
-                                        <option value="{{place}}">{{place}}</option>
-                                        {% endfor %}
-                                    </select><br/>
-                                    Pick Date : <input  placeholder="select date" type="date" style="margin-left: 9px;padding-left: 15px;padding-right: 5px;border-radius:25px;background-color: cornflowerblue;" name="date" required>
-
-                        <button type="submit" class="btn btn-primary" style="background: #2cbdb8;">Search</button>
+                    <div class="first-row row" style="text-align:center">
+                      <div class="col-md-2 pt-2">
+                          Pick Place :
+                      </div>
+                      <div class="col-md-3">
+                      <select name="place" required>
+                          {% for place in places %}
+                            <option value="{{place}}">{{place}}</option>
+                          {% endfor %}
+                        </select><br/>
+                      </div>
+                      <div class="col-md-2 pt-2">
+                        Pick Date :
+                      </div>
+                      <div class="col-md-3 pt-2">
+                        <input  placeholder="select date" type="date" style="margin-left: 12px;margin-right: 20px;padding-left: 15px;padding-right: 5px;border-radius:5px;background-color: cornflowerblue;height:35px;" name="date" min="{{tdate}}" required>
+                      </div>
+                      <div class="col-md-2 pt-2">
+                          <button type="submit" class="btn btn-primary" style="background: #2cbdb8;">Search</button>
+                      </div>
                     </div>
                 </form>
             </div>
