@@ -26,48 +26,53 @@
             </div>
         </div>
     </section>
-    <div  class="search-form">
-        <div class="container">
-            <div id="1" class="row" style="margin-bottom: 15px;">
-                <div class="col-lg-12">
-                    <div class="search-form-text">
-                        <div class="search-text">
-                            <i class="fa fa-search"></i>
-                            Find Your Parking Space
+    {% if role == "User" %}
+        <div  class="search-form">
+            <div class="container">
+                <div id="1" class="row" style="margin-bottom: 15px;">
+                    <div class="col-lg-12">
+                        <div class="search-form-text">
+                            <div class="search-text">
+                                <i class="fa fa-search"></i>
+                                Find Your Parking Space
+                            </div>
                         </div>
+                        <form action="/User/showlanddetails/" method="GET" class="filter-form">
+                        {% csrf_token%}
+                            <div class="first-row" style="text-align:center">
+                                Pick Date : <input  placeholder="select date" type="date" style="margin-left: 12px;margin-right: 20px;padding-left: 15px;padding-right: 5px;border-radius:5px;background-color: cornflowerblue;height:35px;" name="rdate" min="{{tdate}}" required>
+                                <input type="checkbox" id="ckb1"  style="margin-left: 12px;" onclick="getLocation()" required> <span style="margin-right: 20px;color:black">Enable Location</span>
+                                <input type="hidden" name="langitude" id="langitude">
+                                <input type="hidden" name="lattitude" id="lattitude">
+                                <button type="submit" class="btn btn-primary" style="background: #2cbdb8;">Search</button>
+                            </div>
+                        </form>
                     </div>
-                    <form action="/User/showlanddetails/" method="GET" class="filter-form">
-                       {% csrf_token%}
-                        <div class="first-row" style="text-align:center">
-                            Pick Date : <input  placeholder="select date" type="date" style="margin-left: 9px;padding-left: 15px;padding-right: 5px;border-radius:25px;background-color: cornflowerblue;" name="rdate" required>
-                            <button type="submit" class="btn btn-primary" style="background: #2cbdb8;">Search</button>
-                        </div>
-                    </form>
                 </div>
-            </div>
-            <div id="2" class="row" style="margin-bottom: 15px;">
-                <div class="col-lg-12">
-                    <div class="search-form-text">
-                        <div class="search-text">
-                            <i class="fa fa-search"></i>
-                            Add Locations In Advance
+                
+                <div id="2" class="row" style="margin-bottom: 15px;">
+                    <div class="col-lg-12">
+                        <div class="search-form-text">
+                            <div class="search-text">
+                                <i class="fa fa-search"></i>
+                                Add Locations In Advance
+                            </div>
                         </div>
+                        <form action="/User/addLocation/" method="POST" class="filter-form">
+                        {% csrf_token%}
+                            <div class="first-row" style="text-align:center">
+                                Location Name :<input  placeholder="Give Name" style="margin-left: 12px;margin-right: 20px;padding-left: 15px;padding-right: 5px;border-radius:5px;background-color: cornflowerblue;height:35px;" type="text" name="location_name" required>
+                                 <input type="checkbox" id="ckb2"  style="margin-left: 12px;" onclick="getLocation()" required> <span style="margin-right: 20px;color:black">Enable Location</span>
+                                 <input type="hidden" name="langitude" id="langitude1">
+                                 <input type="hidden" name="lattitude" id="lattitude1">                               
+                                <button type="submit" class="btn btn-primary" style="background: #2cbdb8;">Add Location</button>
+                            </div>
+                        </form>
                     </div>
-                    <form action="/User/addLocation/" method="POST" class="filter-form">
-                       {% csrf_token%}
-                        <div class="first-row" style="text-align:center">
-                            Location Name :<input  placeholder="Give Name" style="margin-left: 9px;padding-left: 15px;padding-right: 5px;border-radius:25px;background-color:cornflowerblue;" type="text" name="location_name" required>
-                            <input type="checkbox" id="ckb1" onclick="getLocation()" required> <span style="color:black">Enable Location</span>
-                                <input type="hidden" id="langitude" name="langitude">
-                                <input type="hidden" id="lattitude" name="lattitude">
-                            <button type="submit" class="btn btn-primary" style="background: #2cbdb8;">Add Location</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
-    </div>
-    
+    {% endif %}
     <section class="howit-works spad">
         <div class="container">
             <div class="row">
@@ -106,12 +111,14 @@
     <script>
         var langitude = document.getElementById("langitude");
         var lattitude = document.getElementById("lattitude");
+        var langitude1 = document.getElementById("langitude1");
+        var lattitude1 = document.getElementById("lattitude1");
         function getLocation() {
-          if (navigator.geolocation) {
+        if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
-          } else { 
+        } else { 
             x.innerHTML = "Geolocation is not supported by this browser.";
-          }
+        }
         }
         function getAvailablity() {
             var x=document.getElementById("no_of_spot").value;
@@ -120,8 +127,10 @@
         function showPosition(position) {
             lattitude.value = position.coords.latitude;
             langitude.value = position.coords.longitude;
+            lattitude1.value = position.coords.latitude;
+            langitude1.value = position.coords.longitude;
         }
-        </script>
+    </script>
     <section class="agent-section spad">
         <div class="container">
             <div class="row">

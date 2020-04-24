@@ -65,7 +65,7 @@ def Login(request):
             request.session['role']=request.POST.get('role')
             if request.POST.get('date')!=None:
                return ShowLandDetails(request)
-            return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.POST.get('role')})
+            return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.POST.get('role'),'tdate': datetime.date.today().isoformat()})
         else:
             return render(request, 'Login.html',{'title':'Login Page','message':'Invalid email or password!!!','role':request.POST.get('role'),'form' : form})
     else:
@@ -135,7 +135,7 @@ def Registration(request):
             c = {}
             c.update(csrf(request))
             form = LoginForm()
-            return render(request, 'Login.html',{'title':'Login Page','role':request.POST.get('role'),'message':'Registration Successful','form' : form})
+            return render(request, 'Login.html',{'title':'Login Page','role':request.POST.get('role'),'message1':'Registration Successful','form' : form})
         else:
             return render(request, 'Registration.html',{'title':'Registration Page','role':request.POST.get('role'),'message':'Registration Failed','form' : form})
     else:
@@ -152,7 +152,7 @@ def EditProfile(request):
         form = EditProfileForm(request.POST,instance=mydetail)
         if form.is_valid():
             form.save()
-            return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.session.get('role')})
+            return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.session.get('role'),'tdate': datetime.date.today().isoformat()})
         else:
             return render(request, 'EditProfile.html',{'title':'Edit User Detail','login':'True','role':request.session.get('role'),'message':'Edit fail','form' : form})
     else:
@@ -163,11 +163,12 @@ def EditProfile(request):
         form = EditProfileForm(instance=mydetail)
         return render(request, 'EditProfile.html',{'title':'Edit User Detail','login':'True','role':request.session.get('role'),'form' : form, 'userid' : userid})
 
-def showLand(request,dateOf):
+
+def showLand(request,dateOf,lag2,lat2):
     if request.method == 'GET':
             c = {}
             c.update(csrf(request))
-            date = dateOf
+            date = dateOf 
             request.session['date']=date
             landobj = Land_detail.objects.filter(start_date__lte=date,end_date__gte=date,verified=0)
             lands=list(landobj.values())
@@ -175,8 +176,6 @@ def showLand(request,dateOf):
             for land in lands:
                 lat1=land['lattitude']
                 lag1=land['langitude']
-                g = geocoder.ip(get_client_ip(request))
-                lat2,lag2 = g.latlng
                 landloc = (lat1,lag1)
                 current = (lat2,lag2)
                 d=distance.distance(landloc,current).km
@@ -187,13 +186,14 @@ def showLand(request,dateOf):
                     nlands.append(land.copy()) 
             nlands = list(filter(lambda i: i['distance'] < 10000, nlands)) 
             nlands=sorted(nlands, key = lambda i: i['distance'])
+            
             return nlands,date
 
 
 @myuser_login_required
 def ShowLandDetails(request):
     try:
-        nlands,date = showLand(request,request.GET.get('rdate'))
+        nlands,date = showLand(request,request.GET.get('rdate'),request.GET.get('langitude'),request.GET.get('lattitude'))
         paginator = Paginator(nlands, 5)
         page =  request.GET.get('page',1) 
         try:
@@ -204,8 +204,10 @@ def ShowLandDetails(request):
             users = paginator.page(paginator.num_pages)
         return render(request, 'LandDetails.html',{'title':'Reserve your favorite space','login':'True','role':request.session.get('role'),'page_obj': users ,'Date' : date})
     except :
-        return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.session.get('role')})
+        return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.session.get('role'),'tdate': datetime.date.today().isoformat()})
 
+
+@myuser_login_required
 def ReserveParking(request):
     c = {}
     c.update(csrf(request))
@@ -231,9 +233,9 @@ def ReserveParking(request):
         from_email = settings.EMAIL_HOST_USER
         to_list = [request.session['email']]
         send_mail(subject, message, from_email, to_list, fail_silently=False)
-        return render(request, 'index.html',{'title':'Land Reserved','login':'True','role':request.session.get('role'),'message': "successful reserve"})
+        return render(request, 'index.html',{'title':'Land Reserved','login':'True','role':request.session.get('role'),'message': "successful reserve",'tdate': datetime.date.today().isoformat()})
     except:
-       return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.session.get('role')})
+       return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.session.get('role'),'tdate': datetime.date.today().isoformat()})
 
 def Home(request):
     loginDone="False"
@@ -243,7 +245,7 @@ def Home(request):
     except:
         loginDone="False"
         request.session['role']='User'
-    return render(request,'index.html',{'title':'Car Parking Space Reservation','login':loginDone,'role':request.session.get('role')})
+    return render(request,'index.html',{'title':'Car Parking Space Reservation','login':loginDone,'role':request.session.get('role'),'tdate': datetime.date.today().isoformat() })
 
 @myuser_login_required
 def ShowUserHistory(request):
@@ -265,7 +267,7 @@ def LogoutHere(request):
         del request.session['email']
         del request.session['role']
         loginDone="False"
-        return render(request,'index.html',{'title':'Car Parking Space Reservation','login':loginDone,'role':'User'})
+        return render(request,'index.html',{'title':'Car Parking Space Reservation','login':loginDone,'role':'User','tdate': datetime.date.today().isoformat()})
 
     except:
         c = {}
@@ -284,8 +286,8 @@ def feedback(request):
 
 @myuser_login_required
 def addLocation(request):
-    lat=request.POST.get('langitude')
-    lon=request.POST.get('lattitude')
+    lat=request.POST.get('lattitude')
+    lon=request.POST.get('langitude')
     name=request.POST.get('location_name')
     userid=request.session['uid']
     location= User_Location()
@@ -294,7 +296,7 @@ def addLocation(request):
     location.langitude=lon
     location.userid=User_detail.objects.get(userid=userid)
     location.save()
-    return render(request,'index.html',{'title':'Location Done','login':'True','role':'User'})
+    return render(request,'index.html',{'title':'Location Done','login':'True','role':'User','tdate': datetime.date.today().isoformat()})
     
 @myuser_login_required
 def advanceReservation(request):
@@ -334,7 +336,7 @@ def advanceReservation(request):
         listitem=set()
         for i in listLocation:
             listitem.add(i.name)
-        return render(request,'advanceSearch.html',{'place':place,'title':'Reserve your favorite space','places':listitem,'data':'True','login':'True','role':request.session.get('role'),'page_obj': users ,'Date' : date})
+        return render(request,'advanceSearch.html',{'place':place,'title':'Reserve your favorite space','places':listitem,'data':'True','tdate': datetime.date.today().isoformat(),'login':'True','role':request.session.get('role'),'page_obj': users ,'Date' : date})
 
     else:
         if request.GET.get('place')!=None and request.GET.get('date')!=None:
@@ -373,10 +375,10 @@ def advanceReservation(request):
             listitem=set()
             for i in listLocation:
                 listitem.add(i.name)
-            return render(request,'advanceSearch.html',{'place':place,'title':'Reserve your favorite space','places':listitem,'data':'True','login':'True','role':request.session.get('role'),'page_obj': users ,'Date' : date})
+            return render(request,'advanceSearch.html',{'place':place,'title':'Reserve your favorite space','places':listitem,'data':'True','login':'True','role':request.session.get('role'),'page_obj': users ,'Date' : date,'tdate': datetime.date.today().isoformat()})
         userid=request.session['uid']
         listLocation = User_Location.objects.filter(userid=userid)
         listitem=set()
         for i in listLocation:
             listitem.add(i.name)
-        return render(request,'advanceSearch.html',{'data':'False','places':listitem,'login':'True','role':request.session.get('role')})
+        return render(request,'advanceSearch.html',{'data':'False','places':listitem,'login':'True','title':'Reserve your favorite space','role':request.session.get('role'),'tdate': datetime.date.today().isoformat()})
