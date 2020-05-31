@@ -158,7 +158,7 @@ def EditProfile(request):
     else:
         c = {}
         c.update(csrf(request))
-        userid = 1
+        userid = request.session['uid']
         mydetail = User_detail.objects.get(userid=userid)
         form = EditProfileForm(instance=mydetail)
         return render(request, 'EditProfile.html',{'title':'Edit User Detail','login':'True','role':request.session.get('role'),'form' : form, 'userid' : userid})
