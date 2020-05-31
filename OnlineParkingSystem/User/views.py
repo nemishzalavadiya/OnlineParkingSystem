@@ -150,7 +150,6 @@ def EditProfile(request):
         userid = request.POST.get('userid')
         mydetail = User_detail.objects.get(userid=userid)
         form = EditProfileForm(request.POST,instance=mydetail)
-        print(userid)
         if form.is_valid():
             form.save()
             return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.session.get('role'),'tdate': datetime.date.today().isoformat()})
