@@ -150,6 +150,7 @@ def EditProfile(request):
         userid = request.POST.get('userid')
         mydetail = User_detail.objects.get(userid=userid)
         form = EditProfileForm(request.POST,instance=mydetail)
+        print(userid)
         if form.is_valid():
             form.save()
             return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.session.get('role'),'tdate': datetime.date.today().isoformat()})
@@ -158,7 +159,7 @@ def EditProfile(request):
     else:
         c = {}
         c.update(csrf(request))
-        userid = 1
+        userid = request.session['uid']
         mydetail = User_detail.objects.get(userid=userid)
         form = EditProfileForm(instance=mydetail)
         return render(request, 'EditProfile.html',{'title':'Edit User Detail','login':'True','role':request.session.get('role'),'form' : form, 'userid' : userid})
