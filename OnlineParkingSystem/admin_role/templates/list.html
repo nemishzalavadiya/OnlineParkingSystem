@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<script>
+
+</script>
 <div style="align-items:center;"><h3 class="card-panel fray bg-primary" style="margin: 30px;padding: 10px 20px;text-align: center;align-items: center;"> Approval Needed</h3></div>
 	<div style="overflow-x:auto;margin-left: 30px;margin-right: 30px;">
         <table class="table table-striped centered" >
@@ -35,8 +38,12 @@
       </tr>
      </form>
     {% endfor %}
+
   </tbody>
 </table>
+        {% if not users %}
+            <div style="text-align:center;font-family:Christmas;margin:40px;" ><h3>Nothing to show</h3></div>
+        {% endif %}
 </div>
 <script>
   
@@ -48,7 +55,6 @@
     var url = "{% url 'UserShortedView' %}";
     console.log("url : "+url);
     var id = $this;
-    console.log(url + "/" + id);
  
     document.location.href = '/admin_role/sortLand/?id='+ id;
   }
@@ -78,5 +84,66 @@
 </div>
 </div>
 <div style="text-align:center;margin-top: 20px;">
-<a href="{% url 'Home' %}"><button class="btn btn-primary" style="margin-bottom:3%">Home</button></a></div>
+<div class="row">
+    <div class="col-md-6">
+    <a href="{% url 'Home' %}"><button class="btn btn-primary" style="margin-bottom:3%">Home</button></a>
+    </div>
+    <div class="col-md-6">
+        <select id="mySelect">
+            <option value="{% url 'getHistdata' %}">Users History</option>
+            <option value="{% url 'getScatterdata' %}">Landloads Payment History</option>
+        </select>
+    <button id="myBtn" class="btn btn-success" >Visualize</button>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+
+      <h2 style="margin-left:27%;">Graphical Representation</h2>
+        <span class="close">&times;</span>
+    </div>
+    <div class="modal-body">
+        <img src="{% url 'getScatterdata' %}" id="visual" alt="Data Will Be Available Here">
+    </div>
+    <div class="modal-footer">
+      <h3>Modal Footer</h3>
+    </div>
+  </div>
+
+</div>
+        <script>
+            // Get the modal
+            var modal = document.getElementById("myModal");
+
+            // Get the button that opens the modal
+            var btn = document.getElementById("myBtn");
+            var select = document.getElementById("mySelect");
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // When the user clicks the button, open the modal
+            btn.onclick = function() {
+              var option = select.options[select.selectedIndex];
+              console.log(option.value)
+              document.getElementById("visual").src=option.value;
+              modal.style.display = "block";
+            }
+
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+              modal.style.display = "none";
+            }
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+              if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            }
+        </script>
 {% endblock %}
