@@ -29,5 +29,5 @@ urlpatterns += [
     url('User/', include("User.urls")),   
     url('Landlord/', include("Landlord.urls")),
     url('admin_role/', include("admin_role.urls")),  
-    url(r'', include("User.urls")), 
+    url(r'', include("User.urls")),
 ]

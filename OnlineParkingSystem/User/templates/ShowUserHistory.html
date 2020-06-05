@@ -69,7 +69,7 @@ $('.success-box div.text-message').html("<span>" + msg + "</span>");
             <th>Landlord Age</th>
             <th>FeedBack</th>
         </tr>
-        
+
         {% for land in LandRecord %}
             <tr>
                 <td>{{land.start_date}}</td>
@@ -117,7 +117,10 @@ $('.success-box div.text-message').html("<span>" + msg + "</span>");
             </tr>
         {% endfor %}
         </table>
-		</div>
+        {% if not LandRecord %}
+            <div style="text-align:center;font-family:Christmas;margin:40px;" ><h3>Nothing to show</h3></div>
+        {% endif %}
+    </div>
 	<script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
 
 	<script src="/static/vendor/bootstrap/js/popper.js"></script>

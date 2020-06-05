@@ -31,7 +31,10 @@
   font-family: Poppins-SemiBold;
   src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
 }
-
+@font-face {
+  font-family: Christmas;
+  src: url('../fonts/Cristmas/Christmas-Snow.ttf');
+}
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
 
