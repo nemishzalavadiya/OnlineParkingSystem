@@ -47,12 +47,11 @@ class RegistrationForm(ModelForm):
             msg = "Mobile Number must be valid."
             self.add_error('mobile_no', msg)
         if age == None or int(age) <18 :
-            msg = "Age must be valid."
+            msg = "Age must grater than or equal to 18"
             self.add_error('age', msg)
         if re.match(r'[A-Za-z0-9@#$%^&+=]{8,}',password) == None:
             msg = "Password must be valid(length is atleast 8)."
             self.add_error('password', msg)
-        
 
 class LoginForm(ModelForm):
     class Meta:

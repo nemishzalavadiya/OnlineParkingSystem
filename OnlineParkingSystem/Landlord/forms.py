@@ -3,7 +3,7 @@ from django import forms
 import datetime
 from User.models import User_detail
 from .models import Land_detail
-
+from datetime import timedelta
 
 class RegistrationForm(ModelForm):
     class Meta:
@@ -91,12 +91,16 @@ class AddLandForm(ModelForm):
             'start_date': forms.DateInput(attrs={
                 "type":"Date",
                 "class":"form-control",
-                "id":"start_date"
+                "id":"start_date",
+                "min":datetime.date.today(),
+                "max":datetime.date.today()+timedelta(days=30),
             }),
             'end_date': forms.DateInput(attrs={
                 "type":"Date",
                 "class":"form-control",
-                "id":"end_date"
+                "id":"end_date",
+                "min": datetime.date.today(),
+                "max": datetime.date.today() + timedelta(days=120),
             }),
             'langitude': forms.HiddenInput(attrs={
                 "id":"langitude",

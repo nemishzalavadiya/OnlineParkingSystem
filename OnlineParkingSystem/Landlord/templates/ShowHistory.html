@@ -21,6 +21,9 @@
             </tr>
         {% endfor %}
         </table>
+        {% if not LandRecord %}
+            <div style="text-align:center;font-family:Christmas;margin:40px;" ><h3>Not Used Yet</h3></div>
+        {% endif %}
 	<script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
 
 	<script src="/static/vendor/bootstrap/js/popper.js"></script>
