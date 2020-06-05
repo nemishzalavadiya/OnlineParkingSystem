@@ -510,7 +510,7 @@ iframe {
 }
 
 .true-validate::after {
-  content: "\f26b";
+  content: "\2713";
   font-family: Material-Design-Iconic-Font;
   font-size: 22px;
   color: #00ad5f;

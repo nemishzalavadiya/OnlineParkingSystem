@@ -1,5 +1,3 @@
-from django.db import models
-
 # Create your models here.
 from django.db import models
 from django.core.exceptions import ValidationError
@@ -15,11 +13,6 @@ class User_detail(models.Model):
     role = models.CharField(max_length=10)
     otp = models.IntegerField(null=True)
     face = models.CharField(max_length=10000,null=True)
-
-    def clean_fields(self, exclude=None):
-        super().clean_fields(exclude=exclude)
-        if self.age != None and self.age < 18:
-            raise ValidationError(_('Age must be greater than 17'), code='Invalid')
 
 class User_Location(models.Model):
     Locationid = models.AutoField(primary_key=True)
