@@ -129,3 +129,52 @@ class AddLandForm(ModelForm):
                 "placeholder":"image"
             }),
         }
+
+
+class EditLandForm(ModelForm):
+    class Meta:
+        model=Land_detail
+        fields=('image','city','area','state','address','no_of_spot','description','price_per_hour')
+        widgets = {
+            'address': forms.TextInput(attrs={
+                "class":"form-control",
+                "id":"address",
+                "placeholder":"Enter Your Address"
+            }),
+            'no_of_spot': forms.NumberInput(attrs={
+                "class":"form-control",
+                "id":"no_of_spot",
+                "placeholder":"Enter Number of Spot",
+                "onChange":"getAvailablity()"
+            }),
+            'description': forms.TextInput(attrs={
+                "class":"form-control",
+                "id":"description",
+                "placeholder":"Enter Description"
+            }),
+            'price_per_hour': forms.NumberInput(attrs={
+                "class":"form-control",
+                "id":"price_per_hour",
+                "placeholder":"Enter Price per Hour"
+            }),
+            'city': forms.TextInput(attrs={
+                "class":"form-control",
+                "id":"city",
+                "placeholder":"city",
+            }),
+            'area': forms.TextInput(attrs={
+                "class":"form-control",
+                "id":"area",
+                "placeholder":"area"
+            }),
+            'state': forms.TextInput(attrs={
+                "class":"form-control",
+                "id":"state",
+                "placeholder":"state"
+            }),
+            'image': forms.FileInput(attrs={
+                "class":"form-control",
+                "id":"image",
+                "placeholder":"image"
+            }),
+        }

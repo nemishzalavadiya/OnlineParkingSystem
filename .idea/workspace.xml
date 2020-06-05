@@ -26,6 +26,10 @@
   <component name="ChangeListManager">
     <list default="true" id="970b0446-a48a-43a0-868d-158074ed476e" name="Default Changelist" comment="altered cases and syntax">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/templates/EditLandDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/templates/EditLandDetail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/setup.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +52,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1cqnGPaP2fDzdVKzakJnhImeQon" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -62,6 +68,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\13101\Desktop\jupyter_notebook\OnlineParkingSystem\OnlineParkingSystem\Landlord" />
+      <recent name="C:\Users\13101\Desktop\jupyter_notebook\OnlineParkingSystem\OnlineParkingSystem\Landlord\templates" />
       <recent name="C:\Users\13101\Desktop\jupyter_notebook\OnlineParkingSystem\OnlineParkingSystem\User\static\fonts" />
       <recent name="C:\Users\13101\Desktop\jupyter_notebook\OnlineParkingSystem\OnlineParkingSystem\User\static\img" />
     </key>
@@ -112,7 +120,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591362243188</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="altered cases and syntax">
+      <created>1591368192861</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1591368192861</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -147,10 +162,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1591337347442" />
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1591362268635">
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1591368229778">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1591362268635" />
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1591368229778" />
     <state x="492" y="277" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591352115973">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
