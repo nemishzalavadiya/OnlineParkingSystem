@@ -52,7 +52,7 @@
                         <form action="/User/showlanddetails/" method="GET" class="filter-form">
                         {% csrf_token%}
                             <div class="first-row" style="text-align:center">
-                                Pick Date : <input  placeholder="select date" type="date" style="margin-left: 12px;margin-right: 20px;padding-left: 15px;padding-right: 5px;border-radius:5px;background-color: cornflowerblue;height:35px;" name="rdate" min="{{tdate}}" max="{{ ldate }}" required>
+                                Pick Date : <input  placeholder="select date" type="date" style="margin-left: 12px;margin-right: 20px;padding-left: 15px;padding-right: 5px;border-radius:5px;background-color: lightgrey;height:35px;" name="rdate" min="{{tdate}}" max="{{ ldate }}" required>
                                 <input type="checkbox" id="ckb1"  style="margin-left: 12px;" onclick="getLocation()" required> <span style="margin-right: 20px;color:black">Enable Location</span>
                                 <input type="hidden" name="langitude" id="langitude">
                                 <input type="hidden" name="lattitude" id="lattitude">
@@ -73,7 +73,7 @@
                         <form action="/User/addLocation/" method="POST" class="filter-form">
                         {% csrf_token%}
                             <div class="first-row" style="text-align:center">
-                                Location Name :<input  placeholder="Give Name" style="margin-left: 12px;margin-right: 20px;padding-left: 15px;padding-right: 5px;border-radius:5px;background-color: cornflowerblue;height:35px;" type="text" name="location_name" required>
+                                Location Name :<input  placeholder="Give Name" style="margin-left: 12px;margin-right: 20px;padding-left: 15px;padding-right: 5px;border-radius:5px;background-color: lightgrey;height:35px;" type="text" name="location_name" required>
                                  <input type="checkbox" id="ckb2"  style="margin-left: 12px;" onclick="getLocation()" required> <span style="margin-right: 20px;color:black">Enable Location</span>
                                  <input type="hidden" name="langitude" id="langitude1">
                                  <input type="hidden" name="lattitude" id="lattitude1">                               

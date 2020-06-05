@@ -282,6 +282,7 @@ input[type=number] {
                                                  <ul>
                                                     <li><a href="{% url 'landlist' %}">Land Details</a></li>
                                                     <li><a href="{% url 'addlanddetail' %}">Add Land</a></li>
+                                                     <li><a href="{% url 'editprofile' %}">Edit Profile</a></li>
                                                  </ul>
                                              </div>
                                          </div>
@@ -289,7 +290,7 @@ input[type=number] {
                                  </div>
                                  {% endif %}
                                  
-                                 {% if role == "User" %}
+                                 {% if role == "User" or role == "None" %}
                                  <li><a href="{% url 'Home' %}">Reserve Lands</a></li>
                                  <li><a href="{% url 'advanceReservation' %}">Advance Reservation</a></li>
                                  <li><a href="{% url 'ShowUserHistory' %}">Show History</a></li>
@@ -314,9 +315,10 @@ input[type=number] {
                                  {% if role == "Landlord" %}
 
                                      <div class="top-right" style="text-align: left;">
-                                        <li class="active"><a href="/">Home</a></li>
-                                                     <li><a href="{% url 'landlist' %}">Land Details</a></li>
-                                                     <li><a href="{% url 'addlanddetail' %}">Add Land</a></li>
+                                         <li class="active"><a href="/">Home</a></li>
+                                         <li><a href="{% url 'landlist' %}">Land Details</a></li>
+                                         <li><a href="{% url 'addlanddetail' %}">Add Land</a></li>
+                                         <li><a href="{% url 'editprofile' %}">Edit Profile</a></li>
                                      </div>
                                  {% endif %}
                                  
