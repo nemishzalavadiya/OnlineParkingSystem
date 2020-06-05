@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 	{% if message != None %}
-		<div class="card text-center">{{message}}</div>
-		{% endif %}
+			<div style="width:100%;	height:50px;"class=" alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+							{{message}}
+        	</div>
+	{% endif %}
 	<div class="limiter">
 		<div class="container-login100">
 		
@@ -62,15 +65,16 @@
 					</div>
 
 					<div class="wrap-input100 validate-input1" data-validate="Mobile number is required">
-						{{ form.mobile_no.errors }}
-   						 <label  class="label-input100" for="{{ form.mobile_no.id_for_label }}">mobile_no :</label>
-    					{{ form.mobile_no }}
+   						<label  class="label-input100" for="{{ form.mobile_no.id_for_label }}">mobile_no :</label>
+						<div class="error" style="color:red;">{{ form.mobile_no.errors }}</div>
+    					{{ form.mobile_no}}
 						<span class="focus-input100"></span>
 					</div>
 					
 					<div class="wrap-input100 validate-input-age" data-validate="Age is required">
 						{{ form.age.errors }}
    						 <label  class="label-input100" for="{{ form.age.id_for_label }}">age :</label>
+						<div class="error" style="color:red;">{{ form.age.errors }}</div>
     					{{ form.age }}
 						<span class="focus-input100"></span>
 					</div>

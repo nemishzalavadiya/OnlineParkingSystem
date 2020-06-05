@@ -29,7 +29,17 @@
 
 	<link rel="stylesheet" type="text/css" href="/static/css/util.css">
 	<link rel="stylesheet" type="text/css" href="/static/css/signup.css">
-
+	<style>
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+		}
+		
+		input[type=number] {
+		-moz-appearance: textfield;
+		}
+	</style>
 </head>
 <body>
 	{% if message != None %}
@@ -96,28 +106,30 @@
 						<span class="focus-input100"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input1" data-validate="Mobile number is required">
-						{{ form.mobile_no.errors }}
-   						 <label  class="label-input100" for="{{ form.mobile_no.id_for_label }}">mobile_no :</label>
-    					{{ form.mobile_no }}
+					<div class="wrap-input100 validate-input1" data-validate="Only indian mobile number is valid">	
+   						<label  class="label-input100" for="{{ form.mobile_no.id_for_label }}">Mobile Number :</label>
+						<div class="error" style="color:red;">{{ form.mobile_no.errors }}</div>
+						{{ form.mobile_no }}
 						<span class="focus-input100"></span>
 					</div>
 					
 					<div class="wrap-input100 validate-input-age" data-validate="Age is required">
-						{{ form.age.errors }}
-   						 <label  class="label-input100" for="{{ form.age.id_for_label }}">age :</label>
+   						 <label  class="label-input100" for="{{ form.age.id_for_label }}">Age :</label>
+						<div class="error" style="color:red;">{{ form.age.errors }}</div>
     					{{ form.age }}
 						<span class="focus-input100"></span>
 					</div>
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						{{ form.password.errors }}
-   						 <label  class="label-input100" for="{{ form.password.id_for_label }}">Password :</label>
+					
+					<div class="wrap-input100 validate-input-password" data-validate = "Password must be valid">
+						<label  class="label-input100" for="{{ form.password.id_for_label }}">Password :</label>
+						<div class="error" style="color:red;">{{ form.password.errors }}</div>
     					{{ form.password }}
 						<span class="focus-input100"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input-password" data-validate = "both Password is not same">
-						<span class="label-input100">Confirm Password</span>
+					<div class="wrap-input100 validate-input-cpassword" data-validate = "both Password must be same">
+						<span class="label-input100">Confirm Password :</span>
+						<div class="error" style="color:red;">{{ error1 }}</div>
 						<input class="input100" type="password" name="confirm-pass" placeholder="*************">
 						<span class="focus-input100"></span>
 					</div>
