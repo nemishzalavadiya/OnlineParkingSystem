@@ -80,7 +80,6 @@ def getScatterdata(request):
         axis.annotate(data_counts[xy[0]],xy=xy,color="white",va="bottom",ha="center")
     for tick in axis.get_xticklabels():
         tick.set_rotation(90)
-    axis.xaxis.set_ticks(pd.date_range(frame.index[0],frame.index[-1]))
     axis.xaxis.set_major_formatter(mpl.dates.DateFormatter('%b-%d'))
     fig.autofmt_xdate()
     axis.set_xlabel("Dates "+str(year_))
@@ -99,7 +98,7 @@ def getScatterdata(request):
 
 @myuser_login_required
 def getHistdata(request):
-    record_data = Land_detail.objects.all()
+    record_data = Land_record.objects.all()
 
     dictionary_data = [x for x in record_data.values()]
     frame = change_panda(dictionary_data)
@@ -112,10 +111,10 @@ def getHistdata(request):
             date.append(info[0])
             range_.append(info[1])
     fig = Figure()
-
+    print(date)
     axis = fig.add_subplot(1, 1, 1)
     axis.plot(date,range_)
-    axis.xaxis.set_ticks(frame.index)
+    #axis.xaxis.set_ticks(frame.index)
     axis.xaxis.set_major_formatter(mpl.dates.DateFormatter('%b-%d'))
     for tick in axis.get_xticklabels():
         tick.set_rotation(90)

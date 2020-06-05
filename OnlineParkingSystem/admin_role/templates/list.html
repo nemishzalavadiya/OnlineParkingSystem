@@ -111,7 +111,7 @@
         <img src="{% url 'getScatterdata' %}" id="visual" alt="Data Will Be Available Here">
     </div>
     <div class="modal-footer">
-      <h3>Modal Footer</h3>
+      <h3 id="footer" style="margin-right:600px;">Modal Footer</h3>
     </div>
   </div>
 
@@ -129,6 +129,14 @@
             // When the user clicks the button, open the modal
             btn.onclick = function() {
               var option = select.options[select.selectedIndex];
+              if (select.selectedIndex==0){
+              document.getElementById("footer").innerHTML = "User's History"
+              console.log("User's History")
+              }
+              else{
+              document.getElementById("footer").innerHTML = "Landload's History"
+              console.log("Landload's History")
+              }
               console.log(option.value)
               document.getElementById("visual").src=option.value;
               modal.style.display = "block";
