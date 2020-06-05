@@ -88,14 +88,15 @@ def ShowHistory(request):
 def DeleteLand(request):
     landid = request.GET.get("landid")
     count = Land_record.objects.filter(landid=landid).count()
+    user= User_detail.objects.get(email=request.session['email'],role=request.session['role'])
+    land=Land_detail.objects.filter(userid_id=user.userid)
     if count==0:
         Land_detail.objects.filter(landid=landid).delete()
         message = "Land (landid:"+landid+") deleted successfully!!!"
+        return render(request, 'show.html',{ 'title':'All Land Detail','list' : land,'login':'True','role':request.session['role'] ,'message':message})
     else:
-        message = "You cann't delete this land (landid:"+landid+") because land already reserved by some user!!!"
-    user= User_detail.objects.get(email=request.session['email'],role=request.session['role'])
-    land=Land_detail.objects.filter(userid_id=user.userid)
-    return render(request, 'show.html',{ 'title':'All Land Detail','list' : land,'login':'True','role':request.session['role'] ,'message':message})
+        error = "You cann't delete this land (landid:"+landid+") because land already reserved by some user!!!"
+        return render(request, 'show.html',{ 'title':'All Land Detail','list' : land,'login':'True','role':request.session['role'] ,'error':error})
 
 #@myuser_login_required
 def Payment(request):
@@ -104,13 +105,14 @@ def Payment(request):
     landrecord = list(landrecord.values())
     paymentrecords = Land_record.objects.filter(landid=landid,payment_remaining=True)
     count = paymentrecords.count() 
+    user = User_detail.objects.get(email=request.session['email'],role=request.session['role'])
+    land = Land_detail.objects.filter(userid_id=user.userid)
     if count==0:
-        message = "Already paid all payment for land (landid:"+landid+")!!"
+        error = "Already paid all payment for land (landid:"+landid+")!!"
+        return render(request, 'show.html',{'title':'All Land Detail', 'list' : land,'login':'True','role':request.session['role'],'error':error})
     else:
         payment = 24*count*landrecord[0]['price_per_hour']
         paymentrecords.update(payment_remaining=False)
         paymentrecords= list(paymentrecords.values())
         message = "For Land (landid:"+landid+") successfully payment done!!!Payment Rs:"+str(payment)
-    user = User_detail.objects.get(email=request.session['email'],role=request.session['role'])
-    land = Land_detail.objects.filter(userid_id=user.userid)
-    return render(request, 'show.html',{'title':'All Land Detail', 'list' : land,'login':'True','role':request.session['role'],'message':message})
+        return render(request, 'show.html',{'title':'All Land Detail', 'list' : land,'login':'True','role':request.session['role'],'message':message})
