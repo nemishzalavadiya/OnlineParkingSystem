@@ -49,11 +49,11 @@
                 return false;
             }
         }
-    }
-$('.validate-input-password .input100').each(function(){
+    } 
+$('.validate-input-cpassword .input100').each(function(){
         $(this).on('blur', function(){
 			
-            if(validate_password(this) == false){
+            if(validate_cpassword(this) == false){
                 showValidate(this);
 				
             }
@@ -63,10 +63,8 @@ $('.validate-input-password .input100').each(function(){
         })    
     })
 	function validate_password (input) {
-        if($(input).attr('type') == 'password' ) {
-			
-
-            if( $(input).val().trim() == "" || $(input).val().trim() != $("#pass").val().trim() ) {
+        if($(input).c('type') == 'password' ) {
+			if( $(input).val().trim() == "" || $(input).val().trim() != $("#pass").val().trim() ) {
 
                 return false;
             }
@@ -102,7 +100,28 @@ $('.validate-input-password .input100').each(function(){
             }
         }
     }
-
+    $('.validate-input-password .input100').each(function(){
+        $(this).on('blur', function(){
+            if(validate_password(this) == false){
+                showValidate(this);
+            }
+            else {
+                $(this).parent().addClass('true-validate');
+            }
+        })    
+    })
+	function validate_password (input) {
+        if($(input).attr('type') == 'password') {
+            if($(input).val().length < 8 ) {
+                return false;
+            }
+        }
+        else {
+            if($(input).val().trim() == ''){
+                return false;
+            }
+        }
+    }
 
     /*==================================================================
     [ Validate ]*/

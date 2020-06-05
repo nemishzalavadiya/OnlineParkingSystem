@@ -91,16 +91,12 @@ class AddLandForm(ModelForm):
             'start_date': forms.DateInput(attrs={
                 "type":"Date",
                 "class":"form-control",
-                "id":"start_date",
-                "min":datetime.date.today().isoformat(),
-                "max":(datetime.date.today() + datetime.timedelta(3*365/12)).isoformat(),
+                "id":"start_date"
             }),
             'end_date': forms.DateInput(attrs={
                 "type":"Date",
                 "class":"form-control",
-                "id":"end_date",
-                "min":datetime.date.today().isoformat(),
-                "max":(datetime.date.today() + datetime.timedelta(3*365/12)).isoformat(),
+                "id":"end_date"
             }),
             'langitude': forms.HiddenInput(attrs={
                 "id":"langitude",

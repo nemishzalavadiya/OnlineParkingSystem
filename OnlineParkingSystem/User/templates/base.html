@@ -146,6 +146,16 @@ border-radius: 4px;
   color:#FF912C;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 </style>
 <body>
      <div class="offcanvas-menu-overlay"></div>
@@ -242,7 +252,7 @@ border-radius: 4px;
                                  
                                  {% if role == "User" %}
                                  <li class="active"><a href="/">Home</a></li>
-                                 <li><a href="{% url 'Home' %}">Reserve Lands</a></li>
+                                 <li><a href="/#1">Reserve Lands</a></li>
                                  <li><a href="{% url 'advanceReservation' %}">Advance Reservation</a></li>
                                  <li><a href="{% url 'ShowUserHistory' %}">Show History</a></li>
                                  <li><a href="{% url 'editprofile' %}">Edit Profile</a></li>
