@@ -23,8 +23,6 @@ def myuser_login_required(f):
     def login_first(request, *args, **kwargs):
         date='False'
         try:
-            if request.POST.get('rdate')!=None:
-                date=request.POST.get('rdate')
             if request.session['email']==None:
                 c = {}
                 c.update(csrf(request))
@@ -36,7 +34,7 @@ def myuser_login_required(f):
             c = {}
             c.update(csrf(request))
             form = LoginForm()
-            return render(request, 'Login.html',{'title':'Login Page','message':'Something went wrong Do it later!!',"role":'User','form' : form,'date':date})
+            return render(request, 'Login.html',{'title':'Login Page','message':'Login Please!!',"role":'User','form' : form,'date':date})
     login_first.__doc__=f.__doc__
     login_first.__name__=f.__name__
     return login_first
@@ -64,8 +62,6 @@ def Login(request):
             request.session['uid']=user_data.userid
             request.session['email']=email
             request.session['role']=request.POST.get('role')
-            if request.POST.get('date')!=None:
-               return ShowLandDetails(request)
             return render(request,'index.html',{'title':'Car Parking Space Reservation','login':'True','role':request.POST.get('role'),'tdate': datetime.date.today().isoformat(),'ldate': (datetime.date.today()+timedelta(days=90)).isoformat()})
         else:
             return render(request, 'Login.html',{'title':'Login Page','message':'Invalid email or password!!!','role':request.POST.get('role'),'form' : form})
@@ -122,7 +118,7 @@ def Addnewpassword(request):
 			return render(request, 'newpassword.html', {'error': 'Enter correct OTP'})
 			
 def Registration(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and request.POST['role']!="None":
         form = RegistrationForm(request.POST)
         if form.is_valid() and form.data['password'] == request.POST.get('confirm-pass'):
             data = User_detail()
@@ -188,7 +184,7 @@ def showLand(request,dateOf,lag2,lat2):
                 count = Land_record.objects.filter(landid=land['landid'],start_date=date).count()
                 if land['no_of_spot'] > count:
                     nlands.append(land.copy()) 
-            nlands = list(filter(lambda i: i['distance'] < 10000, nlands)) 
+            nlands = list(filter(lambda i: i['distance'] < 1000000, nlands))
             nlands=sorted(nlands, key = lambda i: i['distance'])
             
             return nlands,date

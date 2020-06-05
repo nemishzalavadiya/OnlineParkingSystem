@@ -115,6 +115,9 @@
         </form>
         {% endfor %}
         </table>
+        {% if not page_obj %}
+            <div style="text-align:center;font-family:Christmas;margin:40px;" ><h3>No Approved Lands Available!! Sorry</h3></div>
+        {% endif %}
 		</div>
     {% endif %}
     {% endif %}

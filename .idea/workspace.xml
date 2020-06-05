@@ -24,8 +24,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="970b0446-a48a-43a0-868d-158074ed476e" name="Default Changelist" comment="Data Visualization">
+    <list default="true" id="970b0446-a48a-43a0-868d-158074ed476e" name="Default Changelist" comment="data visualization">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/templates/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/templates/show.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/LandDetails.html" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/LandDetails.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/advanceSearch.html" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/advanceSearch.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/User/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/User/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/admin_role/templates/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/admin_role/templates/list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/admin_role/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/admin_role/views.py" afterDir="false" />
     </list>
@@ -44,7 +51,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="change" />
+        <entry key="$PROJECT_DIR$" value="new_pycharm" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -56,6 +63,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -92,7 +100,21 @@
       <option name="project" value="LOCAL" />
       <updated>1591351701997</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Data Visualization">
+      <created>1591353333949</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1591353333949</updated>
+    </task>
+    <task id="LOCAL-00004" summary="data visualization">
+      <created>1591353428207</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1591353428208</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -110,7 +132,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="done with replace" />
     <MESSAGE value="Data Visualization" />
-    <option name="LAST_COMMIT_MESSAGE" value="Data Visualization" />
+    <MESSAGE value="data visualization" />
+    <option name="LAST_COMMIT_MESSAGE" value="data visualization" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591333599025">
@@ -125,14 +148,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1591337347442" />
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1591351745014">
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1591353436102">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1591351745014" />
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1591353436102" />
     <state x="492" y="277" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591352115973">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="492" y="277" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1591352115973" />
+    <state x="335" y="76" key="git4idea.branch.GitSmartOperationDialog" timestamp="1591353406671">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="335" y="76" key="git4idea.branch.GitSmartOperationDialog/0.0.1366.728@0.0.1366.728" timestamp="1591353406671" />
     <state x="346" y="152" key="git4idea.merge.GitPullDialog" timestamp="1591352145019">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
