@@ -24,17 +24,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="970b0446-a48a-43a0-868d-158074ed476e" name="Default Changelist" comment="data visualization">
+    <list default="true" id="970b0446-a48a-43a0-868d-158074ed476e" name="Default Changelist" comment="changes final">
+      <change afterPath="$PROJECT_DIR$/testing.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/templates/show.html" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/templates/show.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/LandDetails.html" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/LandDetails.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/advanceSearch.html" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/advanceSearch.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/Testing/geckodriver.log" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/Testing/geckodriver.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/Testing/login_testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/Testing/login_testing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/User/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/User/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/admin_role/templates/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/admin_role/templates/list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/admin_role/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/admin_role/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/setup.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +53,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1cqnGPaP2fDzdVKzakJnhImeQon" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -71,6 +69,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\13101\Desktop\jupyter_notebook\OnlineParkingSystem\OnlineParkingSystem\Landlord" />
+      <recent name="C:\Users\13101\Desktop\jupyter_notebook\OnlineParkingSystem\OnlineParkingSystem\Landlord\templates" />
       <recent name="C:\Users\13101\Desktop\jupyter_notebook\OnlineParkingSystem\OnlineParkingSystem\User\static\fonts" />
       <recent name="C:\Users\13101\Desktop\jupyter_notebook\OnlineParkingSystem\OnlineParkingSystem\User\static\img" />
     </key>
@@ -114,8 +114,39 @@
       <option name="project" value="LOCAL" />
       <updated>1591353428208</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="altered cases and syntax">
+      <created>1591362243188</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1591362243188</updated>
+    </task>
+    <task id="LOCAL-00006" summary="altered cases and syntax">
+      <created>1591368192861</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1591368192861</updated>
+    </task>
+    <task id="LOCAL-00007" summary="changes views">
+      <created>1591370259575</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1591370259575</updated>
+    </task>
+    <task id="LOCAL-00008" summary="changes final">
+      <created>1591376761302</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1591376761302</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.js" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -133,7 +164,10 @@
     <MESSAGE value="done with replace" />
     <MESSAGE value="Data Visualization" />
     <MESSAGE value="data visualization" />
-    <option name="LAST_COMMIT_MESSAGE" value="data visualization" />
+    <MESSAGE value="altered cases and syntax" />
+    <MESSAGE value="changes views" />
+    <MESSAGE value="changes final" />
+    <option name="LAST_COMMIT_MESSAGE" value="changes final" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591333599025">
@@ -148,10 +182,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1591337347442" />
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1591353436102">
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1591376767693">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1591353436102" />
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1591376767693" />
     <state x="492" y="277" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591352115973">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -164,10 +198,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="152" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1591352145019" />
-    <state x="339" y="17" width="670" height="676" key="search.everywhere.popup" timestamp="1591266649233">
+    <state x="339" y="17" width="672" height="676" key="search.everywhere.popup" timestamp="1591370447038">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="17" width="670" height="676" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1591266649233" />
+    <state x="339" y="17" width="672" height="676" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1591370447038" />
     <state x="405" y="275" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1591269596021">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

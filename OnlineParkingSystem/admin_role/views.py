@@ -31,7 +31,7 @@ class UserShortedView(ListView):
     model = Land_detail
     template_name = 'list.html'  
     context_object_name = 'users' 
-    paginate_by = 10
+    paginate_by = 5
     def get_queryset(self):
         l=['address','description','end_date','langitude', 'lattitude', 'no_of_spot', 'price_per_hour', 'start_date']
         if self.request.GET.get('id') in l:
@@ -69,6 +69,7 @@ def getScatterdata(request):
     start = datetime.date(year_,1,1)
     end = datetime.date(year_,12,31)
     frame = frame[(frame.index>=start)&(frame.index<=end)]
+
     fig = Figure()
     axis = fig.add_subplot(1, 1, 1)
     frame.payment_remaining = frame.payment_remaining.apply(lambda x: 200 if x else 600)

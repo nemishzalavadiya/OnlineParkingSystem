@@ -71,8 +71,8 @@
 						<span class="focus-input100"></span>
 					</div>
 					
-					<div class="wrap-input100 validate-input-age" data-validate="Age is required">
-						{{ form.age.errors }}
+					<div class="wrap-input100 validate-input-age" data-validate="Age must be >= 18">
+
    						 <label  class="label-input100" for="{{ form.age.id_for_label }}">age :</label>
 						<div class="error" style="color:red;">{{ form.age.errors }}</div>
     					{{ form.age }}

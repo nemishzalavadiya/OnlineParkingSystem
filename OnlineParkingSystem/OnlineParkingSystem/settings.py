@@ -14,7 +14,7 @@ import os
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'parkingsystem12345@gmail.com'
+EMAIL_HOST_USER = 'parking022222@gmail.com'
 EMAIL_HOST_PASSWORD = 'parking@123'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)

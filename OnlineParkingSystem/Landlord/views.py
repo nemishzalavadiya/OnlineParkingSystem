@@ -3,7 +3,7 @@ from django.template.context_processors import csrf
 from User.models import User_detail
 from django.core.mail import send_mail
 from django.conf import settings
-from .forms import RegistrationForm,LoginForm,AddLandForm
+from .forms import RegistrationForm,LoginForm,AddLandForm,EditLandForm
 from .models import Land_detail,Land_record
 from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseRedirect
@@ -51,18 +51,20 @@ def EditLandDetail(request):
     if request.method == 'POST':
         landid = request.POST.get('landid')
         mydetail = Land_detail.objects.get(landid=landid)
-        form = AddLandForm(request.POST,instance=mydetail)
+        form = EditLandForm(request.POST,instance=mydetail)
         if form.is_valid():
             form.save()
-            return render(request, 'EditLandDetail.html',{'title':'Edit Land Detail','message1':'Edit land detail successfully','form' : form,'login':'True','role':request.session['role']})
+            user= User_detail.objects.get(email=request.session['email'],role=request.session['role'])
+            land=Land_detail.objects.filter(userid_id=user.userid)
+            return render(request, 'show.html',{'title':'All Land Detail', 'list' : land,'login':'True','role':request.session['role'],'message':'Edit land detail successfully'})
         else:
-            return render(request, 'EditLandDetail.html',{'title':'Edit Land Detail','message':'Edit fail','form' : form,'login':'True','role':request.session['role']})
+            return render(request, 'EditLandDetail.html',{'title':'Edit Land Detail','message':'Edit failed','form' : form,'login':'True','role':request.session['role']})
     else:
         c = {}
         c.update(csrf(request))
         landid = request.GET.get('landid')
         mydetail = Land_detail.objects.get(landid=landid)
-        form = AddLandForm(instance=mydetail)
+        form = EditLandForm(instance=mydetail)
         return render(request, 'EditLandDetail.html',{'title':'Edit Land Detail','form' : form, 'landid' : landid,'login':'True','role':request.session['role']})
 
 @myuser_login_required
@@ -98,7 +100,7 @@ def DeleteLand(request):
         error = "You cann't delete this land because land already reserved by some user!!! sorry for inconvenience"
         return render(request, 'show.html',{ 'title':'All Land Detail','list' : land,'login':'True','role':request.session['role'] ,'error':error})
 
-#@myuser_login_required
+@myuser_login_required
 def Payment(request):
     landid = request.GET.get("landid")
     landrecord = Land_detail.objects.filter(landid=landid)
