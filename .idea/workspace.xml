@@ -24,19 +24,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="970b0446-a48a-43a0-868d-158074ed476e" name="Default Changelist" comment="changes views">
+    <list default="true" id="970b0446-a48a-43a0-868d-158074ed476e" name="Default Changelist" comment="changes final">
+      <change afterPath="$PROJECT_DIR$/testing.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/templates/AddLandDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/templates/AddLandDetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/templates/EditLandDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/templates/EditLandDetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/templates/ShowHistory.html" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/Landlord/templates/ShowHistory.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/OnlineParkingSystem/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/OnlineParkingSystem/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/User/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/User/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/EditProfile.html" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/EditProfile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/Login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/Registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/User/templates/Registration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/Testing/geckodriver.log" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/Testing/geckodriver.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/Testing/login_testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/Testing/login_testing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/User/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/User/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OnlineParkingSystem/admin_role/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineParkingSystem/admin_role/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/setup.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591370259575</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="changes final">
+      <created>1591376761302</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1591376761302</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -165,7 +166,8 @@
     <MESSAGE value="data visualization" />
     <MESSAGE value="altered cases and syntax" />
     <MESSAGE value="changes views" />
-    <option name="LAST_COMMIT_MESSAGE" value="changes views" />
+    <MESSAGE value="changes final" />
+    <option name="LAST_COMMIT_MESSAGE" value="changes final" />
   </component>
   <component name="WindowStateProjectService">
     <state x="137" y="18" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591333599025">
@@ -180,10 +182,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="110" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.728@0.0.1366.728" timestamp="1591337347442" />
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1591370264631">
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1591376767693">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1591370264631" />
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1591376767693" />
     <state x="492" y="277" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591352115973">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

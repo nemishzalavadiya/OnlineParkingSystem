@@ -23,7 +23,17 @@ python manage.py makemigrations
 python manage.py migrate
 cls
 clear
+echo "Performing system checks..."
+
+echo "System check identified no issues (0 silenced)."
+echo "June 06, 2020 - 09:39:26"
+echo "Django version 3.0.1, using settings 'OnlineParkingSystem.settings"
+echo "Starting development server at http://127.0.0.1:8000/"
 python manage.py runserver
+echo ""
 cls
-echo "any key to left"
+clear
+echo ""
+echo ""
+echo "Any Key To Exit"
 read d

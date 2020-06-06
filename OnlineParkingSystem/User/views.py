@@ -214,6 +214,7 @@ def showLand(request, dateOf, lag2, lat2):
             land['distance'] = d
             count = Land_record.objects.filter(landid=land['landid'], start_date=date).count()
             if land['no_of_spot'] > count:
+                land['no_of_spot'] -= count
                 nlands.append(land.copy())
         nlands = list(filter(lambda i: i['distance'] < 1000000, nlands))
         nlands = sorted(nlands, key=lambda i: i['distance'])
@@ -396,6 +397,7 @@ def advanceReservation(request):
             land['distance'] = d
             count = Land_record.objects.filter(landid=land['landid'], start_date=date).count()
             if land['no_of_spot'] > count:
+                land['no_of_spot'] -= count
                 nlands.append(land.copy())
         nlands = list(filter(lambda i: i['distance'] < 10000, nlands))
         nlands = sorted(nlands, key=lambda i: i['distance'])
@@ -439,6 +441,7 @@ def advanceReservation(request):
                 land['distance'] = d
                 count = Land_record.objects.filter(landid=land['landid'], start_date=date).count()
                 if land['no_of_spot'] > count:
+                    land['no_of_spot'] -= count
                     nlands.append(land.copy())
             nlands = list(filter(lambda i: i['distance'] < 10000, nlands))
             nlands = sorted(nlands, key=lambda i: i['distance'])
