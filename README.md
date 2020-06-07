@@ -1,3 +1,9 @@
 # OnlineParkingSystem
 
-This project is about how to manage parking space around the glob to provide easy facilities to create parking easy
+### This project is illustration of parking management at online platform. It has three particular accesser of the system namely,
+   - Admin
+      - caretake and handler of platform
+   - Landlord 
+      - owner of parking spaces
+   - user
+      - consumer of the parking space
