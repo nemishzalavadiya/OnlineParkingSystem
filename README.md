@@ -19,7 +19,19 @@
 > Operations
 
     - **Landlord**
-     
-      - Managing Lands In The system ( Land must be first verify by the admin )
-      - Profile management
-      - Payments Check Out etc.
+         - Managing Lands In The system ( Land must be first verify by the admin )
+         - Profile management
+         - Payments Check Out etc.
+    - **Admin**
+         - Verification of lands and Data visualization
+    - **User**
+         - Reserve parking space
+         - reserve in advance
+         - manage platform live
+         - profile manage ment etc.
+
+> System Requirement
+
+ - Python, Django Framework, Sqlclient, Xampp-Control installed
+ - GPS Location
+ 
