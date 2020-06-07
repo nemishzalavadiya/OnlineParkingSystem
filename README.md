@@ -1,5 +1,9 @@
 # OnlineParkingSystem
 
+
+
+![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger)
+
 ### This project is illustration of parking management at online platform. It has three particular accesser of the system namely,
    - Admin
       - Caretake and Candler of platform
