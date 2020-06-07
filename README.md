@@ -2,7 +2,7 @@
 
 
 
-[![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)] [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)]
+![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)  ![License](https://camo.githubusercontent.com/cb297629267ecb0a0487565f93e92f515a29d302/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f76657273696f6e2d312e322e332d626c7565)
 
 
 ### This project is illustration of parking management at online platform. It has three particular accesser of the system namely,
