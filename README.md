@@ -2,8 +2,16 @@
 
 ### This project is illustration of parking management at online platform. It has three particular accesser of the system namely,
    - Admin
-      - caretake and handler of platform
+      - Caretake and Candler of platform
    - Landlord 
-      - owner of parking spaces
+      - Owner of parking spaces
    - user
-      - consumer of the parking space
+      - Consumer of the parking space
+      
+### This system uses live GPS Location for searching near by locations of parking space as well as for landlords while uploading Land to the system.
+ 
+     Landlord can perform operations like,
+     
+      - Managing Lands In The system ( Land must be first verify by the admin )
+      - Profile management
+      - Payments Check Out etc.
